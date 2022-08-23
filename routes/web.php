@@ -22,3 +22,4 @@ include base_path('routes/warga.php');
 include base_path('routes/admin.php');
 
 include base_path('routes/login.php');
+include base_path('routes/jimpitan.php');

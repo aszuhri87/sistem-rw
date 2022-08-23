@@ -11,6 +11,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item mr-4">
+                    <a class="nav-link text-dark" href="/jimpitan/tampil">Jimpitan</a>
+                </li>
+            <li class="nav-item mr-4">
                     <a class="nav-link text-dark" href="/admin/tampil">Admin</a>
                 </li>
                  <li class="nav-item mr-4">
