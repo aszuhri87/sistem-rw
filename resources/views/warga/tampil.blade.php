@@ -5,7 +5,10 @@
         <div class="container mb-5">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="m-0 p-0">Data Kependudukan Warga</h5>
-                <a href="/warga/tambah" class="btn btn-success">Tambah</a>
+                <div>
+                <a href="/warga/import" class="btn btn-primary">Import Warga</a>
+                <a href="/warga/tambah" class="btn btn-success">Tambah</a>    
+                </div>
             </div>
             <div class="card">
                 <div class="card-body"> 
@@ -13,7 +16,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>  
-                                <th width="30%">NOMOR kk</th> 
+                                <th width="30%">NOMOR KK</th> 
                                 <th width="20%">NAMA</th> 
                                 <th width="20%">NIK</th> 
                                 <th width="30%" class="text-center">Aksi</th>

@@ -13,7 +13,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th width="30%">ID Warga </th>
+                            <th width="20%">ID Warga </th>
+                            <th width="30%">Nama </th>
                             <th width="30%">Nominal </th>
                             <th width="20%" class="text-center">Aksi</th>
                         </tr>
@@ -23,6 +24,7 @@
                         <tr>
                             <td>{{$index + 1}}</td>
                             <td>{{$item->id_warga}}</td>
+                            <td>{{$item->nama_lengkap}}</td>
                             <td>{{$item->nominal}}</td>
                             <td class="text-center">
                                 <a href="/jimpitan/ubah/{{$item->id}}" class="btn btn-sm btn-warning">Ubah</a>

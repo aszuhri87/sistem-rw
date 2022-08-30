@@ -100,3 +100,22 @@ Route::get('/warga/lihat/{id}', function ($id) {
 
     return view("warga.lihat", compact('warga'));
 });
+
+Route::get('/warga/import', function () { 
+    if(!session()->get('admin')){
+        return redirect('/login');
+    }
+    return view('warga.import');
+});
+
+Route::post('/warga/post-import', function (Request $request) {
+    if(!session()->get('admin')){
+        return redirect('/login');
+    }
+    \App\Models\Warga::create([
+        'import_warga' => $request-> import_warga,
+        
+    ]);
+
+    return redirect('warga/import');
+});

@@ -22,7 +22,8 @@ Route::post('/jimpitan/tambah', function (Request $request) {
 });
 Route::get('/jimpitan/tampil', function () {
 
-    $jimpitan = \App\Models\Jimpitan::all();
+    $jimpitan = \DB::select("SELECT jimpitan.*,warga.nama_lengkap FROM `jimpitan` 
+    left join warga on warga.id = jimpitan.id_warga;");
 
     return view('jimpitan/tampil', [
         'jimpitan' => $jimpitan
