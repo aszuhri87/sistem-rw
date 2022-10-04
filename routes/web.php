@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
 include base_path('routes/warga.php');
 
 include base_path('routes/admin.php');
