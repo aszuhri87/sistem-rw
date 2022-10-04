@@ -28,3 +28,4 @@ include base_path('routes/admin.php');
 include base_path('routes/login.php');
 include base_path('routes/jimpitan.php');
 include base_path('routes/kas_warga.php');
+include base_path('routes/dashboard.php');

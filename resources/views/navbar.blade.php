@@ -10,7 +10,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item mr-4">
+                 <li class="nav-item mr-4">
+                    <a class="nav-link text-dark" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item mr-4">
                     <a class="nav-link text-dark" href="/jimpitan/tampil">Jimpitan</a>
                 </li>
                  <li class="nav-item mr-4">
@@ -22,6 +25,7 @@
                 <li class="nav-item mr-4">
                     <a class="nav-link text-dark" href="/kas-warga/tampil">Kas Warga</a>
                 </li>
+                
 
                     <a class="nav-link text-danger" href="/logout" onclick="return confirm('Klick OK jika ingin Logout');">Logout</a>
                 </li>
