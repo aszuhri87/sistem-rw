@@ -1,3 +1,14 @@
+<?php
+$chart1 = [];
+$daftar_warga = \App\Models\Warga::get();
+$daftar_warga ->each(function ($warga) use(&$chart1){
+    array_push($chart1,[
+      'value' => 100,
+      'name' => 'RT '.$warga->rt,
+    ]);
+});
+dump(json_encode($chart1));
+?>
 <script>
     var dom = document.getElementById('chart1-container');
 var myChart = echarts.init(dom, null, {
@@ -41,13 +52,7 @@ option = {
       labelLine: {
         show: false
       },
-      data: [
-        { value: 1048, name: 'RT 24' },
-        { value: 735, name: 'RT 25' },
-        { value: 580, name: 'RT 26' },
-        { value: 484, name: 'RT 27' },
-        { value: 300, name: 'RT 28' }
-      ]
+      data: @json ($chart1)
     }
   ]
 };
