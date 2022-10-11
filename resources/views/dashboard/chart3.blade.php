@@ -11,14 +11,14 @@ var option;
 option = {
   xAxis: {
     type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul','Agu','Sep','Okt','Nov','Des']
   },
   yAxis: {
     type: 'value'
   },
   series: [
     {
-      data: [150, 230, 224, 218, 135, 147, 260],
+      data: [550000, 300000, 500000, 600000, 1000000, 500000, 850000, 800000, 750000, 469000, 754000, 650000],
       type: 'line'
     }
   ]

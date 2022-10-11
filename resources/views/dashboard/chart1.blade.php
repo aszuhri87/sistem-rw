@@ -42,11 +42,11 @@ option = {
         show: false
       },
       data: [
-        { value: 1048, name: 'Search Engine' },
-        { value: 735, name: 'Direct' },
-        { value: 580, name: 'Email' },
-        { value: 484, name: 'Union Ads' },
-        { value: 300, name: 'Video Ads' }
+        { value: 1048, name: 'RT 24' },
+        { value: 735, name: 'RT 25' },
+        { value: 580, name: 'RT 26' },
+        { value: 484, name: 'RT 27' },
+        { value: 300, name: 'RT 28' }
       ]
     }
   ]

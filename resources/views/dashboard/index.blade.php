@@ -31,6 +31,8 @@
         <div class="row mb-3">
           <div class="col-6">
               <div class="card">
+                <br>
+              <h5 class="text-center" >Dashboard Perbandingan Jumlah Warga RW 05</h5>
                 <div class="card-body">
                   <div id="chart1-container"></div>
                 </div>
@@ -38,6 +40,8 @@
           </div>
           <div class="col-6">
               <div class="card">
+                <br>
+              <h5 class="text-center" >Dashboard Perbandingan Warga Laki-Laki/Perempuan</h5>
                 <div class="card-body">
                   <div id="chart2-container"></div>
                 </div>
