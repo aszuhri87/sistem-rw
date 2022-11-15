@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach ($warga as $index => $item)
                             <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">{{ $loop->index + 1}}</th>
                                 <td>{{$item->no_kk}}</td>
                                 <td>{{$item->nama_lengkap}}</td>
                                 <td>{{$item->nik}}</td>

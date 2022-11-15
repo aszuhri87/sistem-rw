@@ -1,7 +1,9 @@
 <?php
 
+use App\Imports\WargaImport;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/warga/tambah', function () { 
     if(!session()->get('admin')){
@@ -112,10 +114,8 @@ Route::post('/warga/post-import', function (Request $request) {
     if(!session()->get('admin')){
         return redirect('/login');
     }
-    \App\Models\Warga::create([
-        'import_warga' => $request-> import_warga,
-        
-    ]);
+    
+    Excel::import(new WargaImport, $request->file);
 
     return redirect('warga/import');
 });

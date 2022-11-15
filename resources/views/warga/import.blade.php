@@ -10,7 +10,7 @@
             </div>
             <div class="card">
                 <div class="card-body"> 
-                    <form action="{{url('warga/post-import')}}" method="POST">
+                    <form action="{{url('warga/post-import')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>File</label>
