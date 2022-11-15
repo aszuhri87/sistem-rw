@@ -2,7 +2,6 @@
 
 @include("navbar")
 
-
 <div class="container mb-5">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="m-0 p-0">Input Kependudukan Warga</h5>

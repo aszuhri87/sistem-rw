@@ -1,13 +1,14 @@
 <?php
 $chart1 = [];
 $daftar_warga = \App\Models\Warga::get();
-$daftar_warga ->each(function ($warga) use(&$chart1){
+$warga_rt ->each(function ($warga) use(&$chart1){
     array_push($chart1,[
-      'value' => 100,
+      'value' => $warga->jumlah,
       'name' => 'RT '.$warga->rt,
     ]);
 });
-dump(json_encode($chart1));
+
+
 ?>
 <script>
     var dom = document.getElementById('chart1-container');
@@ -18,7 +19,6 @@ var myChart = echarts.init(dom, null, {
 var app = {};
 
 var option;
-
 option = {
   tooltip: {
     trigger: 'item'
@@ -29,7 +29,7 @@ option = {
   },
   series: [
     {
-      name: 'Access From',
+      name: 'Warga',
       type: 'pie',
       radius: ['40%', '70%'],
       avoidLabelOverlap: false,
