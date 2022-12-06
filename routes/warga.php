@@ -114,15 +114,8 @@ Route::post('/warga/post-import', function (Request $request) {
     if (!session()->get('admin')) {
         return redirect('/login');
     }
-<<<<<<< HEAD
-    \App\Models\Warga::create([
-        'import_warga' => $request->import_warga,
-
-    ]);
-=======
     
     Excel::import(new WargaImport, $request->file);
->>>>>>> 0d1dc120c1c40437a4977ce7d733f4c1c0a19afd
 
     return redirect('warga/import');
 });
