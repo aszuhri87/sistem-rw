@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\Admin;
 
 Route::get('/login', function () { 
 
@@ -18,7 +19,7 @@ Route::post('/login', function (Request $request) {
     
         if ($admin) {
             session()->put('admin', $admin);
-            return redirect('admin/tampil');
+            return redirect('dashboard');
         }else{
             return \Redirect::back()
                 ->withErrors(['message' => 'Login gagal!, periksa email dan password.'])
