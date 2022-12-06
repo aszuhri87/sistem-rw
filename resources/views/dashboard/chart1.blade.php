@@ -1,3 +1,15 @@
+<?php
+$chart1 = [];
+$daftar_warga = \App\Models\Warga::get();
+$warga_rt ->each(function ($warga) use(&$chart1){
+    array_push($chart1,[
+      'value' => $warga->jumlah,
+      'name' => 'RT '.$warga->rt,
+    ]);
+});
+
+
+?>
 <script>
     var dom = document.getElementById('chart1-container');
 var myChart = echarts.init(dom, null, {
@@ -7,7 +19,6 @@ var myChart = echarts.init(dom, null, {
 var app = {};
 
 var option;
-
 option = {
   tooltip: {
     trigger: 'item'
@@ -18,7 +29,7 @@ option = {
   },
   series: [
     {
-      name: 'Access From',
+      name: 'Warga',
       type: 'pie',
       radius: ['40%', '70%'],
       avoidLabelOverlap: false,
@@ -41,13 +52,7 @@ option = {
       labelLine: {
         show: false
       },
-      data: [
-        { value: 1048, name: 'Search Engine' },
-        { value: 735, name: 'Direct' },
-        { value: 580, name: 'Email' },
-        { value: 484, name: 'Union Ads' },
-        { value: 300, name: 'Video Ads' }
-      ]
+      data: @json ($chart1)
     }
   ]
 };

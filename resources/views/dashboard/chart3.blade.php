@@ -1,3 +1,14 @@
+<?php
+$chart3 = [];
+$bulan =[];
+$kas_warga ->each(function ($kas_warga) use(&$chart3,&$bulan){
+    array_push($chart3,$kas_warga->jumlah);
+    array_push($bulan,$kas_warga->bulan);
+});
+
+$chart3=array_reverse($chart3);
+$bulan=array_reverse($bulan);
+?>
 <script>
   var dom = document.getElementById('chart3-container');
 var myChart = echarts.init(dom, null, {
@@ -11,14 +22,14 @@ var option;
 option = {
   xAxis: {
     type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    data:@json ($bulan)
   },
   yAxis: {
     type: 'value'
   },
   series: [
     {
-      data: [150, 230, 224, 218, 135, 147, 260],
+      data: @json ($chart3),
       type: 'line'
     }
   ]

@@ -1,3 +1,13 @@
+<?php
+$chart2 = [];
+$warga_jenis_kelamin ->each(function ($warga) use(&$chart2){
+    array_push($chart2,[
+      'value' => $warga->jumlah,
+      'name' => $warga->jenis_kelamin,
+    ]);
+});
+?>
+
 <script>
     var dom = document.getElementById('chart2-container');
 var myChart = echarts.init(dom, null, {
@@ -18,7 +28,7 @@ option = {
   },
   series: [
     {
-      name: 'Access From',
+      name: 'Jenis Kelamin',
       type: 'pie',
       radius: ['40%', '70%'],
       avoidLabelOverlap: false,
@@ -41,13 +51,7 @@ option = {
       labelLine: {
         show: false
       },
-      data: [
-        { value: 1048, name: 'Search Engine' },
-        { value: 735, name: 'Direct' },
-        { value: 580, name: 'Email' },
-        { value: 484, name: 'Union Ads' },
-        { value: 300, name: 'Video Ads' }
-      ]
+      data: @json ($chart2)
     }
   ]
 };

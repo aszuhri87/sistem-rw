@@ -3,9 +3,14 @@
 @include("navbar")
 
 <div class="fs-1 text-center">
-         DETAIL KEPENDUDUKAN WARGA
+
+
          </div>
     <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="m-0 p-0">Detail Data Warga</h5>
+                <a href="/warga/tampil" class="btn btn-danger">Kembali</a>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <form action="">
@@ -99,7 +104,7 @@
                             <input type="text" name="keterangan" class="form-control" value="{{$warga->keterangan}}" disabled>
                         </div>
                         <br>
-                        <a href="/warga/tampil"  class="btn btn-danger btn-sm mt-3">Kembali</a>
+                        
                     </form>
                 </div>
             </div>
