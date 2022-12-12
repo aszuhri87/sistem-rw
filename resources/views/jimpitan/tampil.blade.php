@@ -49,7 +49,7 @@
                         <div class="mb-3">
                             <a href="/jimpitan/tambah" class="btn btn-success">Tambah</a>
                             <a href="/jimpitan/export" class="btn btn-primary">Laporan Excel</a>
-                            <a class="btn btn-primary" id="filter_btn">Filter</a>
+                            <a class="btn btn-primary m-1" id="filter_btn">Filter</a>
                         </div>
                         <table width="100%" class="table table-bordered mb-0 table-responsive">
                             <thead>
