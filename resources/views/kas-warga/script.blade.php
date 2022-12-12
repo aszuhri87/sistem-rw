@@ -32,8 +32,10 @@
                         <td>`+ item.nominal +`</td>
                         <td>`+item.tanggal+`</td>
                         <td>`+item.tipe+`</td>
+                        <td>`+item.rt+`</td>
+                        <td>`+item.rw+`</td>
                         <td class="text-center">
-                            <a href="/kas-warga/ubah/`+item.id+`" class="btn btn-sm btn-warning">Ubah</a>
+                            <a href="/kas-warga/ubah/`+item.id+`" class="btn btn-sm btn-warning m-1">Ubah</a>
                             <a href="/kas-warga/hapus/`+item.id+`" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
                         </td>
                         </tr>`

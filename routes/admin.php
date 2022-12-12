@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
@@ -36,11 +37,33 @@ Route::get('/admin/tampil', function () {
     if (!session()->get('admin')) {
         return redirect('/login');
     }
-    $admin = \App\Models\Admin::all();
+    $admin = \App\Models\Admin::select([
+        '*',
+        DB::raw('IF(rt is null, "-", rt) as rt'),
+        DB::raw('IF(rw is null, "-", rw) as rw'),
+    ])
+    ->paginate(10);
 
     return view('admin.tampil', [
     'admin' => $admin,
     ]);
+});
+
+Route::get('/admin/filter', function (Request $request) {
+    $admin = \App\Models\Admin::select([
+        '*',
+    ])
+    ->where('nama', 'like', '%'.$request->cari.'%')
+    ->orWhere('email', 'like', '%'.$request->cari.'%')
+    ->orWhere('level', 'like', '%'.$request->cari.'%')
+    ->orWhere('rt', 'like', '%'.$request->cari.'%')
+    ->orWhere('rw', 'like', '%'.$request->cari.'%');
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $admin->get(),
+        'message' => 'Information load successfully!',
+    ], 200);
 });
 
 Route::get('/admin/get-ubah/{id}', function ($id) {

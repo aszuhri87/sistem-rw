@@ -28,10 +28,12 @@
                         <td>`+ item.no_kk +`</td>
                         <td>`+item.nama_lengkap+`</td>
                         <td>`+item.nik+`</td>
+                        <td>`+item.rt+`</td>
+                        <td>`+item.rw+`</td>
                         <td class="text-center">
-                            <a href="/warga/lihat/`+item.id+`" class="btn btn-sm btn-primary">Lihat</a>
-                            <a href="/warga/ubah/`+item.id+`" class="btn btn-sm btn-warning">Ubah</a>
-                            <a href="/warga/qr/`+item.id+`" class="btn btn-sm btn-warning">Qr Code</a>
+                            <a href="/warga/lihat/`+item.id+`" class="btn btn-sm btn-primary m-1">Lihat</a>
+                            <a href="/warga/ubah/`+item.id+`" class="btn btn-sm btn-warning m-1">Ubah</a>
+                            <a href="/warga/qr/`+item.id+`" class="btn btn-sm btn-warning m-1">Qr Code</a>
                             <a href="/warga/hapus/`+item.id+`" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
                         </td>
                     </tr>`

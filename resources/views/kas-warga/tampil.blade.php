@@ -51,7 +51,7 @@
                 <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div>
+                        <div class="mb-3">
                             <a href="/kas-warga/tambah" class="btn btn-success">Tambah</a>
                         </div>
                         <table width="100%" class="table table-bordered mb-0 table-responsive">
@@ -77,7 +77,7 @@
                                     <td>{{ $item->rw }}</td>
                                     <td>{{ $item->tipe }}</td>
                                     <td class="text-center">
-                                        <a href="/kas-warga/ubah/{{$item->id}}" class="btn btn-sm btn-warning">Ubah</a>
+                                        <a href="/kas-warga/ubah/{{$item->id}}" class="btn btn-sm btn-warning m-1">Ubah</a>
                                         <a href="/kas-warga/hapus/{{$item->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
                                     </td>
                                     </tr>
@@ -91,28 +91,6 @@
                     </div>
                 </div>
                 </div>
-                {{-- <div class="col-2">
-                    <div class="card" style="width:200px;">
-                        <div class="card-body">
-                            <div class="form-group">
-                                Dari :
-                                <input type="date" name="dari" id="dari" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                Sampai :
-                                <input type="date" name="ke" id="ke" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" name="filter_type" id="filter_type">
-                                    <option value="">--Tipe--</option>
-                                    <option value="masuk"> Masuk </option>
-                                    <option value="keluar"> Keluar </option>
-                                </select>
-                            </div>
-                            <button class="btn btn-primary" id="filter"> Filter</button>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
 
