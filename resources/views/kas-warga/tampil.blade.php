@@ -59,8 +59,8 @@
                                <option value=""></option>
                                <tr>
                                     <th>No</th>
-                                    <th width="35%">NOMINAL</th>
-                                    <th width="35%">TANGGAL</th>
+                                    <th width="30%">NOMINAL</th>
+                                    <th width="25%">TANGGAL</th>
                                     <th width="10%">RT</th>
                                     <th width="10%">RW</th>
                                     <th width="10%">TIPE</th>
