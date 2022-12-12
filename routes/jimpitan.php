@@ -97,5 +97,5 @@ Route::get('/jimpitan/ubah/{id}', function ($id) {
 });
 
 Route::get('/jimpitan/export', function () {
-    return Excel::download(new JimpitanExport(), 'Laporan jimpitan - '.date('d-m-Y').'.xlsx');
+    return Excel::download(new JimpitanExport(), 'Laporan jimpitan bulan '.date('F').' - '.date('d-m-Y').'.xlsx');
 });
