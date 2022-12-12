@@ -10,6 +10,9 @@ Route::get('/dashboard', function () {
     $jimpit_res = null;
     $warga_jk_res = null;
     $warga_res = null;
+    $kas_warga_res = null;
+    $kas_masuk_res = null;
+    $kas_keluar_res = null;
 
     $warga_rt = DB::table('warga')
         ->select(DB::raw('count(*) as jumlah, rt'))
@@ -37,18 +40,33 @@ Route::get('/dashboard', function () {
     $kas_masuk = \App\Models\KasWarga::select([
         \DB::raw('SUM(nominal) as count'),
     ])
-    ->where('tipe', 'masuk')
-    ->first();
+    ->where('tipe', 'masuk');
+
+    if ($rt == null) {
+        $kas_masuk_res = $kas_masuk->first()->count;
+    } else {
+        $kas_masuk_res = $kas_masuk->where('rt', $rt)->first()->count;
+    }
 
     $kas_keluar = \App\Models\KasWarga::select([
         \DB::raw('SUM(nominal) as count'),
     ])
-    ->where('tipe', 'keluar')
-    ->first();
+    ->where('tipe', 'keluar');
+
+    if ($rt == null) {
+        $kas_keluar_res = $kas_keluar->first()->count;
+    } else {
+        $kas_keluar_res = $kas_keluar->where('rt', $rt)->first()->count;
+    }
 
     $kas_warga = \App\Models\KasWarga::select(DB::raw('sum(nominal) as jumlah '), DB::raw("DATE_FORMAT(tanggal,'%M %Y') as bulan"))
-    ->groupBy('bulan')
-    ->get();
+    ->groupBy('bulan');
+
+    if ($rt == null) {
+        $kas_warga_res = $kas_warga->get();
+    } else {
+        $kas_warga_res = $kas_warga->where('rt', $rt)->get();
+    }
 
     $jimpit = \App\Models\Jimpitan::select([
         \DB::raw('SUM(jimpitan.nominal) as count'),
@@ -103,12 +121,12 @@ Route::get('/dashboard', function () {
     return view('dashboard.index', [
         'warga_rt' => $warga_rt_res,
         'warga_jenis_kelamin' => $warga_jk_res,
-        'kas_masuk' => $kas_masuk->count,
-        'kas_keluar' => $kas_keluar->count,
+        'kas_masuk' => $kas_masuk_res,
+        'kas_keluar' => $kas_keluar_res,
         'jimpitan' => $jimpit_res->count,
         'warga' => $warga_res,
         'jimpit_per_bulan' => $jimpit_data,
         'jimpit_per_bulan_sum' => $jimpit_data_sum,
-        'kas_warga' => $kas_warga,
+        'kas_warga' => $kas_warga_res,
     ]);
 });

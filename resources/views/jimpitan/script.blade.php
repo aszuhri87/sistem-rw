@@ -1,6 +1,18 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+
+        $('#filter_btn').on('click', function(e){
+            console.log( $('#filter_card').hasClass('d-none'));
+            if($('#filter_card').hasClass('d-none')){
+                $('#filter_card').removeClass('d-none');
+                $("#filter_btn").html("Sembunyikan Filter");
+            } else {
+                $('#filter_card').addClass('d-none');
+                $("#filter_btn").html("Filter");
+            }
+        });
+
         $('#filter').on('click',function(e){
             $('tbody tr').remove();
             $('#paginate').remove();

@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="m-0 p-0">Data Jimpitan</h5>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3 d-none" id="filter_card">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -49,6 +49,7 @@
                         <div class="mb-3">
                             <a href="/jimpitan/tambah" class="btn btn-success">Tambah</a>
                             <a href="/jimpitan/export" class="btn btn-primary">Laporan Excel</a>
+                            <a class="btn btn-primary" id="filter_btn">Filter</a>
                         </div>
                         <table width="100%" class="table table-bordered mb-0 table-responsive">
                             <thead>
