@@ -28,7 +28,7 @@
             <table width="100%" class="table table-bordered mb-0 table-responsive">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th width="5%"">No</th>
                         <th width="10%">NOMOR KK</th>
                         <th width="20%">NAMA</th>
                         <th width="10%">NIK</th>
