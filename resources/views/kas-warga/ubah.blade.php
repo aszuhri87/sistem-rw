@@ -9,7 +9,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <form action="/kas-warga/post-ubah/{{$kas_warga->id}}" method="POST">
+                    <form action="/kas-warga/post-ubah/{{$kas_warga->id}}" method="POST" id="ubah">
                         @csrf
                         <div class="form-group">
                             <label>Nominal</label>
@@ -30,6 +30,13 @@
                             <input type="text"  value="{{$kas_warga->rw}}" class="form-control" name="rw" required placeholder="RW">
                         </div>
                         @endif
+                        <div class="form-group">
+                            <label>Tipe</label>
+                            <select name="tipe" id="" class="form-control">
+                                <option value=""> -- Pilih Tipe --</option>
+                                <option value="masuk"> Masuk </option>
+                                <option value="keluar"> Keluar </option>
+                            </select>
                         <br>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
@@ -42,6 +49,10 @@
      <script src="{{asset('js/jquery.blockUI.js')}}"></script>
     <script>
         $(document).ready(function () {
+            var data = {!! json_encode($kas_warga) !!};
+
+            $('#ubah').find('select[name="tipe"]').find('option[value="'+ data.tipe+'"]').prop('selected', true);
+
             $('.btn-save').click(function () {
                 $.blockUI({
                     message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
