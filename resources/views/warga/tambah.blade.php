@@ -8,7 +8,7 @@
                 <a href="/warga/tampil" class="btn btn-danger">Kembali</a>
             </div>
             <div class="card">
-                <div class="card-body"> 
+                <div class="card-body">
                     <form action="{{url('warga/post-tambah')}}" method="POST">
                         @csrf
                         <div class="form-group">
@@ -19,12 +19,12 @@
                         <div class="form-group">
                             <label>NIK</label>
                             <input type="text" class="form-control" name="nik" required placeholder="NIK">
-                        </div> 
+                        </div>
                         <br>
                         <div class="form-group">
                             <label>Nama Lengkap</label>
                             <input type="text" class="form-control" name="nama_lengkap" required placeholder="Nama Lengkap">
-                        </div> 
+                        </div>
                         <br>
                         <div class="form-group">
                             <label>Tempat Lahir</label>
@@ -38,7 +38,11 @@
                         <br>
                         <div class="form-group">
                             <label>Jenis Kelamin</label>
-                            <input type="text" class="form-control" name="jenis_kelamin" required placeholder="Jenis Kelmain">
+                            <select name="jenis_kelamin" class="form-control" id="jenis_kelamin">
+                                <option value="">-- Pilih --</option>
+                                <option value="L">Laki-Laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
                         </div>
                         <br>
                         <div class="form-group">
@@ -101,10 +105,33 @@
                             <input type="text" class="form-control" name="keterangan" required placeholder="Keterangan">
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary btn-save">Simpan</button>
                     </form>
                 </div>
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <script src="{{asset('js/jquery.blockUI.js')}}"></script>
+        <script>
+            $(document).ready(function () {
+                $('.btn-save').click(function () {
+                    $.blockUI({
+                        message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
+                        css: {
+                            backgroundColor: 'transparent',
+                            color: '#fff',
+                            border: '0'
+                        },
+                        overlayCSS: {
+                            opacity: 0.5
+                        },
+                        timeout: 1000,
+                        baseZ: 2000
+                    });
+                });
+            });
+
+        </script>
 @include("footer")

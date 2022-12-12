@@ -11,10 +11,11 @@ class KasWarga extends Model
     protected $fillable = [
         'id',
         'nominal',
-        'tanggal'
-
+        'tanggal',
+        'tipe',
+        'rt',
+        'rw',
     ];
 
     public $timestamps = false;
-
 }

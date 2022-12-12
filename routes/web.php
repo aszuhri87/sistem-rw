@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::get('/dashboard', function () {
@@ -29,3 +29,4 @@ include base_path('routes/login.php');
 include base_path('routes/jimpitan.php');
 include base_path('routes/kas_warga.php');
 include base_path('routes/dashboard.php');
+include base_path('routes/qr.php');

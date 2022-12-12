@@ -1,31 +1,40 @@
+<?php
+$chart3 = [];
+$bulan =[];
+$kas_warga ->each(function ($kas_warga) use(&$chart3,&$bulan){
+    array_push($chart3,$kas_warga->jumlah);
+    array_push($bulan,$kas_warga->bulan);
+});
+
+$chart3=array_reverse($chart3);
+$bulan=array_reverse($bulan);
+?>
 <script>
   var dom = document.getElementById('chart3-container');
-console.log(dom);
-
 var myChart = echarts.init(dom, null, {
   renderer: 'canvas',
   useDirtyRect: false
 });
 var app = {};
-var jimpit_per_bulan_sum = {!! json_encode($jimpit_per_bulan_sum) !!};
 
 var option;
 
 option = {
   xAxis: {
     type: 'category',
-    data: jimpit_per_bulan_sum['bulan']
+    data:@json ($bulan)
   },
   yAxis: {
     type: 'value'
   },
   series: [
     {
-      data: jimpit_per_bulan_sum['count'],
+      data: @json ($chart3),
       type: 'line'
     }
   ]
 };
+
 if (option && typeof option === 'object') {
   myChart.setOption(option);
 }

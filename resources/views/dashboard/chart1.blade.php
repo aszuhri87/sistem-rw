@@ -11,12 +11,14 @@ $warga_rt ->each(function ($warga) use(&$chart1){
 
 ?>
 <script>
-    var dom = document.getElementById('chart1-container');
+var dom = document.getElementById('chart1-container');
 var myChart = echarts.init(dom, null, {
   renderer: 'canvas',
   useDirtyRect: false
 });
 var app = {};
+var kas_masuk = {!! json_encode($kas_masuk) !!};
+var kas_keluar = {!! json_encode($kas_keluar) !!};
 
 var option;
 option = {

@@ -1,23 +1,14 @@
-<?php
-$chart2 = [];
-$warga_jenis_kelamin->each(function ($warga) use(&$chart2){
-    array_push($chart2,[
-      'value' => $warga->jumlah,
-      'name' => $warga->jenis_kelamin,
-    ]);
-});
-?>
-
 <script>
-    var dom = document.getElementById('chart2-container');
+    var dom = document.getElementById('chart5-container');
 var myChart = echarts.init(dom, null, {
   renderer: 'canvas',
   useDirtyRect: false
 });
 var app = {};
+var kas_masuk = {!! json_encode($kas_masuk) !!};
+var kas_keluar = {!! json_encode($kas_keluar) !!};
 
 var option;
-
 option = {
   tooltip: {
     trigger: 'item'
@@ -28,7 +19,7 @@ option = {
   },
   series: [
     {
-      name: 'Jenis Kelamin',
+      name: 'Total',
       type: 'pie',
       radius: ['40%', '70%'],
       avoidLabelOverlap: false,
@@ -51,7 +42,10 @@ option = {
       labelLine: {
         show: false
       },
-      data: @json ($chart2)
+      data: [
+        { value: kas_keluar, name: 'Kas Keluar' },
+        { value: kas_masuk, name: 'Kas Masuk' },
+      ]
     }
   ]
 };

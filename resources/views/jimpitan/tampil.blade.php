@@ -3,39 +3,88 @@
 
 <body>
     <div class="container mb-5">
+        @if($errors->has('error'))
+                <div class="alert alert-danger mt-3" style="text-align: left;" role="alert">
+                    {{ $errors->first('error') }}
+                </div>
+            @endif
+            @if (session('message'))
+            <div class="alert alert-success mt-3" style="text-align: left;" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="m-0 p-0">Data Jimpitan</h5>
-                <a href="/jimpitan/tambah" class="btn btn-success">Tambah</a>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <table width="100%" class="table table-bordered mb-0">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th width="20%">ID Warga </th>
-                            <th width="30%">Nama </th>
-                            <th width="30%">Nominal </th>
-                            <th width="20%" class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($jimpitan as $index => $item)
-                        <tr>
-                            <td>{{$index + 1}}</td>
-                            <td>{{$item->id_warga}}</td>
-                            <td>{{$item->nama_lengkap}}</td>
-                            <td>{{$item->nominal}}</td>
-                            <td class="text-center">
-                                <a href="/jimpitan/ubah/{{$item->id}}" class="btn btn-sm btn-warning">Ubah</a>
-                                <a href="/jimpitan/hapus/{{$item->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    Dari :
+                                    <input type="date" name="dari" id="dari" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    Sampai :
+                                    <input type="date" name="ke" id="ke" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control mt-4" id="cari" name="cari" placeholder="Cari..">
+                                </div>
+                                <button class="btn btn-primary mt-4" id="filter"> Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <a href="/jimpitan/tambah" class="btn btn-success">Tambah</a>
+                            <a href="/jimpitan/export" class="btn btn-primary">Laporan Excel</a>
+                        </div>
+                        <table width="100%" class="table table-bordered mb-0 table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th width="30%">Nama </th>
+                                    <th width="20%">Tanggal </th>
+                                    <th width="30%">Nominal </th>
+                                    <th width="20%" class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($jimpitan as $index => $item)
+                                <tr>
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{$item->nama_lengkap}}</td>
+                                    <td>{{$item->tanggal}}</td>
+                                    <td>{{$item->nominal}}</td>
+                                    <td class="text-center">
+                                        <a href="/jimpitan/ubah/{{$item->id}}" class="btn btn-sm btn-warning">Ubah</a>
+                                        <a href="/jimpitan/hapus/{{$item->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <br>
+                        <div id="paginate">
+                            {{ $jimpitan->links() }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    @include ("footer")
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+@include('jimpitan.script')
+@include ("footer")

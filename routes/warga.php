@@ -1,14 +1,15 @@
 <?php
 
 use App\Imports\WargaImport;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/warga/tambah', function () {
     if (!session()->get('admin')) {
         return redirect('/login');
     }
+
     return view('warga.tambah');
 });
 
@@ -16,7 +17,8 @@ Route::post('/warga/post-tambah', function (Request $request) {
     if (!session()->get('admin')) {
         return redirect('/login');
     }
-    \App\Models\Warga::create([
+
+    $warga = \App\Models\Warga::create([
         'no_kk' => $request->no_kk,
         'nik' => $request->nik,
         'nama_lengkap' => $request->nama_lengkap,
@@ -37,16 +39,48 @@ Route::post('/warga/post-tambah', function (Request $request) {
         'keterangan' => $request->keterangan,
     ]);
 
-    return redirect('warga/tampil');
+    if ($warga) {
+        return redirect('/warga/tampil')->with('message', 'Berhasil Menambah!');
+    } else {
+        return redirect('/warga/tampil')->withErrors('error', 'Gagal!');
+    }
 });
 
 Route::get('/warga/tampil', function (Request $request) {
     if (!session()->get('admin')) {
         return redirect('/login');
     }
-    $warga = \App\Models\Warga::all();
 
-    return view("warga.tampil", compact('warga'));
+    $rt = \Session::get('admin')->rt;
+
+    $result = \DB::table('warga')->select([
+        '*',
+    ]);
+
+    $warga = null;
+
+    if ($rt == null) {
+        $warga = $result->paginate(10);
+    } else {
+        $warga = $result->where('rt', $rt)->paginate(10);
+    }
+
+    return view('warga.tampil', compact('warga'));
+});
+
+Route::get('/warga/filter', function (Request $request) {
+    $warga = \App\Models\Warga::select([
+        '*',
+    ])
+    ->where('no_kk', 'like', '%'.$request->cari.'%')
+    ->orWhere('nama_lengkap', 'like', '%'.$request->cari.'%')
+    ->orWhere('nik', 'like', '%'.$request->cari.'%');
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $warga->get(),
+        'message' => 'Information load successfully!',
+    ], 200);
 });
 
 Route::get('/warga/ubah/{id}', function ($id) {
@@ -82,7 +116,12 @@ Route::post('/warga/post-ubah/{id}', function (Request $request, $id) {
         'nama_ibu' => $request->nama_ibu,
         'keterangan' => $request->keterangan,
     ]);
-    return redirect('/warga/tampil');
+
+    if ($warga) {
+        return redirect('/warga/tampil')->with('message', 'Berhasil Mengubah!');
+    } else {
+        return redirect('/warga/tampil')->withErrors('error', 'Gagal!');
+    }
 });
 
 Route::get('/warga/hapus/{id}', function ($id) {
@@ -100,13 +139,14 @@ Route::get('/warga/lihat/{id}', function ($id) {
     }
     $warga = \App\Models\Warga::find($id);
 
-    return view("warga.lihat", compact('warga'));
+    return view('warga.lihat', compact('warga'));
 });
 
 Route::get('/warga/import', function () {
     if (!session()->get('admin')) {
         return redirect('/login');
     }
+
     return view('warga.import');
 });
 
@@ -114,17 +154,17 @@ Route::post('/warga/post-import', function (Request $request) {
     if (!session()->get('admin')) {
         return redirect('/login');
     }
-    
-    Excel::import(new WargaImport, $request->file);
+
+    Excel::import(new WargaImport(), $request->file);
 
     return redirect('warga/import');
 });
 
-Route::get('/warga/qr/{id}', function ($id) {
-    if (!session()->get('admin')) {
-        return redirect('/login');
-    }
-    $warga = \App\Models\Warga::find($id);
+// Route::get('/warga/qr/{id}', function ($id) {
+//     if (!session()->get('admin')) {
+//         return redirect('/login');
+//     }
+//     $warga = \App\Models\Warga::find($id);
 
-    return view("warga.qr", compact('warga'));
-});
+//     return view('warga.qr', compact('warga'));
+// });

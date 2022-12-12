@@ -16,7 +16,6 @@ class Admin extends Model
         'rt',
         'rw',
         'level',
-
     ];
 
     public $timestamps = false;
