@@ -42,7 +42,7 @@
             <h5 class="m-0 p-0">Dashboard</h5>
         </div>
         <div class="row mb-3">
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12 mb-3">
                 <div class="card">
                     <div class="card-body">
                         @if( Session::get('admin')->level == 'admin')
@@ -85,7 +85,7 @@
                 </div>
             </div>
         @if( Session::get('admin')->level == 'admin')
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
               <div class="card">
                 <br>
               <h5 class="text-center" >Dashboard Perbandingan Jumlah Warga RW 05</h5>
@@ -99,7 +99,7 @@
 
         @if( Session::get('admin')->level == 'admin')
         <div class="row mb-3">
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12 mb-3">
                 <div class="card">
                   <br>
                 <h5 class="text-center" >Dashboard Perbandingan Warga Laki-Laki/Perempuan</h5>
@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12 mb-3">
               <div class="card">
                   <br>
               <h5 class="text-center" >Dashboard Diagram Kas Warga PerBulan</h5>
