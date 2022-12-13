@@ -68,7 +68,7 @@
                                 <tr>
                                     <td>{{$index + 1}}</td>
                                     <td>{{$item->nama_lengkap}}</td>
-                                    <td>{{$item->tanggal}}</td>
+                                    <td>{{date('d-m-Y H:i:s', strtotime($item->tanggal))}}</td>
                                     <td>{{$item->nominal}}</td>
                                     <td class="text-center">
                                         <a href="/jimpitan/ubah/{{$item->id}}" class="btn btn-sm btn-warning m-1">Ubah</a>

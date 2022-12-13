@@ -72,7 +72,7 @@
                                 <tr>
                                     <th scope="row">{{ $index+1 }}</th>
                                     <td>{{ $item->nominal }}</td>
-                                    <td>{{ $item->tanggal }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
                                     <td>{{ $item->rt }}</td>
                                     <td>{{ $item->rw }}</td>
                                     <td>{{ $item->tipe }}</td>
