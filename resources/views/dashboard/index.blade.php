@@ -88,7 +88,7 @@
           <div class="col-md-6 col-sm-12">
               <div class="card">
                 <br>
-              <h5 class="text-center" >Dashboard Perbandingan Jumlah Warga RW 05</h5>
+              <h5 class="text-center" >Dashboard Perbandingan Jumlah Warga @if( Session::get('admin')->rw ) RW {{Session::get('admin')->rw }} @endif</h5>
                 <div class="card-body">
                   <div id="chart1-container"></div>
                 </div>
