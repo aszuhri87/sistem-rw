@@ -59,10 +59,20 @@ Route::get('/kas-warga/tampil', function (Request $request) {
 });
 
 Route::get('/kas-warga/filter', function (Request $request) {
-    $kas_warga = \App\Models\KasWarga::select([
+    $rt = \Session::get('admin')->rt;
+
+    $result = \App\Models\KasWarga::select([
         '*',
     ])
     ->where('tipe', 'like', '%'.$request->cari.'%');
+
+    $kas_warga = null;
+
+    if ($rt == null) {
+        $kas_warga = $result;
+    } else {
+        $kas_warga = $result->where('rt', $rt);
+    }
 
     if ($request->ke && $request->dari) {
         $kas_warga->whereBetween('tanggal', [$request->dari, $request->ke]);

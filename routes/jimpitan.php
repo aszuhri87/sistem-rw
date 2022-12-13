@@ -49,11 +49,21 @@ Route::get('/jimpitan/tampil', function () {
 });
 
 Route::get('/jimpitan/filter', function (Request $request) {
-    $jimpitan = \App\Models\Jimpitan::select([
+    $rt = \Session::get('admin')->rt;
+
+    $result = \App\Models\Jimpitan::select([
         'jimpitan.*',
         'warga.nama_lengkap',
     ])
     ->leftJoin('warga', 'warga.id', 'jimpitan.id_warga');
+
+    $jimpitan = null;
+
+    if ($rt == null) {
+        $jimpitan = $result;
+    } else {
+        $jimpitan = $result->where('warga.rt', $rt);
+    }
 
     if ($request->cari) {
         $jimpitan->where('warga.nama_lengkap', 'like', '%'.$request->cari.'%');

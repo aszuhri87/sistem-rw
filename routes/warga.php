@@ -69,12 +69,21 @@ Route::get('/warga/tampil', function (Request $request) {
 });
 
 Route::get('/warga/filter', function (Request $request) {
-    $warga = \App\Models\Warga::select([
+    $warga = null;
+    $rt = \Session::get('admin')->rt;
+
+    $result = \App\Models\Warga::select([
         '*',
     ])
     ->where('no_kk', 'like', '%'.$request->cari.'%')
     ->orWhere('nama_lengkap', 'like', '%'.$request->cari.'%')
     ->orWhere('nik', 'like', '%'.$request->cari.'%');
+
+    if ($rt == null) {
+        $warga = $result;
+    } else {
+        $warga = $result->where('rt', $rt);
+    }
 
     return response()->json([
         'status' => 'success',
@@ -155,16 +164,11 @@ Route::post('/warga/post-import', function (Request $request) {
         return redirect('/login');
     }
 
-    Excel::import(new WargaImport(), $request->file);
+    $excel = Excel::import(new WargaImport(), $request->file);
 
-    return redirect('warga/import');
+    if ($excel) {
+        return redirect('/warga/tampil')->with('message', 'Berhasil Menambah!');
+    } else {
+        return redirect('/warga/tampil')->withErrors('error', 'Gagal!');
+    }
 });
-
-// Route::get('/warga/qr/{id}', function ($id) {
-//     if (!session()->get('admin')) {
-//         return redirect('/login');
-//     }
-//     $warga = \App\Models\Warga::find($id);
-
-//     return view('warga.qr', compact('warga'));
-// });

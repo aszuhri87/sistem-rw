@@ -21,9 +21,11 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <div class="mb-3">
-                <a href="/warga/import" class="btn btn-primary">Import Warga</a>
-                <a href="/warga/tambah" class="btn btn-success">Tambah</a>
+            <div class="d-flex mb-3">
+                <a href="/warga/tambah" class="btn btn-success p-2 mr-auto m-1">Tambah</a>
+                <div>
+                    <a href="/warga/import" class="btn btn-primary p-2 ml-1">Import Data</a>
+                </div>
             </div>
             <table width="100%" class="table table-bordered mb-0 table-responsive">
                 <thead>

@@ -46,10 +46,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="mb-3">
-                            <a href="/jimpitan/tambah" class="btn btn-success">Tambah</a>
-                            <a href="/jimpitan/export" class="btn btn-primary">Laporan Excel</a>
-                            <a class="btn btn-primary m-1" id="filter_btn">Filter</a>
+                        <div class="d-flex mb-3">
+                            <a href="/jimpitan/tambah" class="btn btn-success mt-auto p-2 mr-auto">Tambah</a>
+                            <div>
+                                <a href="/jimpitan/export" class="btn btn-primary p-2 ml-1">Laporan Excel</a>
+                                <a class="btn btn-secondary p-2 m-1" id="filter_btn">Filter</a>
+                            </div>
                         </div>
                         <table width="100%" class="table table-bordered mb-0 table-responsive">
                             <thead>
