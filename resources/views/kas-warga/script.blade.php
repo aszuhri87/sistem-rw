@@ -1,52 +1,50 @@
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#filter').on('click',function(e){
+<script type = "text/javascript" >
+    $(document).ready(function () {
+        $('#filter').on('click', function (e) {
             $('tbody tr').remove();
             $('#paginate').remove();
 
-            let value=$('#filter_type').val();
-            let ke=$('#ke').val();
+            let value = $('#filter_type').val();
+            let ke = $('#ke').val();
             let dari = $('#dari').val();
 
             $.ajax({
-                type : 'get',
-                async: false,
-                cache: false,
-                url : '/kas-warga/filter',
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    'cari': value,
-                    'ke': ke,
-                    'dari': dari
-                },
-        }).done(function(res, xhr, meta) {
-            let data = res.data;
+                    type: 'get',
+                    async: false,
+                    cache: false,
+                    url: '/kas-warga/filter',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'cari': value,
+                        'ke': ke,
+                        'dari': dari
+                    },
+                }).done(function (res, xhr, meta) {
+                    let data = res.data;
 
-            data.forEach((item, i) => {
-                    i+=1;
+                    data.forEach((item, i) => {
+                        i += 1;
 
-                    $('tbody').append(`
+                        $('tbody').append(`
                     <tr>
-                        <th scope="row">`+ i +`</th>
-                        <td>`+ item.nominal +`</td>
-                        <td>`+item.tanggal+`</td>
-                        <td>`+item.tipe+`</td>
-                        <td>`+item.rt+`</td>
-                        <td>`+item.rw+`</td>
+                        <th scope="row">` + i + `</th>
+                        <td>` + item.nominal + `</td>
+                        <td>` + item.tanggal + `</td>
+                        <td>` + item.tipe + `</td>
+                        <td>` + item.rt + `</td>
+                        <td>` + item.rw + `</td>
                         <td class="text-center">
-                            <a href="/kas-warga/ubah/`+item.id+`" class="btn btn-sm btn-warning m-1">Ubah</a>
-                            <a href="/kas-warga/hapus/`+item.id+`" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                            <a href="/kas-warga/ubah/` + item.id + `" class="btn btn-sm btn-warning m-1">Ubah</a>
+                            <a href="/kas-warga/hapus/` + item.id + `" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
                         </td>
-                        </tr>`
-                    );
-                });
+                        </tr>`);
+                    });
 
-            })
-            .fail(function(res, error) {
-                console.error(res.responseJSON.message, 'Gagal')
-            })
-            .always(function() { });
+                })
+                .fail(function (res, error) {
+                    console.error(res.responseJSON.message, 'Gagal')
+                })
+                .always(function () {});
 
         })
     });
