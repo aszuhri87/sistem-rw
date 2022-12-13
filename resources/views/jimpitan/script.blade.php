@@ -3,13 +3,12 @@
     $(document).ready(function() {
 
         $('#filter_btn').on('click', function(e){
-            console.log( $('#filter_card').hasClass('d-none'));
             if($('#filter_card').hasClass('d-none')){
                 $('#filter_card').removeClass('d-none');
-                $("#filter_btn").html("Tutup");
+                $("#filter_btn").removeClass('btn-secondary').addClass('btn-danger').html("Tutup");
             } else {
                 $('#filter_card').addClass('d-none');
-                $("#filter_btn").html("Filter");
+                $("#filter_btn").removeClass('btn-danger').addClass('btn-secondary').html("Filter");
             }
         });
 
