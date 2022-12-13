@@ -6,7 +6,7 @@
             console.log( $('#filter_card').hasClass('d-none'));
             if($('#filter_card').hasClass('d-none')){
                 $('#filter_card').removeClass('d-none');
-                $("#filter_btn").html("Sembunyikan Filter");
+                $("#filter_btn").html("Tutup");
             } else {
                 $('#filter_card').addClass('d-none');
                 $("#filter_btn").html("Filter");
