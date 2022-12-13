@@ -29,5 +29,5 @@ Route::get('/warga/qrcode/{id}', function ($id) {
 
     $dataUri = $result->getDataUri();
 
-    return view('warga.qr', compact('result', 'dataUri'));
+    return view('warga.qr', compact('result', 'warga', 'dataUri'));
 });

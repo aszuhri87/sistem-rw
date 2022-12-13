@@ -10,7 +10,6 @@
                         </div>
                         <br>
                         <hr>
-                        {{-- <p>Ini adalah kode qr anda, jaga baik-baik kode qr ini, jangan sampai hilang.</p> --}}
                     </div>
                     <button type="button" class="btn btn-primary" id="btn-print">
                         Print kode QR
@@ -24,6 +23,8 @@
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 
     <script>
+        var data = {!! json_encode($warga)!!}
+
         $(document).on('click','#btn-print', function(event){
                 event.preventDefault();
 
@@ -31,10 +32,10 @@
                     printable: 'qrcode',
                     type: 'html',
                     style:'#qrcode{  display: flex; justify-content: center;}',
-                    documentTitle: Date.now()+'_lembar disposisi'
+                    documentTitle: data.nama_lengkap+'_QR_Code_'+Date.now()
                 });
 
-                document.title = Date.now()+'_lembar disposisi';
+                document.title = data.nama_lengkap+'_QR_Code_'+Date.now();
 
             });
     </script>
