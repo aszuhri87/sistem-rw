@@ -18,8 +18,8 @@ class CreateAdminTable extends Migration
             $table->string('nama');
             $table->string('email');
             $table->string('password');
-            $table->string('rt');
-            $table->string('rw');
+            $table->string('rt')->nullable();
+            $table->string('rw')->nullable();
             $table->string('level');
         });
     }

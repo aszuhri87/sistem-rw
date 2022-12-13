@@ -14,20 +14,20 @@ class AdminSeed extends Seeder
     public function run()
     {
         \App\Models\Admin::create([
-            'name' => 'Admin',
+            'nama' => 'Admin',
             'email' => 'admin@bibitunggul.com',
             'rt' => null,
             'rw' => null,
-            'password' => Hash::make('bu1@varx.id'),
+            'password' => \Hash::make('bu1@varx.id'),
             'level' => 'admin',
         ]);
 
         \App\Models\Admin::create([
-            'name' => 'Penjimpit',
+            'nama' => 'Penjimpit',
             'email' => 'penjimpit@bibitunggul.com',
             'rt' => null,
             'rw' => null,
-            'password' => Hash::make('bu2@varx.id'),
+            'password' => \Hash::make('bu2@varx.id'),
             'level' => 'penjimpit',
         ]);
     }
