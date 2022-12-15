@@ -27,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
         Paginator::useBootstrap();
+        if(env('APP_ENV') == 'production') {
+            \URL::forceScheme('https');
+        }
     }
 }
