@@ -18,7 +18,12 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libonig-dev\ 
     libzip-dev \
-    supervisor
+    supervisor \
+    libfreetype6-dev \
+    libmcrypt-dev \
+    libpng12-dev \
+    libjpeg-dev \
+    libpng-dev
 
 # Install php extensions
 RUN docker-php-ext-install mbstring pdo_mysql mysqli pdo_pgsql pgsql zip exif pcntl gd
