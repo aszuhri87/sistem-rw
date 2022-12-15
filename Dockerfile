@@ -33,14 +33,14 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Set working directory
-WORKDIR /var/www/app
+WORKDIR /var/www/app/
 
 COPY composer.json /var/www/app/composer.json
 
-RUN composer install
-
 # Copy code to /var/www
 COPY --chown=www:www-data . /var/www/app/
+
+RUN composer install --optimize-autoloader --no-dev
 
 
 # Copy nginx/php/supervisor configs
