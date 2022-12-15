@@ -21,7 +21,6 @@ RUN apt-get update && apt-get install -y \
     supervisor \
     libfreetype6-dev \
     libmcrypt-dev \
-    libpng12-dev \
     libjpeg-dev \
     libpng-dev
 
