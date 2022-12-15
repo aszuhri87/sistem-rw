@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     supervisor
 
 # Install php extensions
-RUN docker-php-ext-install mbstring pdo_mysql zip exif pcntl gd
+RUN docker-php-ext-install mbstring pdo_mysql zip gd pdo
 
 COPY --from=composer:2.3.10 /usr/bin/composer /usr/bin/composer
 
