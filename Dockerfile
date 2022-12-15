@@ -35,6 +35,10 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 # Set working directory
 WORKDIR /var/www/app
 
+COPY composer.json /var/www/app/composer.json
+
+RUN composer install
+
 # Copy code to /var/www
 COPY --chown=www:www-data . /var/www/cbt/
 
