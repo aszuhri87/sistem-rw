@@ -2,14 +2,26 @@ FROM php:8.1-fpm-bullseye
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    zlib1g-dev \
-    libzip-dev \
+    build-essential \
+    libpng-dev \
     libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
     unzip \
+    git \
+    curl \
+    lua-zlib-dev \
+    libmemcached-dev \
+    nginx \
+    libpq-dev \
+    libonig-dev\ 
+    libzip-dev \
     supervisor
 
 # Install php extensions
-RUN docker-php-ext-install pdo_mysql zip gd pdo
+RUN docker-php-ext-install mbstring pdo_mysql mysqli pdo_pgsql pgsql zip exif pcntl gd
 
 COPY --from=composer:2.3.10 /usr/bin/composer /usr/bin/composer
 
