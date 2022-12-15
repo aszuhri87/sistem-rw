@@ -1,10 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
     $rt = \Session::get('admin')->rt;
+
+    // $rt = Auth::user()->rt;
 
     $warga_rt_res = null;
     $jimpit_res = null;

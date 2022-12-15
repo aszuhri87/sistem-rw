@@ -8,19 +8,25 @@ Route::get('/login', function () {
 });
 
 Route::post('/login', function (Request $request) {
+    $login = [
+        'email' => $request->email,
+        'password' => $request->password,
+    ];
+
     $admin = \App\Models\Admin::where([
             'email' => $request->email,
         ])->first();
 
-    if ($admin && Hash::check($request->password, $admin->password)) {
+    if (Auth::attempt($login)) {
         session()->put('admin', $admin);
 
         return redirect('dashboard');
     } else {
         return \Redirect::back()
-                ->withErrors(['message' => 'Login gagal!, periksa email dan password.'])
-                ->withInput();
+            ->withErrors(['message' => 'Login gagal!, periksa email dan password.'])
+            ->withInput();
     }
+
 });
 
 Route::get('/logout', function () {
