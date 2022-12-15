@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /var/www
+cd /var/www/app
 
 php artisan route:clear
 php artisan config:clear
