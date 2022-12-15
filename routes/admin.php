@@ -37,6 +37,7 @@ Route::get('/admin/tampil', function () {
     if (!session()->get('admin')) {
         return redirect('/login');
     }
+
     $admin = \App\Models\Admin::select([
         '*',
         DB::raw('IF(rt is null, "-", rt) as rt'),

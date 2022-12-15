@@ -9,6 +9,10 @@ use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 
 Route::get('/warga/qrcode/{id}', function ($id) {
+    if (!session()->get('admin')) {
+        return redirect('/login');
+    }
+
     $warga = \App\Models\Warga::find($id);
 
     $result = Builder::create()
