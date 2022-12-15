@@ -40,7 +40,7 @@ COPY composer.json /var/www/app/composer.json
 RUN composer install
 
 # Copy code to /var/www
-COPY --chown=www:www-data . /var/www/cbt/
+COPY --chown=www:www-data . /var/www/app/
 
 
 # Copy nginx/php/supervisor configs
