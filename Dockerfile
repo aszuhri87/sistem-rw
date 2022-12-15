@@ -33,29 +33,27 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Set working directory
-WORKDIR /var/www/app/
-
-COPY composer.json /var/www/app/composer.json
+WORKDIR /var/www/
 
 # Copy code to /var/www
-COPY --chown=www:www-data . /var/www/app/
+COPY --chown=www:www-data . /var/www/
 
 RUN composer install --optimize-autoloader --no-dev
 
+# add root to www group
+RUN chmod -R ug+w /var/www/storage
 
 # Copy nginx/php/supervisor configs
 RUN cp supervisor.conf /etc/supervisord.conf
 RUN cp php/local.ini /usr/local/etc/php/conf.d/app.ini
-RUN cp nginx/nginx.conf /etc/nginx/nginx.conf
-RUN cp nginx/conf.d/app.conf /etc/nginx/sites-enabled/default
+RUN cp nginx/nginx.conf /etc/nginx/sites-enabled/default
 
 # PHP Error Log Files
 RUN mkdir /var/log/php
 RUN touch /var/log/php/errors.log && chmod 777 /var/log/php/errors.log
 
 # Deployment steps
-# RUN composer install --optimize-autoloader --no-dev
-RUN chmod +x /var/www/app/run.sh
+RUN chmod +x /var/www/run.sh
 
 EXPOSE 8000
-ENTRYPOINT ["/var/www/app/run.sh"]
+ENTRYPOINT ["/var/www/run.sh"]
