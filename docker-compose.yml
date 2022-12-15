@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   main:
-    image: registry.gitlab.com/varx.id/bibit-unggul/sistem-rw
+    image: registry.gitlab.com/varx.id/bibit-unggul/sistem-rw:latest
     env_file:
       - .env
     ports:

@@ -1,9 +1,6 @@
-FROM php:7.4.30
+FROM php:8.1-buster
 
-RUN curl -sS https://getcomposer.org/installer | php -- \
-     --install-dir=/usr/local/bin --filename=composer
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.3.10 /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && apt-get install -y zlib1g-dev \
     libzip-dev \
@@ -14,6 +11,9 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 RUN install-php-extensions zip
 
 RUN install-php-extensions gd
+
+RUN docker-php-ext-install pdo pdo_mysql \
+    && docker-php-ext-enable pdo_mysql
 
 RUN mkdir /app
 
