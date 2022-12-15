@@ -19,12 +19,13 @@ RUN apt-get update && apt-get install -y \
     libonig-dev\ 
     libzip-dev \
     supervisor \
-    libfreetype6-dev \
     libmcrypt-dev \
     libjpeg-dev \
-    libpng-dev
+    libpng-dev \
+    libmcrypt-dev
 
 # Install php extensions
+RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg 
 RUN docker-php-ext-install mbstring pdo_mysql mysqli pdo_pgsql pgsql zip exif pcntl gd
 
 COPY --from=composer:2.3.10 /usr/bin/composer /usr/bin/composer
