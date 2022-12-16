@@ -4,14 +4,14 @@
 <body>
     <div class="container mb-5">
         @if($errors->has('error'))
-                <div class="alert alert-danger mt-3" style="text-align: left;" role="alert">
-                    {{ $errors->first('error') }}
-                </div>
-            @endif
-            @if (session('message'))
-            <div class="alert alert-success mt-3" style="text-align: left;" role="alert">
-                {{ session('message') }}
+            <div class="alert alert-danger mt-3" style="text-align: left;" role="alert">
+                {{ $errors->first('error') }}
             </div>
+        @endif
+        @if (session('message'))
+        <div class="alert alert-success mt-3" style="text-align: left;" role="alert">
+            {{ session('message') }}
+        </div>
         @endif
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="m-0 p-0">Data Jimpitan</h5>

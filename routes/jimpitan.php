@@ -19,6 +19,10 @@ Route::post('/jimpitan/scan-qr', function (Request $request) {
 Route::post('/jimpitan/tambah', function (Request $request) {
     $warga = \App\Models\Warga::where('no_kk', $request->no_kk)->first();
 
+    if(!$warga){
+        return redirect('jimpitan/tambah')->with('message', 'NIK Tidak Ditemukan');
+    }
+
     $admin = session()->get('admin');
     \App\Models\Jimpitan::create([
         'id_warga' => $warga->id,

@@ -7,6 +7,11 @@
             <h5 class="m-0 p-0">Tambah Jimpitan</h5>
             <a href="/jimpitan/tampil" class="btn btn-outline-danger">Kembali</a>
         </div>
+        @if (session('message'))
+        <div class="alert alert-danger mt-3" style="text-align: left;" role="alert">
+            {{ session('message') }}
+        </div>
+        @endif
         <div class="card">
             <div class="card-body">
                 {{-- <div id="reader" width="600px"></div> --}}

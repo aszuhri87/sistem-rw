@@ -121,8 +121,6 @@
 
                 cameraId = cameras[camerasIndex]
 
-                console.log(cameras, cameraId, camerasIndex);
-
                 html5QrCodeEl = new Html5Qrcode("reader");
 
                 html5QrCodeEl.start(
