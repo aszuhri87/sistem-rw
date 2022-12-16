@@ -9,8 +9,8 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div id="reader" width="600px"></div>
-
+                {{-- <div id="reader" width="600px"></div> --}}
+                <a href="/jimpitan/scan-qr" class="btn btn-primary w-100 mb-3">Scan QrCode</a>
                 <form action="{{url('jimpitan/tambah')}}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -34,39 +34,13 @@
     <script src="{{asset('js/jquery.blockUI.js')}}"></script>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script>
+        @if(Session::get('scan_result'))
+        $('#no_kk').val(atob('{{Session::get('scan_result')}}'))
+        @endif
+
         $(document).on('click', '.btn-nominal', function(e) {
             $('#nominal').val($(this).val())
         })
-
-        function onScanSuccess(decodedText, decodedResult) {
-            // handle the scanned code as you like, for example:
-            console.log(`Code matched = ${decodedText}`, decodedResult);
-            $('#no_kk').val(atob(decodedText))
-            html5QrcodeScanner.clear();
-        }
-
-        function onScanFailure(error) {
-            // handle scan failure, usually better to ignore and keep scanning.
-            // for example:
-            console.warn(`Code scan error = ${error}`);
-        }
-
-        function StopQR() { html5QrCode.stop().then((ignore) => { // QR Code scanning is stopped.
-        }).catch((err) => { // Stop failed, handle it.
-            });
-        }
-
-        let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", {
-                fps: 10,
-                qrbox: {
-                    width: 250,
-                    height: 250
-                }
-            },
-            /* verbose= */
-            false);
-        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
     </script>
 
     <script>

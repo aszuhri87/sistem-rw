@@ -8,6 +8,14 @@ Route::get('/jimpitan/tambah', function () {
     return view('jimpitan/tambah');
 });
 
+Route::get('/jimpitan/scan-qr', function () {
+    return view('jimpitan.scanapp');
+});
+
+Route::post('/jimpitan/scan-qr', function (Request $request) {
+    return redirect('jimpitan/tambah')->with('scan_result', $request->scan_result);
+});
+
 Route::post('/jimpitan/tambah', function (Request $request) {
     $warga = \App\Models\Warga::where('no_kk', $request->no_kk)->first();
 
