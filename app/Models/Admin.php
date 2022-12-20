@@ -18,8 +18,7 @@ class Admin extends Authenticatable
         'nama',
         'email',
         'password',
-        'rt',
-        'rw',
+        'id_rt_rw',
         'level',
     ];
 

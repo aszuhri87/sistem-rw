@@ -1,34 +1,37 @@
 <?php
 
+use App\Models\RtRw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/kas-warga/tambah', function () {
-    return view('kas-warga.tambah');
+    $rt;
+
+    if(!Auth::user()->id_rt_rw){
+        $rt = RtRw::all();
+    } else {
+        $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
+    }
+    return view('kas-warga.tambah', compact('rt'));
 });
 
 Route::post('/kas-warga/post-tambah', function (Request $request) {
-    $rt = null;
-    $rw = null;
+    $rt;
 
     if ($request->rt) {
-        $rt = \Session::get('admin')->rt;
-    } else {
         $rt = $request->rt;
-    }
-
-    if ($request->rw) {
-        $rw = \Session::get('admin')->rw;
     } else {
-        $rw = $request->rw;
+        $rt = Auth::user()->id_rt_rw;
     }
 
     $kas = \App\Models\KasWarga::create([
         'nominal' => $request->nominal,
         'tanggal' => $request->tanggal,
         'tipe' => $request->tipe,
-        'rt' => $rt,
-        'rw' => $rw,
+        'kategori' => $request->kategori,
+        'catatan' => $request->catatan,
+        'id_rt_rw' => $rt,
     ]);
 
     if ($kas) {
@@ -40,15 +43,18 @@ Route::post('/kas-warga/post-tambah', function (Request $request) {
 
 Route::get('/kas-warga/tampil', function (Request $request) {
     $kas_warga = null;
-    $rt = \Session::get('admin')->rt;
+    $rt = Auth::user()->id_rt_rw;
 
     $result = \App\Models\KasWarga::select([
-        '*',
+        'kas_warga.*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
+    ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
     ->orderBy('tanggal', 'desc');
 
     if ($rt) {
-        $kas_warga = $result->where('rt', $rt)->paginate(10);
+        $kas_warga = $result->where('id_rt_rw', $rt)->paginate(10);
     } else {
         $kas_warga = $result->paginate(10);
     }
@@ -59,11 +65,14 @@ Route::get('/kas-warga/tampil', function (Request $request) {
 });
 
 Route::get('/kas-warga/filter', function (Request $request) {
-    $rt = \Session::get('admin')->rt;
+    $rt = Auth::user()->id_rt_rw;
 
     $result = \App\Models\KasWarga::select([
-        '*',
+        'kas_warga.*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
+    ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
     ->where('tipe', 'like', '%'.$request->cari.'%');
 
     $kas_warga = null;
@@ -71,7 +80,7 @@ Route::get('/kas-warga/filter', function (Request $request) {
     if ($rt == null) {
         $kas_warga = $result;
     } else {
-        $kas_warga = $result->where('rt', $rt);
+        $kas_warga = $result->where('id_rt_rw', $rt);
     }
 
     if ($request->ke && $request->dari) {
@@ -92,9 +101,23 @@ Route::get('/kas-warga/hapus/{id}', function ($id) {
 });
 
 Route::post('/kas-warga/post-ubah/{id}', function (Request $request, $id) {
+
+    $rt;
+
+    if ($request->rt) {
+        $rt = $request->rt;
+    } else {
+        $rt = Auth::user()->id_rt_rw;
+    }
+
     $kas_warga = \App\Models\KasWarga::find($id)->update([
         'nominal' => $request->nominal,
         'tanggal' => $request->tanggal,
+        'kategori' => $request->kategori,
+        'catatan' => $request->catatan,
+        'tipe' => $request->tipe,
+        'id_rt_rw' => $rt,
+
     ]);
 
     if ($kas_warga) {
@@ -105,9 +128,40 @@ Route::post('/kas-warga/post-ubah/{id}', function (Request $request, $id) {
 });
 
 Route::get('/kas-warga/ubah/{id}', function ($id) {
-    $kas_warga = \App\Models\KasWarga::find($id);
+    $kas_warga = \App\Models\KasWarga::select([
+        'kas_warga.*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+    ])
+    ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
+    ->where('kas_warga.id', $id)
+    ->first();
+
+    $rt;
+
+    if(!Auth::user()->id_rt_rw){
+        $rt = RtRw::all();
+    } else {
+        $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
+    }
 
     return view('kas-warga.ubah', [
+        'kas_warga' => $kas_warga,
+        'rt' => $rt
+    ]);
+});
+
+Route::get('/kas-warga/lihat/{id}', function ($id) {
+    $kas_warga = \App\Models\KasWarga::select([
+        'kas_warga.*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+    ])
+    ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
+    ->where('kas_warga.id', $id)
+    ->first();
+
+    return view('kas-warga.lihat', [
         'kas_warga' => $kas_warga,
     ]);
 });

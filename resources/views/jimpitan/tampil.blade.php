@@ -58,8 +58,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th width="30%">Nama </th>
-                                    <th width="20%">Tanggal </th>
-                                    <th width="30%">Nominal </th>
+                                    <th width="15%">Tanggal </th>
+                                    <th width="15%">Nominal </th>
+                                    <th width="20%">Kategori </th>
                                     <th width="20%" class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -70,6 +71,7 @@
                                     <td>{{$item->nama_lengkap}}</td>
                                     <td>{{date('d-m-Y H:i:s', strtotime($item->tanggal))}}</td>
                                     <td>{{$item->nominal}}</td>
+                                    <td>{{$item->kategori}}</td>
                                     <td class="text-center">
                                         <a href="/jimpitan/ubah/{{$item->id}}" class="btn btn-sm btn-warning m-1">Ubah</a>
                                         <a href="/jimpitan/hapus/{{$item->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>

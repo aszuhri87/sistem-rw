@@ -7,9 +7,10 @@ use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/warga/qrcode/{id}', function ($id) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 
@@ -26,7 +27,7 @@ Route::get('/warga/qrcode/{id}', function ($id) {
     ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
     ->logoPath(public_path('img/logo-bu-sm.png'))
     ->labelText($warga->nama_lengkap)
-    ->labelFont(new NotoSans(20))
+    ->labelFont(new NotoSans(14))
     ->labelAlignment(new LabelAlignmentCenter())
     ->validateResult(false)
     ->build();

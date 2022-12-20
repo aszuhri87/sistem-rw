@@ -11,32 +11,32 @@
                 <div class="card-body">
                     <form action="{{url('warga/post-tambah')}}" method="POST">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label>Nomor KK</label>
                             <input type="text" class="form-control" name="no_kk" required placeholder="Nomor KK">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>NIK</label>
                             <input type="text" class="form-control" name="nik" required placeholder="NIK">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Nama Lengkap</label>
                             <input type="text" class="form-control" name="nama_lengkap" required placeholder="Nama Lengkap">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Tempat Lahir</label>
                             <input type="text" class="form-control" name="tempat_lahir" required placeholder="Tempat Lahir">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Tanggal Lahir</label>
                             <input type="date" class="form-control" name="tanggal_lahir" required placeholder="Tanggal Lahir">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Jenis Kelamin</label>
                             <select name="jenis_kelamin" class="form-control" id="jenis_kelamin">
                                 <option value="">-- Pilih --</option>
@@ -44,67 +44,72 @@
                                 <option value="P">Perempuan</option>
                             </select>
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Agama</label>
                             <input type="text" class="form-control" name="agama" required placeholder="Agama">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Alamat</label>
                             <input type="text" class="form-control" name="alamat" required placeholder="Alamat">
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label>RT</label>
-                            <input type="text" class="form-control" name="rt" required placeholder="RT">
+
+                        <div class="form-group mb-3">
+                            <label>RT/RW</label>
+                            <select name="rt" id="rt" class="form-control">
+                                <option value=""> -- </option>
+                                @foreach($rt as $item)
+                                    <option value="{{ $item->id }}">RT {{$item->rt}}/RW {{$item->rw}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label>RW</label>
-                            <input type="text" class="form-control" name="rw" required placeholder="RW">
-                        </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Pendidikan</label>
                             <input type="text" class="form-control" name="pendidikan" required placeholder="Pendidikan">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Pekerjaan</label>
                             <input type="text" class="form-control" name="pekerjaan" required placeholder="Pekerjaan">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Kewarganegaraan</label>
                             <input type="text" class="form-control" name="kewarganegaraan" required placeholder="Kewarganegaraan">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Status Perkawinan</label>
                             <input type="text" class="form-control" name="status_perkawinan" required placeholder="Status Perkawinan">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Status Dalam Keluarga</label>
-                            <input type="text" class="form-control" name="status_dalam_keluarga" required placeholder="Status Dalam Keluarga">
+                            <select name="status_dalam_keluarga" class="form-control" id="status_dalam_keluarga">
+                                <option value="KEPALA KELUARGA">KEPALA KELUARGA</option>
+                                <option value="ISTRI"> ISTRI </option>
+                                <option value="ANAK"> ANAK </option>
+                                <option value="FAMILI LAIN"> FAMILI LAIN </option>
+                            </select>
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Nama Ayah</label>
                             <input type="text" class="form-control" name="nama_ayah" required placeholder="Nama Ayah">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Nama Ibu</label>
                             <input type="text" class="form-control" name="nama_ibu" required placeholder="Nama Ibu">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Keterangan</label>
                             <input type="text" class="form-control" name="keterangan" required placeholder="Keterangan">
                         </div>
-                        <br>
+
                         <button type="submit" class="btn btn-primary btn-save">Simpan</button>
                     </form>
                 </div>

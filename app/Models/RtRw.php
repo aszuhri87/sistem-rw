@@ -4,17 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Jimpitan extends Model
+class RtRw extends Model
 {
-    protected $table = 'jimpitan';
+    protected $table = 'rt_rw';
 
     protected $fillable = [
         'id',
-        'id_warga',
-        'nominal',
-        'id_admin',
-        'kategori'
-
+        'rt',
+        'rw',
     ];
 
     public $timestamps = false;

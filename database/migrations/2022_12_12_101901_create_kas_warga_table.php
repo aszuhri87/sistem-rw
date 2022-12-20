@@ -15,11 +15,14 @@ class CreateKasWargaTable extends Migration
     {
         Schema::create('kas_warga', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_rt_rw');
             $table->integer('nominal');
-            $table->integer('rt');
-            $table->integer('rw');
             $table->date('tanggal');
             $table->string('tipe');
+            $table->string('kategori');
+            $table->string('catatan');
+
+            $table->foreign('id_rt_rw')->references('id')->on('rt_rw')->onDelete('cascade');
         });
     }
 

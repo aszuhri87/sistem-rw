@@ -18,15 +18,12 @@ Route::post('/login', function (Request $request) {
         ])->first();
 
     if (Auth::attempt($login)) {
-        session()->put('admin', $admin);
-
         return redirect('dashboard');
     } else {
         return \Redirect::back()
             ->withErrors(['message' => 'Login gagal!, periksa email dan password.'])
             ->withInput();
     }
-
 });
 
 Route::get('/logout', function () {

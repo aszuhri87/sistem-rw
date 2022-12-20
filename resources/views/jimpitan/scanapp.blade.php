@@ -32,7 +32,7 @@
         #cancel-btn{
             position: fixed;
             padding: 7px 10px 10px 10px;
-            bottom: 30px;
+            bottom: 30px;zuhr
             left: 20px;
             z-index: 999;
         }
@@ -71,7 +71,12 @@
              * { id: "id", label: "label" }
              */
             if (devices && devices.length) {
-                cameraId = devices[0].id;
+
+                if (devices.length === 1) {
+                    cameraId = devices[0].id;
+                } else {
+                    cameraId = devices[1].id;
+                }
 
                 html5QrCodeEl = new Html5Qrcode("reader");
 
@@ -84,6 +89,9 @@
                     (decodedText, decodedResult) => {
                         $('#scan-result').val(decodedText);
                         $('#form-qr').submit();
+
+                        alert('Kode QR berhasil di scan.');
+
                         return false;
                     },
                     (errorMessage) => {
@@ -132,6 +140,9 @@
                     (decodedText, decodedResult) => {
                         $('#scan-result').val(decodedText);
                         $('#form-qr').submit();
+
+                        alert('Kode QR berhasil di scan.');
+
                         return false;
                     },
                     (errorMessage) => {

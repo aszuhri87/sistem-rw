@@ -13,8 +13,9 @@ class KasWarga extends Model
         'nominal',
         'tanggal',
         'tipe',
-        'rt',
-        'rw',
+        'id_rt_rw',
+        'kategori',
+        'catatan'
     ];
 
     public $timestamps = false;

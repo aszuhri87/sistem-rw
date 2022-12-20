@@ -9,32 +9,32 @@
                 <div class="card-body">
                     <form action="{{url('admin/post-tambah')}}" method="POST">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label>Nama</label>
                             <input type="text" class="form-control" name="nama" required placeholder="Nama">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Email</label>
                             <input type="text" class="form-control" name="email" required placeholder="Email">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Password</label>
                             <input type="password" class="form-control" name="password" required placeholder="Password">
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label>RT</label>
-                            <input type="text" class="form-control" name="rt" required placeholder="RT">
+
+                        <div class="form-group mb-3">
+                            <label>RT/RW</label>
+                            <select name="rt" id="rt" class="form-control">
+                                <option value=""> -- </option>
+                                @foreach($rt as $item)
+                                    <option value="{{ $item->id }}">RT {{$item->rt}} / RW {{$item->rw}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label>RW</label>
-                            <input type="text" class="form-control" name="rw" required placeholder="RW">
-                        </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Level</label>
                             <select name="level" class="form-control" id="level">
                                 <option value="">-- Level --</option>
@@ -42,7 +42,7 @@
                                 <option value="penjimpit"> Pengambil Jimpitan </option>
                             </select>
                         </div>
-                        <br>
+
                         <button type="submit" class="btn btn-primary btn-save">Simpan</button>
                     </form>
                 </div>

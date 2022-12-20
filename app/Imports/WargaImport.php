@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\RtRw;
 use App\Models\Warga;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -17,6 +18,9 @@ class WargaImport implements ToModel, WithHeadingRow, WithColumnFormatting
      */
     public function model(array $row)
     {
+
+        $rt = RtRw::where('rt', $row['rt'])->where('rw', $row['rw'])->first();
+
         return new Warga([
             'no_kk' => (int) $row["no_kk"],
             'nik' => (int) $row["nik"],
@@ -26,8 +30,7 @@ class WargaImport implements ToModel, WithHeadingRow, WithColumnFormatting
             'jenis_kelamin' => $row["jenis_kelamin"],
             'agama' => $row["agama"],
             'alamat' => $row["alamat"],
-            'rt' => $row["rt"],
-            'rw' => $row["rw"],
+            'id_rt_rw' => $rt->id,
             'pendidikan' => $row["pendidikan"],
             'pekerjaan' => $row["pekerjaan"],
             'kewarganegaraan' => $row["kewarganegaraan"],

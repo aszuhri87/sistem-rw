@@ -15,12 +15,13 @@ class CreateAdminTable extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_rt_rw')->nullable();
             $table->string('nama');
             $table->string('email');
             $table->string('password');
-            $table->string('rt')->nullable();
-            $table->string('rw')->nullable();
             $table->string('level');
+
+            $table->foreign('id_rt_rw')->references('id')->on('rt_rw')->onDelete('cascade');
         });
     }
 

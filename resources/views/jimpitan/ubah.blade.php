@@ -9,7 +9,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <form action="/jimpitan/ubah/{{$jimpitan->id}}" method="POST">
+                <form action="/jimpitan/ubah/{{$jimpitan->id}}" method="POST" id="ubah">
                     @csrf
                     <div class="form-group">
                         <label>ID Warga</label>
@@ -18,6 +18,15 @@
                     <div class="form-group">
                         <label>Nominal</label>
                         <input type="text" class="form-control" name="nominal" value="{{$jimpitan->nominal}}" required placeholder="Nominal">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Kategori</label>
+                        <select name="kategori" class="form-control" id="kategori">
+                            <option value="Harian"> Harian </option>
+                            <option value="Mingguan"> Mingguan </option>
+                            <option value="Bulanan"> Bulanan </option>
+                            <option value="Tahunan"> Tahunan </option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary btn-save">Simpan</button>
                 </form>
@@ -30,6 +39,10 @@
     <script src="{{asset('js/jquery.blockUI.js')}}"></script>
     <script>
         $(document).ready(function () {
+            var data = {!! json_encode($jimpitan) !!};
+
+            $('#ubah').find('select[name="kategori"]').find('option[value="'+ data.kategori+'"]').prop('selected', true);
+
             $('.btn-save').click(function () {
                 $.blockUI({
                     message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',

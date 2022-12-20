@@ -1,20 +1,30 @@
 <?php
 
 use App\Imports\WargaImport;
+use App\Models\RtRw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/warga/tambah', function () {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 
-    return view('warga.tambah');
+    $rt;
+
+    if (!Auth::user()->id_rt_rw) {
+        $rt = RtRw::all();
+    } else {
+        $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
+    }
+
+    return view('warga.tambah', compact('rt'));
 });
 
 Route::post('/warga/post-tambah', function (Request $request) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 
@@ -27,8 +37,7 @@ Route::post('/warga/post-tambah', function (Request $request) {
         'jenis_kelamin' => $request->jenis_kelamin,
         'agama' => $request->agama,
         'alamat' => $request->alamat,
-        'rt' => $request->rt,
-        'rw' => $request->rw,
+        'id_rt_rw' => $request->rt,
         'pendidikan' => $request->pendidikan,
         'pekerjaan' => $request->pekerjaan,
         'kewarganegaraan' => $request->kewarganegaraan,
@@ -47,22 +56,25 @@ Route::post('/warga/post-tambah', function (Request $request) {
 });
 
 Route::get('/warga/tampil', function (Request $request) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 
-    $rt = \Session::get('admin')->rt;
+    $rt = Auth::user()->id_rt_rw;
 
     $result = \DB::table('warga')->select([
-        '*',
-    ]);
+        'warga.*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+    ])
+    ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw');
 
     $warga = null;
 
     if ($rt == null) {
         $warga = $result->paginate(10);
     } else {
-        $warga = $result->where('rt', $rt)->paginate(10);
+        $warga = $result->where('id_rt_rw', $rt)->paginate(10);
     }
 
     return view('warga.tampil', compact('warga'));
@@ -70,11 +82,14 @@ Route::get('/warga/tampil', function (Request $request) {
 
 Route::get('/warga/filter', function (Request $request) {
     $warga = null;
-    $rt = \Session::get('admin')->rt;
+    $rt = Auth::user()->id_rt_rw;
 
     $result = \App\Models\Warga::select([
-        '*',
+        'warga.*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
+    ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw')
     ->where('no_kk', 'like', '%'.$request->cari.'%')
     ->orWhere('nama_lengkap', 'like', '%'.$request->cari.'%')
     ->orWhere('nik', 'like', '%'.$request->cari.'%');
@@ -82,7 +97,7 @@ Route::get('/warga/filter', function (Request $request) {
     if ($rt == null) {
         $warga = $result;
     } else {
-        $warga = $result->where('rt', $rt);
+        $warga = $result->where('id_rt_rw', $rt);
     }
 
     return response()->json([
@@ -93,16 +108,24 @@ Route::get('/warga/filter', function (Request $request) {
 });
 
 Route::get('/warga/ubah/{id}', function ($id) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
+    }
+
+    $rt;
+
+    if (!Auth::user()->id_rt_rw) {
+        $rt = RtRw::all();
+    } else {
+        $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
     }
     $warga = \App\Models\Warga::find($id);
 
-    return view('warga.ubah', compact('warga'));
+    return view('warga.ubah', compact('warga', 'rt'));
 });
 
 Route::post('/warga/post-ubah/{id}', function (Request $request, $id) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
     $warga = \App\Models\Warga::find($id)->update([
@@ -114,8 +137,7 @@ Route::post('/warga/post-ubah/{id}', function (Request $request, $id) {
         'jenis_kelamin' => $request->jenis_kelamin,
         'agama' => $request->agama,
         'alamat' => $request->alamat,
-        'rt' => $request->rt,
-        'rw' => $request->rw,
+        'id_rt_rw' => $request->rt,
         'pendidikan' => $request->pendidikan,
         'pekerjaan' => $request->pekerjaan,
         'kewarganegaraan' => $request->kewarganegaraan,
@@ -134,7 +156,7 @@ Route::post('/warga/post-ubah/{id}', function (Request $request, $id) {
 });
 
 Route::get('/warga/hapus/{id}', function ($id) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
     \App\Models\Warga::find($id)->delete();
@@ -143,16 +165,23 @@ Route::get('/warga/hapus/{id}', function ($id) {
 });
 
 Route::get('/warga/lihat/{id}', function ($id) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
-    $warga = \App\Models\Warga::find($id);
+    $warga = \App\Models\Warga::select([
+        'warga.*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+    ])
+    ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw')
+    ->where('warga.id', $id)
+    ->first();
 
     return view('warga.lihat', compact('warga'));
 });
 
 Route::get('/warga/import', function () {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 
@@ -160,7 +189,7 @@ Route::get('/warga/import', function () {
 });
 
 Route::post('/warga/post-import', function (Request $request) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 

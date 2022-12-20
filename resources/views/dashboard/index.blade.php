@@ -45,7 +45,7 @@
             <div class="col-md-6 col-sm-12 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        @if( Session::get('admin')->level == 'admin')
+                        @if( Auth::user()->level == 'admin')
                         <div class="card mb-3">
                           <div class="card-header">
                               Total Warga
@@ -63,7 +63,7 @@
                               <h1>{{number_format($jimpitan, 0);}}</h1>
                           </div>
                         </div>
-                        @if( Session::get('admin')->level == 'admin')
+                        @if( Auth::user()->level == 'admin')
                         <div class="card mb-3">
                           <div class="card-header">
                               Total Kas Masuk
@@ -84,11 +84,11 @@
                     </div>
                 </div>
             </div>
-        @if( Session::get('admin')->level == 'admin')
+        @if( Auth::user()->level == 'admin')
           <div class="col-md-6 col-sm-12">
               <div class="card">
                 <br>
-              <h5 class="text-center" >Dashboard Perbandingan Jumlah Warga @if( Session::get('admin')->rw ) RW {{Session::get('admin')->rw }} @endif</h5>
+              <h5 class="text-center" >Dashboard Perbandingan Jumlah Warga </h5>
                 <div class="card-body">
                   <div id="chart1-container"></div>
                 </div>
@@ -97,7 +97,7 @@
         @endif
         </div>
 
-        @if( Session::get('admin')->level == 'admin')
+        @if( Auth::user()->level == 'admin')
         <div class="row mb-3">
             <div class="col-md-6 col-sm-12 mb-3">
                 <div class="card">
@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        @if( Session::get('admin')->level == 'admin')
+        @if( Auth::user()->level == 'admin')
         <div class="row mb-3">
             <div class="col-12">
                 <div class="card">

@@ -26,9 +26,21 @@
                         <label>Nominal</label>
                         <input type="text" class="form-control" name="nominal" id="nominal" required placeholder="Nominal">
                     </div>
+                    <div class="form-group mb-3">
+                        <label>Kategori</label>
+                        <select name="kategori" class="form-control" id="kategori">
+                            <option value="Harian"> Harian </option>
+                            <option value="Mingguan"> Mingguan </option>
+                            <option value="Bulanan"> Bulanan </option>
+                            <option value="Tahunan"> Tahunan </option>
+                        </select>
+                    </div>
                     <div class="mb-4">
                         @for($i=1; $i <= 10; $i++) <button type="button" class="btn btn-outline-primary btn-nominal m-1" value="{{$i*500}}">{{$i*500}}</button>
-                            @endfor
+                        @endfor
+
+                        @for($i=2; $i <= 4; $i++) <button type="button" class="btn btn-outline-primary btn-nominal m-1" value="{{$i*5000}}">{{$i*5000}}</button>
+                        @endfor
                     </div>
                     <button type="submit" class="btn btn-primary btn-save">Simpan</button>
                 </form>

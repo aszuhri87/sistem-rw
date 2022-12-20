@@ -18,23 +18,33 @@
                             <label>Tanggal</label>
                             <input type="date" class="form-control" name="tanggal" required placeholder="Tanggal">
                         </div>
-                        @if( Session::get('admin')->level == 'admin' && Session::get('admin')->rt == null)
-                        <div class="form-group">
-                            <label>RT</label>
-                            <input type="text" class="form-control" name="rt" required placeholder="RT">
-                        </div>
-                        <div class="form-group">
-                            <label>RW</label>
-                            <input type="text" class="form-control" name="rw" required placeholder="RW">
+                        @if( Auth::user()->level == 'admin' && Auth::user()->id_rt_rw == null)
+                        <div class="form-group mb-3">
+                            <label>RT/RW</label>
+                            <select name="rt" id="rt" class="form-control">
+                                <option value=""> -- </option>
+                                @foreach($rt as $item)
+                                    <option value="{{ $item->id }}">RT {{$item->rt}}/RW {{$item->rw}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         @endif
                         <div class="form-group">
                             <label>Tipe</label>
-                            <select name="tipe" id="" class="form-control">
+                            <select name="tipe" id="tipe" class="form-control">
                                 <option value=""> -- Pilih Tipe --</option>
                                 <option value="masuk"> Masuk </option>
                                 <option value="keluar"> Keluar </option>
                             </select>
+                        </div>
+
+                        <div class="form-group kategori d-none">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Catatan</label>
+                            <textarea class="form-control" name="catatan" id="catatan" cols="30" rows="10"></textarea>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary btn-save">Simpan</button>
@@ -49,6 +59,7 @@
 <script>
     $(document).ready(function () {
         $('.btn-save').click(function () {
+
             $.blockUI({
                 message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
                 css: {
@@ -66,4 +77,5 @@
     });
 
 </script>
+@include('kas-warga.script')
 @include("footer")

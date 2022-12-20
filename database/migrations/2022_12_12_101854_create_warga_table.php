@@ -15,6 +15,7 @@ class CreateWargaTable extends Migration
     {
         Schema::create('warga', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_rt_rw')->nullable();
             $table->string('no_kk');
             $table->string('nik');
             $table->string('nama_lengkap');
@@ -23,8 +24,6 @@ class CreateWargaTable extends Migration
             $table->string('jenis_kelamin');
             $table->string('agama');
             $table->text('alamat');
-            $table->integer('rt');
-            $table->integer('rw');
             $table->string('pendidikan');
             $table->string('pekerjaan');
             $table->string('kewarganegaraan');
@@ -33,6 +32,8 @@ class CreateWargaTable extends Migration
             $table->string('nama_ayah');
             $table->string('nama_ibu');
             $table->text('keterangan');
+
+            $table->foreign('id_rt_rw')->references('id')->on('rt_rw')->onDelete('cascade');
         });
     }
 

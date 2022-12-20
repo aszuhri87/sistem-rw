@@ -59,12 +59,13 @@
                                <option value=""></option>
                                <tr>
                                     <th>No</th>
-                                    <th width="30%">NOMINAL</th>
-                                    <th width="25%">TANGGAL</th>
-                                    <th width="10%">RT</th>
-                                    <th width="10%">RW</th>
-                                    <th width="10%">TIPE</th>
-                                    <th width="30%" class="text-center">Aksi</th>
+                                    <th width="20%">NOMINAL</th>
+                                    <th width="15%" class="text-center">TANGGAL</th>
+                                    <th width="5%">RT</th>
+                                    <th width="5%">RW</th>
+                                    <th width="10%" class="text-center">TIPE</th>
+                                    <th width="20%" class="text-center">KATEGORI</th>
+                                    <th width="25%" class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,11 +73,13 @@
                                 <tr>
                                     <th scope="row">{{ $index+1 }}</th>
                                     <td>{{ $item->nominal }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
-                                    <td>{{ $item->rt }}</td>
-                                    <td>{{ $item->rw }}</td>
-                                    <td>{{ $item->tipe }}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($item->tanggal)) }}</td>
+                                    <td class="text-center">{{ $item->rt }}</td>
+                                    <td class="text-center">{{ $item->rw }}</td>
+                                    <td class="text-center">{{ $item->tipe }}</td>
+                                    <td class="text-center">{{ $item->kategori }}</td>
                                     <td class="text-center">
+                                        <a href="/kas-warga/lihat/{{$item->id}}" class="btn btn-sm btn-primary m-1">Lihat</a>
                                         <a href="/kas-warga/ubah/{{$item->id}}" class="btn btn-sm btn-warning m-1">Ubah</a>
                                         <a href="/kas-warga/hapus/{{$item->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
                                     </td>

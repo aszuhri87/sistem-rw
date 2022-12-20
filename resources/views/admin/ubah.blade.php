@@ -11,32 +11,32 @@
                 <div class="card-body">
                     <form action="/admin/post-ubah/{{$admin->id}}" method="POST" id="ubah">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label>Nama</label>
                             <input type="text" value="{{$admin->nama}}" class="form-control" name="nama" placeholder="Nama">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Email</label>
                             <input type="text" value="{{$admin->email}}" class="form-control" name="email" placeholder="Email">
                         </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Password</label>
                             <input type="text"  class="form-control" name="password" placeholder="Password">
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label>RT</label>
-                            <input type="text" value="{{$admin->rt}}" class="form-control" name="rt" placeholder="RT">
+
+                        <div class="form-group mb-3">
+                            <label>RT/RW</label>
+                            <select name="rt" id="rt" class="form-control">
+                                <option value=""> -- </option>
+                                @foreach($rt as $item)
+                                    <option value="{{ $item->id }}">RT {{$item->rt}}/RW {{$item->rw}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label>RW</label>
-                            <input type="text" value="{{$admin->rw}}" class="form-control" name="rw" placeholder="RW">
-                        </div>
-                        <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Level</label>
                             <select name="level" class="form-control" id="level">
                                 <option value="">-- Level --</option>
@@ -44,7 +44,7 @@
                                 <option value="penjimpit"> Pengambil Jimpitan </option>
                             </select>
                         </div>
-                        <br>
+
                         <button type="submit" class="btn btn-primary btn-save">Simpan</button>
                     </form>
                 </div>
@@ -60,6 +60,7 @@
                 var data = {!! json_encode($admin) !!};
 
                 $('#ubah').find('select[name="level"]').find('option[value="'+ data.level+'"]').prop('selected', true);
+                $('#ubah').find('select[name="rt"]').find('option[value="'+ data.id_rt_rw+'"]').prop('selected', true);
 
                 $('.btn-save').click(function () {
                     $.blockUI({

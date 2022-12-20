@@ -1,20 +1,32 @@
 <?php
 
+use App\Models\RtRw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use PhpOffice\PhpSpreadsheet\Reader\Xls\RC4;
 
 Route::get('/admin/get-tambah', function () {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 
-    return view('admin.tambah');
+    $rt;
+
+    if(!Auth::user()->id_rt_rw){
+        $rt = RtRw::all();
+    } else {
+        $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
+    }
+
+
+    return view('admin.tambah', ['rt' => $rt]);
 });
 
 Route::post('/admin/post-tambah', function (Request $request) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
     \App\Models\Admin::create([
@@ -22,8 +34,7 @@ Route::post('/admin/post-tambah', function (Request $request) {
     'email' => $request->email,
     'password' => Hash::make($request->password),
     'level' => $request->level,
-    'rt' => $request->rt,
-    'rw' => $request->rw,
+    'id_rt_rw' => $request->rt_rw,
 ]);
 
     if ($admin) {
@@ -34,15 +45,16 @@ Route::post('/admin/post-tambah', function (Request $request) {
 });
 
 Route::get('/admin/tampil', function () {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 
     $admin = \App\Models\Admin::select([
-        '*',
-        DB::raw('IF(rt is null, "-", rt) as rt'),
-        DB::raw('IF(rw is null, "-", rw) as rw'),
+        'admin.*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
+    ->leftJoin('rt_rw', 'rt_rw.id', 'admin.id_rt_rw')
     ->paginate(10);
 
     return view('admin.tampil', [
@@ -53,12 +65,15 @@ Route::get('/admin/tampil', function () {
 Route::get('/admin/filter', function (Request $request) {
     $admin = \App\Models\Admin::select([
         '*',
+        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
+        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
-    ->where('nama', 'like', '%'.$request->cari.'%')
-    ->orWhere('email', 'like', '%'.$request->cari.'%')
-    ->orWhere('level', 'like', '%'.$request->cari.'%')
-    ->orWhere('rt', 'like', '%'.$request->cari.'%')
-    ->orWhere('rw', 'like', '%'.$request->cari.'%');
+    ->leftJoin('rt_rw', 'rt_rw.id', 'admin.id_rt_rw')
+    ->where('admin.nama', 'like', '%'.$request->cari.'%')
+    ->orWhere('admin.email', 'like', '%'.$request->cari.'%')
+    ->orWhere('admin.level', 'like', '%'.$request->cari.'%')
+    ->orWhere('rt_rw.rt', 'like', '%'.$request->cari.'%')
+    ->orWhere('rt_rw.rw', 'like', '%'.$request->cari.'%');
 
     return response()->json([
         'status' => 'success',
@@ -68,17 +83,25 @@ Route::get('/admin/filter', function (Request $request) {
 });
 
 Route::get('/admin/get-ubah/{id}', function ($id) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
+    }
+
+    $rt;
+
+    if(!Auth::user()->id_rt_rw){
+        $rt = RtRw::all();
+    } else {
+        $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
     }
 
     $admin = \App\Models\Admin::find($id);
 
-    return view('admin.ubah', compact('admin'));
+    return view('admin.ubah', compact('admin','rt'));
 });
 
 Route::post('/admin/post-ubah/{id}', function (Request $request, $id) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
 
@@ -96,8 +119,7 @@ Route::post('/admin/post-ubah/{id}', function (Request $request, $id) {
         'email' => $request->email,
         'password' => $password,
         'level' => $request->level,
-        'rt' => $request->rt,
-        'rw' => $request->rw,
+        'id_rt_rw' => $request->rt,
     ]);
 
     if ($admin) {
@@ -108,7 +130,7 @@ Route::post('/admin/post-ubah/{id}', function (Request $request, $id) {
 });
 
 Route::get('/admin/get-hapus/{id}', function ($id) {
-    if (!session()->get('admin')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
     \App\Models\Admin::find($id)->delete();

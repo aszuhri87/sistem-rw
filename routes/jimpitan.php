@@ -2,6 +2,7 @@
 
 use App\Exports\JimpitanExport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/jimpitan/tambah', function () {
@@ -19,18 +20,18 @@ Route::post('/jimpitan/scan-qr', function (Request $request) {
 Route::post('/jimpitan/tambah', function (Request $request) {
     $warga = \App\Models\Warga::where('no_kk', $request->no_kk)->first();
 
-    if(!$warga){
+    if (!$warga) {
         return redirect('jimpitan/tambah')->with('message', 'NIK Tidak Ditemukan');
     }
 
-    $admin = session()->get('admin');
-    \App\Models\Jimpitan::create([
+    $jimpitan = \App\Models\Jimpitan::create([
         'id_warga' => $warga->id,
         'nominal' => $request->nominal,
-        'id_admin' => $admin->id,
+        'id_admin' => Auth::user()->id,
+        'kategori' => $request->kategori,
     ]);
 
-    if ($admin) {
+    if ($jimpitan) {
         return redirect('jimpitan/tampil')->with('message', 'Berhasil Ditambahkan!');
     } else {
         return redirect('jimpitan/tampil')->withErrors('error', 'Penambahan jimpitan gagal!');
@@ -38,11 +39,12 @@ Route::post('/jimpitan/tambah', function (Request $request) {
 });
 
 Route::get('/jimpitan/tampil', function () {
-    $rt = \Session::get('admin')->rt;
+    $rt = Auth::user()->id_rt_rw;
 
     $result = \DB::table('jimpitan')->select([
         'jimpitan.*',
         'warga.nama_lengkap',
+        'warga.no_kk',
     ])
     ->leftJoin('warga', 'warga.id', 'jimpitan.id_warga')
     ->orderBy('jimpitan.tanggal', 'desc');
@@ -52,7 +54,7 @@ Route::get('/jimpitan/tampil', function () {
     if ($rt == null) {
         $jimpitan = $result->paginate(10);
     } else {
-        $jimpitan = $result->where('warga.rt', $rt)->paginate(10);
+        $jimpitan = $result->where('warga.id_rt_rw', Auth::user()->id_rt_rw)->paginate(10);
     }
 
     return view('jimpitan/tampil', [
@@ -61,7 +63,7 @@ Route::get('/jimpitan/tampil', function () {
 });
 
 Route::get('/jimpitan/filter', function (Request $request) {
-    $rt = \Session::get('admin')->rt;
+    $rt = Auth::user()->id_rt_rw;
 
     $result = \App\Models\Jimpitan::select([
         'jimpitan.*',
@@ -99,10 +101,11 @@ Route::get('/jimpitan/hapus/{id}', function ($id) {
 });
 
 Route::post('/jimpitan/ubah/{id}', function (Request $request, $id) {
-    $admin = session()->get('admin');
+    // $admin = session()->get('admin');
     $jimpitan = \App\Models\Jimpitan::find($id)->update([
         'nominal' => $request->nominal,
-        'id_admin' => $admin->id,
+        'id_admin' => Auth::id(),
+        'kategori' => $request->kategori,
     ]);
 
     if ($jimpitan) {

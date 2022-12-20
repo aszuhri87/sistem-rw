@@ -19,6 +19,7 @@ class CreateJimpitanTable extends Migration
             $table->bigInteger('nominal');
             $table->unsignedBigInteger('id_admin');
             $table->timestamp('tanggal');
+            $table->string('kategori');
 
             $table->foreign('id_warga')->references('id')->on('warga')->onDelete('cascade');
             $table->foreign('id_admin')->references('id')->on('admin')->onDelete('cascade');

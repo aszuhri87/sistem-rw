@@ -16,9 +16,12 @@
                 <li class="nav-item mr-4">
                     <a class="nav-link text-dark" href="/jimpitan/tampil">Jimpitan</a>
                 </li>
-                @if( Session::get('admin')->level == 'admin')
+                @if( Auth::user()->level == 'admin')
                     <li class="nav-item mr-4">
                         <a class="nav-link text-dark" href="/admin/tampil">Admin</a>
+                    </li>
+                    <li class="nav-item mr-4">
+                        <a class="nav-link text-dark" href="/rt-rw/tampil">RT/RW</a>
                     </li>
                     <li class="nav-item mr-4">
                         <a class="nav-link text-dark" href="/warga/tampil">Warga</a>
