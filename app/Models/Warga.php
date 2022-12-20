@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Warga extends Model
 {
+    use SoftDeletes;
     protected $table = 'warga';
 
     protected $fillable = [
@@ -27,8 +29,7 @@ class Warga extends Model
         'nama_ayah',
         'nama_ibu',
         'keterangan',
-
     ];
 
-    public $timestamps = false;
+    protected $dates = ['deleted_at'];
 }

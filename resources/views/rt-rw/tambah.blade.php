@@ -13,12 +13,12 @@
                         @csrf
                         <div class="form-group mb-3">
                             <label>RT</label>
-                            <input type="text" class="form-control" name="rt" placeholder="RT">
+                            <input type="text" class="form-control" required name="rt" placeholder="RT">
                         </div>
 
                         <div class="form-group mb-3">
                             <label>RW</label>
-                            <input type="text" class="form-control" name="rw" placeholder="RW">
+                            <input type="text" class="form-control" required name="rw" placeholder="RW">
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-save">Simpan</button>

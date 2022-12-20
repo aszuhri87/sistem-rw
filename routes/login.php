@@ -15,7 +15,9 @@ Route::post('/login', function (Request $request) {
 
     $admin = \App\Models\Admin::where([
             'email' => $request->email,
-        ])->first();
+        ])
+        ->whereNull('admin.deleted_at')
+        ->first();
 
     if (Auth::attempt($login)) {
         return redirect('dashboard');

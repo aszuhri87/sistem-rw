@@ -17,6 +17,8 @@ class CreateRtRwTable extends Migration
             $table->id();
             $table->integer('rt');
             $table->integer('rw');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

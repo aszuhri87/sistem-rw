@@ -67,7 +67,9 @@ Route::get('/warga/tampil', function (Request $request) {
         DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
         DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
-    ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw');
+    ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw')
+    ->whereNull('warga.deleted_at')
+    ->orderBy('warga.created_at', 'desc');
 
     $warga = null;
 
@@ -92,7 +94,9 @@ Route::get('/warga/filter', function (Request $request) {
     ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw')
     ->where('no_kk', 'like', '%'.$request->cari.'%')
     ->orWhere('nama_lengkap', 'like', '%'.$request->cari.'%')
-    ->orWhere('nik', 'like', '%'.$request->cari.'%');
+    ->orWhere('nik', 'like', '%'.$request->cari.'%')
+    ->orderBy('warga.created_at', 'desc')
+    ->whereNull('warga.deleted_at');
 
     if ($rt == null) {
         $warga = $result;
@@ -175,6 +179,7 @@ Route::get('/warga/lihat/{id}', function ($id) {
     ])
     ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw')
     ->where('warga.id', $id)
+    ->whereNull('warga.deleted_at')
     ->first();
 
     return view('warga.lihat', compact('warga'));

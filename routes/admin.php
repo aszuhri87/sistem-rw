@@ -54,6 +54,8 @@ Route::get('/admin/tampil', function () {
         DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
     ->leftJoin('rt_rw', 'rt_rw.id', 'admin.id_rt_rw')
+    ->whereNull('admin.deleted_at')
+    ->orderBy('admin.created_at', 'desc')
     ->paginate(10);
 
     return view('admin.tampil', [
@@ -72,7 +74,9 @@ Route::get('/admin/filter', function (Request $request) {
     ->orWhere('admin.email', 'like', '%'.$request->cari.'%')
     ->orWhere('admin.level', 'like', '%'.$request->cari.'%')
     ->orWhere('rt_rw.rt', 'like', '%'.$request->cari.'%')
-    ->orWhere('rt_rw.rw', 'like', '%'.$request->cari.'%');
+    ->orWhere('rt_rw.rw', 'like', '%'.$request->cari.'%')
+    ->orderBy('admin.created_at', 'desc')
+    ->whereNull('admin.deleted_at');
 
     return response()->json([
         'status' => 'success',

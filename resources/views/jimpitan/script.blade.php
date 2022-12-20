@@ -42,6 +42,7 @@
                         <td>` + item.nama_lengkap + `</td>
                         <td>` + item.tanggal + `</td>
                         <td>` + item.nominal + `</td>
+                        <td>` + item.kategori + `</td>
                         <td class="text-center">
                             <a href="/jimpitan/ubah/` + item.id + `" class="btn btn-sm btn-warning m-1">Ubah</a>
                             <a href="/jimpitan/hapus/` + item.id + `" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>

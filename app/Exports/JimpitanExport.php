@@ -21,6 +21,7 @@ class JimpitanExport implements FromView, WithColumnFormatting
             DB::raw('SUM(jimpitan.nominal) as total_nominal'),
         ])
         ->whereMonth('tanggal', date('m'))
+        ->whereNull('deleted_at')
         ->groupBy('id_warga');
 
         $warga = DB::table('warga')->select([
@@ -34,6 +35,7 @@ class JimpitanExport implements FromView, WithColumnFormatting
             $join->on('warga.id', '=', 'jimpitan.id_warga');
         })
         ->where('warga.status_dalam_keluarga', 'KEPALA KELUARGA')
+        ->whereNull('warga.deleted_at')
         ->orderBy('warga.nama_lengkap', 'asc')
         ->get();
 

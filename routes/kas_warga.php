@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/kas-warga/tambah', function () {
     $rt;
 
-    if(!Auth::user()->id_rt_rw){
+    if (!Auth::user()->id_rt_rw) {
         $rt = RtRw::all();
     } else {
         $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
     }
+
     return view('kas-warga.tambah', compact('rt'));
 });
 
@@ -51,6 +52,7 @@ Route::get('/kas-warga/tampil', function (Request $request) {
         DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
     ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
+    ->whereNull('kas_warga.deleted_at')
     ->orderBy('tanggal', 'desc');
 
     if ($rt) {
@@ -73,6 +75,7 @@ Route::get('/kas-warga/filter', function (Request $request) {
         DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
     ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
+    ->whereNull('kas_warga.deleted_at')
     ->where('tipe', 'like', '%'.$request->cari.'%');
 
     $kas_warga = null;
@@ -101,7 +104,6 @@ Route::get('/kas-warga/hapus/{id}', function ($id) {
 });
 
 Route::post('/kas-warga/post-ubah/{id}', function (Request $request, $id) {
-
     $rt;
 
     if ($request->rt) {
@@ -117,7 +119,6 @@ Route::post('/kas-warga/post-ubah/{id}', function (Request $request, $id) {
         'catatan' => $request->catatan,
         'tipe' => $request->tipe,
         'id_rt_rw' => $rt,
-
     ]);
 
     if ($kas_warga) {
@@ -139,7 +140,7 @@ Route::get('/kas-warga/ubah/{id}', function ($id) {
 
     $rt;
 
-    if(!Auth::user()->id_rt_rw){
+    if (!Auth::user()->id_rt_rw) {
         $rt = RtRw::all();
     } else {
         $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
@@ -147,7 +148,7 @@ Route::get('/kas-warga/ubah/{id}', function ($id) {
 
     return view('kas-warga.ubah', [
         'kas_warga' => $kas_warga,
-        'rt' => $rt
+        'rt' => $rt,
     ]);
 });
 
@@ -158,6 +159,7 @@ Route::get('/kas-warga/lihat/{id}', function ($id) {
         DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
     ])
     ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
+    ->whereNull('kas_warga.deleted_at')
     ->where('kas_warga.id', $id)
     ->first();
 

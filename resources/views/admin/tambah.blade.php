@@ -26,7 +26,7 @@
 
                         <div class="form-group mb-3">
                             <label>RT/RW</label>
-                            <select name="rt" id="rt" class="form-control">
+                            <select name="rt" id="rt" class="form-control" >
                                 <option value=""> -- </option>
                                 @foreach($rt as $item)
                                     <option value="{{ $item->id }}">RT {{$item->rt}} / RW {{$item->rw}}</option>
@@ -54,6 +54,18 @@
         <script src="{{asset('js/jquery.blockUI.js')}}"></script>
         <script>
             $(document).ready(function () {
+
+                $('#level').on('change', function(e){
+                    e.preventDefault();
+
+                    if($('#level').val() == 'penjimpit'){
+                        $('#rt').prop('required', true);
+                    } else {
+                        $('#rt').prop('required', false);
+                    }
+
+                });
+
                 $('.btn-save').click(function () {
                     $.blockUI({
                         message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',

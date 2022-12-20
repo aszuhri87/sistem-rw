@@ -31,7 +31,9 @@ class CreateWargaTable extends Migration
             $table->string('status_dalam_keluarga');
             $table->string('nama_ayah');
             $table->string('nama_ibu');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('id_rt_rw')->references('id')->on('rt_rw')->onDelete('cascade');
         });

@@ -1,12 +1,11 @@
 <?php
 
-use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
-    $rt =  Auth::user()->id_rt_rw;
+    $rt = Auth::user()->id_rt_rw;
 
     $warga_rt_res = null;
     $jimpit_res = null;
@@ -33,6 +32,7 @@ Route::get('/dashboard', function () {
             DB::raw("CASE WHEN warga.jenis_kelamin = 'L' THEN 'Laki-laki' ELSE 'Perempuan' END as jenis_kelamin"),
            ])
         ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw')
+        ->whereNull('warga.deleted_at')
         ->groupBy('warga.jenis_kelamin');
 
     if ($rt == null) {
@@ -45,6 +45,7 @@ Route::get('/dashboard', function () {
         \DB::raw('SUM(kas_warga.nominal) as count'),
     ])
     ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
+    ->whereNull('kas_warga.deleted_at')
     ->where('kas_warga.tipe', 'masuk');
 
     if ($rt == null) {
@@ -57,6 +58,7 @@ Route::get('/dashboard', function () {
         \DB::raw('SUM(kas_warga.nominal) as count'),
     ])
     ->leftJoin('rt_rw', 'rt_rw.id', 'kas_warga.id_rt_rw')
+    ->whereNull('kas_warga.deleted_at')
     ->where('kas_warga.tipe', 'keluar');
 
     if ($rt == null) {
@@ -66,6 +68,7 @@ Route::get('/dashboard', function () {
     }
 
     $kas_warga = \App\Models\KasWarga::select(DB::raw('sum(kas_warga.nominal) as jumlah '), DB::raw("DATE_FORMAT(kas_warga.tanggal,'%M %Y') as bulan"))
+    ->whereNull('kas_warga.deleted_at')
     ->groupBy('bulan');
 
     if ($rt == null) {
@@ -76,7 +79,8 @@ Route::get('/dashboard', function () {
 
     $jimpit = \App\Models\Jimpitan::select([
         \DB::raw('SUM(jimpitan.nominal) as count'),
-    ])->leftJoin('warga', 'warga.id', 'jimpitan.id_warga');
+    ])->leftJoin('warga', 'warga.id', 'jimpitan.id_warga')
+    ->whereNull('jimpitan.deleted_at');
 
     if ($rt == null) {
         $jimpit_res = $jimpit->first();
@@ -86,7 +90,8 @@ Route::get('/dashboard', function () {
 
     $warga = \App\Models\Warga::select([
         \DB::raw('count(warga.id) as count'),
-    ]);
+    ])
+    ->whereNull('warga.deleted_at');
 
     if ($rt == null) {
         $warga_res = $warga->first()->count;
@@ -97,6 +102,7 @@ Route::get('/dashboard', function () {
     $jimpit_per_bulan = \App\Models\Jimpitan::select(DB::raw('sum(jimpitan.nominal) as count'), DB::raw('MONTHNAME(jimpitan.tanggal) as bulan'))
     ->leftJoin('warga', 'warga.id', 'jimpitan.id_warga')
     ->where('jimpitan.id', '!=', null)
+    ->whereNull('jimpitan.deleted_at')
     ->whereYear('jimpitan.tanggal', date('Y'))
     ->groupBy(DB::raw('MONTHNAME(jimpitan.tanggal)'), 'bulan');
 
@@ -109,6 +115,7 @@ Route::get('/dashboard', function () {
     $jimpit_per_bulan_sum = \App\Models\Jimpitan::select(DB::raw('count(id) as count'), DB::raw('MONTHNAME(tanggal) as bulan'))
     ->where('id', '!=', null)
     ->whereYear('tanggal', date('Y'))
+    ->whereNull('jimpitan.deleted_at')
     ->groupBy(DB::raw('MONTHNAME(tanggal)'), 'bulan')
     ->get();
 

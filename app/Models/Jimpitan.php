@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Jimpitan extends Model
 {
+    use SoftDeletes;
     protected $table = 'jimpitan';
 
     protected $fillable = [
@@ -13,9 +15,8 @@ class Jimpitan extends Model
         'id_warga',
         'nominal',
         'id_admin',
-        'kategori'
-
+        'kategori',
     ];
 
-    public $timestamps = false;
+    protected $dates = ['deleted_at'];
 }

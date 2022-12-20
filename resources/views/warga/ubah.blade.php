@@ -103,7 +103,7 @@
 
                         <div class="form-group mb-3">
                             <label>Keterangan</label>
-                            <input type="text" value="{{$warga->keterangan}}" class="form-control" name="keterangan" required placeholder="Keterangan">
+                            <input type="text" value="{{$warga->keterangan}}" class="form-control" name="keterangan" placeholder="Keterangan">
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-save">Simpan</button>

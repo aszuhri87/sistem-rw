@@ -20,7 +20,9 @@ class CreateKasWargaTable extends Migration
             $table->date('tanggal');
             $table->string('tipe');
             $table->string('kategori');
-            $table->string('catatan');
+            $table->string('catatan')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('id_rt_rw')->references('id')->on('rt_rw')->onDelete('cascade');
         });

@@ -4,7 +4,7 @@
             if($(this).val() == 'masuk'){
                 $('.div-kategori').removeClass('d-none').html(`
                     <label>Pilih Kategori</label>
-                    <select name="kategori" id="kategori" class="form-control ">
+                    <select name="kategori" id="kategori" class="form-control" required>
                         <option value=""> -- Pilih Kategori --</option>
                         <option value="Iuran sampah"> Iuran sampah </option>
                         <option value="Sponsorship/donatur"> Sponsorship/donatur </option>
@@ -18,7 +18,7 @@
             } else if ($(this).val() == 'keluar'){
                 $('.div-kategori').removeClass('d-none').html(`
                     <label>Pilih Kategori</label>
-                    <select name="kategori" id="kategori" class="form-control">
+                    <select name="kategori" id="kategori" class="form-control" required>
                         <option value=""> -- Pilih Kategori --</option>
                         <option value="Santunan"> Santunan </option>
                         <option value="Kerjabakti"> Kerjabakti  </option>
@@ -83,10 +83,12 @@
                         <th scope="row">` + i + `</th>
                         <td>` + item.nominal + `</td>
                         <td>` + item.tanggal + `</td>
-                        <td>` + item.tipe + `</td>
                         <td>` + item.rt + `</td>
                         <td>` + item.rw + `</td>
+                        <td>` + item.tipe + `</td>
+                        <td>` + item.kategori + `</td>
                         <td class="text-center">
+                            <a href="/kas-warga/lihat/` + item.id + `" class="btn btn-sm btn-primary m-1">Lihat</a>
                             <a href="/kas-warga/ubah/` + item.id + `" class="btn btn-sm btn-warning m-1">Ubah</a>
                             <a href="/kas-warga/hapus/` + item.id + `" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
                         </td>

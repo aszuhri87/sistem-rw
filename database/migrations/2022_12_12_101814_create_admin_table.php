@@ -21,6 +21,9 @@ class CreateAdminTable extends Migration
             $table->string('password');
             $table->string('level');
 
+            $table->timestamps();
+            $table->softDeletes();
+
             $table->foreign('id_rt_rw')->references('id')->on('rt_rw')->onDelete('cascade');
         });
     }

@@ -24,6 +24,8 @@ Route::get('/rt-rw/tampil', function (Request $request) {
     $result = \App\Models\RtRw::select([
         '*',
     ])
+    ->whereNull('rt_rw.deleted_at')
+    ->orderBy('rt_rw.created_at', 'desc')
     ->paginate(10);
 
     return view('rt-rw.tampil', [
@@ -37,6 +39,8 @@ Route::get('/rt-rw/filter', function (Request $request) {
     ])
     ->where('rt', 'like', '%'.$request->cari.'%')
     ->orWhere('rw', 'like', '%'.$request->cari.'%')
+    ->whereNull('rt_rw.deleted_at')
+    ->orderBy('rt_rw.created_at', 'desc')
     ->get();
 
     return response()->json([

@@ -87,7 +87,7 @@
 
                         <div class="form-group mb-3">
                             <label>Status Dalam Keluarga</label>
-                            <select name="status_dalam_keluarga" class="form-control" id="status_dalam_keluarga">
+                            <select name="status_dalam_keluarga" class="form-control" id="status_dalam_keluarga" required>
                                 <option value="KEPALA KELUARGA">KEPALA KELUARGA</option>
                                 <option value="ISTRI"> ISTRI </option>
                                 <option value="ANAK"> ANAK </option>
@@ -107,7 +107,7 @@
 
                         <div class="form-group mb-3">
                             <label>Keterangan</label>
-                            <input type="text" class="form-control" name="keterangan" required placeholder="Keterangan">
+                            <input type="text" class="form-control" name="keterangan" placeholder="Keterangan">
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-save">Simpan</button>
