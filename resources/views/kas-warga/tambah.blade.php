@@ -21,7 +21,7 @@
                         @if( Auth::user()->level == 'admin' && Auth::user()->id_rt_rw == null)
                         <div class="form-group mb-3">
                             <label>RT/RW</label>
-                            <select name="rt" id="rt" class="form-control">
+                            <select name="rt" id="rt" class="form-control" required>
                                 <option value=""> -- </option>
                                 @foreach($rt as $item)
                                     <option value="{{ $item->id }}">RT {{$item->rt}}/RW {{$item->rw}}</option>
@@ -31,7 +31,7 @@
                         @endif
                         <div class="form-group">
                             <label>Tipe</label>
-                            <select name="tipe" id="tipe" class="form-control">
+                            <select name="tipe" id="tipe" class="form-control" required>
                                 <option value=""> -- Pilih Tipe --</option>
                                 <option value="masuk"> Masuk </option>
                                 <option value="keluar"> Keluar </option>

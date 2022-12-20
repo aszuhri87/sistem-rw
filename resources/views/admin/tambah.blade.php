@@ -36,7 +36,7 @@
 
                         <div class="form-group mb-3">
                             <label>Level</label>
-                            <select name="level" class="form-control" id="level">
+                            <select name="level" class="form-control" id="level" required>
                                 <option value="">-- Level --</option>
                                 <option value="admin"> Admin </option>
                                 <option value="penjimpit"> Pengambil Jimpitan </option>

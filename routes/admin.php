@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use PhpOffice\PhpSpreadsheet\Reader\Xls\RC4;
 
 Route::get('/admin/get-tambah', function () {
     if (!Auth::check()) {
@@ -15,12 +14,11 @@ Route::get('/admin/get-tambah', function () {
 
     $rt;
 
-    if(!Auth::user()->id_rt_rw){
+    if (!Auth::user()->id_rt_rw) {
         $rt = RtRw::all();
     } else {
         $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
     }
-
 
     return view('admin.tambah', ['rt' => $rt]);
 });
@@ -29,13 +27,14 @@ Route::post('/admin/post-tambah', function (Request $request) {
     if (!Auth::check()) {
         return redirect('/login');
     }
-    \App\Models\Admin::create([
-    'nama' => $request->nama,
-    'email' => $request->email,
-    'password' => Hash::make($request->password),
-    'level' => $request->level,
-    'id_rt_rw' => $request->rt_rw,
-]);
+
+    $admin = \App\Models\Admin::create([
+        'nama' => $request->nama,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'level' => $request->level,
+        'id_rt_rw' => $request->rt_rw,
+    ]);
 
     if ($admin) {
         return redirect('/admin/tampil')->with('message', 'Berhasil menambah!');
@@ -89,7 +88,7 @@ Route::get('/admin/get-ubah/{id}', function ($id) {
 
     $rt;
 
-    if(!Auth::user()->id_rt_rw){
+    if (!Auth::user()->id_rt_rw) {
         $rt = RtRw::all();
     } else {
         $rt = RtRw::where('id', Auth::user()->id_rt_rw)->get();
@@ -97,7 +96,7 @@ Route::get('/admin/get-ubah/{id}', function ($id) {
 
     $admin = \App\Models\Admin::find($id);
 
-    return view('admin.ubah', compact('admin','rt'));
+    return view('admin.ubah', compact('admin', 'rt'));
 });
 
 Route::post('/admin/post-ubah/{id}', function (Request $request, $id) {
