@@ -2,7 +2,7 @@
     $(document).ready(function () {
         $('#tipe').on('change', function (e) {
             if($(this).val() == 'masuk'){
-                $('.kategori').removeClass('d-none').html(`
+                $('.div-kategori').removeClass('d-none').html(`
                     <label>Pilih Kategori</label>
                     <select name="kategori" id="kategori" class="form-control ">
                         <option value=""> -- Pilih Kategori --</option>
@@ -16,7 +16,7 @@
                     </select>
                 `);
             } else if ($(this).val() == 'keluar'){
-                $('.kategori').removeClass('d-none').html(`
+                $('.div-kategori').removeClass('d-none').html(`
                     <label>Pilih Kategori</label>
                     <select name="kategori" id="kategori" class="form-control">
                         <option value=""> -- Pilih Kategori --</option>
@@ -35,6 +35,22 @@
             } else {
                 $('.kategori').addClass('d-none');
             }
+        });
+
+        $('.btn-save').click(function () {
+            $.blockUI({
+                message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
+                css: {
+                    backgroundColor: 'transparent',
+                    color: '#fff',
+                    border: '0'
+                },
+                overlayCSS: {
+                    opacity: 0.5
+                },
+                timeout: 1000,
+                baseZ: 2000
+            });
         });
 
         $('#filter').on('click', function (e) {
