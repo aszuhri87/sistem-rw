@@ -35,7 +35,15 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control mt-4" id="cari" name="cari" placeholder="Cari..">
                                 </div>
-                                {{-- <button class="btn btn-primary mt-4" id="filter"> Filter</button> --}}
+                                <div class="form-group mb-3" style="margin-top: 40px;">
+                                    <select name="kategori" class="form-control" id="kategori">
+                                        <option value=""> Semua </option>
+                                        <option value="Harian"> Harian </option>
+                                        <option value="Mingguan"> Mingguan </option>
+                                        <option value="Bulanan"> Bulanan </option>
+                                        <option value="Tahunan"> Tahunan </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

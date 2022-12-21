@@ -86,7 +86,7 @@ Route::get('/kas-warga/filter', function (Request $request) {
         $kas_warga = $result->where('id_rt_rw', $rt);
     }
 
-    if ($request->kategori) {
+    if ($request->cari) {
         $kas_warga->where('kategori', 'like', '%'.$request->kategori.'%');
     }
 

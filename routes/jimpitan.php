@@ -70,7 +70,8 @@ Route::get('/jimpitan/filter', function (Request $request) {
         'warga.nama_lengkap',
     ])
     ->leftJoin('warga', 'warga.id', 'jimpitan.id_warga')
-    ->orderBy('jimpitan.created_at', 'desc');
+    ->orderBy('jimpitan.created_at', 'desc')
+    ->where('jimpitan.kategori', 'like', '%'.$request->kategori.'%');
 
     $jimpitan = null;
 
@@ -82,7 +83,6 @@ Route::get('/jimpitan/filter', function (Request $request) {
 
     if ($request->cari) {
         $jimpitan->where('warga.nama_lengkap', 'like', '%'.$request->cari.'%');
-        $jimpitan->orWhere('jimpitan.kategori', 'like', '%'.$request->cari.'%');
         $jimpitan->orWhere('jimpitan.nominal', 'like', '%'.$request->cari.'%');
     }
 

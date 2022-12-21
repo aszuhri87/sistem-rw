@@ -18,6 +18,7 @@
             let value = $('#cari').val();
             let ke = $('#ke').val();
             let dari = $('#dari').val();
+            let kategori = $('#kategori').val();
 
             $.ajax({
                     type: 'get',
@@ -28,7 +29,8 @@
                         "_token": "{{ csrf_token() }}",
                         'cari': value,
                         'ke': ke,
-                        'dari': dari
+                        'dari': dari,
+                        'kategori' : kategori
                     },
                 }).done(function (res, xhr, meta) {
                     let data = res.data;
