@@ -40,7 +40,12 @@
                                             <option value="keluar"> Keluar </option>
                                         </select>
                                     </div>
-                                    <button class="btn btn-primary mt-4" id="filter"> Filter</button>
+                                    <div class="form-group div-kategori d-none" style="margin-top: 39px">
+                                        <select name="kategori" id="kategori" class="form-control">
+                                            <option value=""> -- Pilih Kategori --</option>
+                                        </select>
+                                    </div>
+                                    {{-- <button class="btn btn-primary mt-4" id="filter"> Filter</button> --}}
                                 </div>
                             </div>
                         </div>

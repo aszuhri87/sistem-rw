@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control mt-4" id="cari" name="cari" placeholder="Cari..">
                                 </div>
-                                <button class="btn btn-primary mt-4" id="filter"> Filter</button>
+                                {{-- <button class="btn btn-primary mt-4" id="filter"> Filter</button> --}}
                             </div>
                         </div>
                     </div>

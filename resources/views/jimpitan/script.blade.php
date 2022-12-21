@@ -11,7 +11,7 @@
             }
         });
 
-        $(':input').on('click change keyup', function (e) {
+        $(':input').on('change keyup', function (e) {
             $('tbody tr').remove();
             $('#paginate').remove();
 

@@ -53,13 +53,45 @@
             });
         });
 
-        $(':input').on('click change', function (e) {
+        $(':input').on('change', function (e) {
             $('tbody tr').remove();
             $('#paginate').remove();
 
             let value = $('#filter_type').val();
             let ke = $('#ke').val();
             let dari = $('#dari').val();
+            let kategori = $('#kategori').val();
+
+            if($(this).val() == 'masuk'){
+                $('.div-kategori').removeClass('d-none');
+                $('#kategori').html(`
+                        <option value=""> -- Pilih Kategori --</option>
+                        <option value="Iuran sampah"> Iuran sampah </option>
+                        <option value="Sponsorship/donatur"> Sponsorship/donatur </option>
+                        <option value="Sewa perlengkapan"> Sewa perlengkapan </option>
+                        <option value="Parkir"> Parkir </option>
+                        <option value="Sewa tempat"> Sewa tempat </option>
+                        <option value="Peralenan"> Peralenan </option>
+                        <option value="Lain-lain"> Lain-lain </option>
+                `);
+            } else if ($(this).val()  == 'keluar'){
+                $('.div-kategori').removeClass('d-none');
+                $('#kategori').html(`
+                        <option value=""> -- Pilih Kategori --</option>
+                        <option value="Santunan"> Santunan </option>
+                        <option value="Kerjabakti"> Kerjabakti  </option>
+                        <option value="Kegiatan"> Kegiatan </option>
+                        <option value="Belanja"> Belanja  </option>
+                        <option value="Perawatan"> Perawatan</option>
+                        <option value="Konsumsi"> Konsumsi </option>
+                        <option value="Perlengkapan"> Perlengkapan  </option>
+                        <option value="Peralenan"> Peralenan </option>
+                        <option value="Iuran sampah"> Iuran sampah </option>
+                        <option value="Lain-lain"> Lain-lain </option>
+                `);
+            } else if($(this).val()  == null || $(this).val()  == ''){
+                $('.div-kategori').addClass('d-none');
+            }
 
             $.ajax({
                     type: 'get',
@@ -70,7 +102,8 @@
                         "_token": "{{ csrf_token() }}",
                         'cari': value,
                         'ke': ke,
-                        'dari': dari
+                        'dari': dari,
+                        'kategori': kategori
                     },
                 }).done(function (res, xhr, meta) {
                     let data = res.data;
