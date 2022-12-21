@@ -7,13 +7,8 @@ use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/warga/qrcode/{id}', function ($id) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $warga = \App\Models\Warga::find($id);
 
     $result = Builder::create()

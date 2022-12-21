@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
 
 Route::post('/login', function (Request $request) {
     $login = [
@@ -28,11 +29,10 @@ Route::post('/login', function (Request $request) {
     }
 });
 
-Route::get('/logout', function () {
-    if (!session()->get('admin')) {
-        return redirect('/login');
-    }
-    session()->flush();
+Route::get('/logout', function (Request $request) {
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
 
     return redirect('login');
-});
+})->middleware('auth');

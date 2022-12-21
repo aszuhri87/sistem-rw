@@ -104,7 +104,6 @@ Route::get('/jimpitan/hapus/{id}', function ($id) {
 });
 
 Route::post('/jimpitan/ubah/{id}', function (Request $request, $id) {
-    // $admin = session()->get('admin');
     $jimpitan = \App\Models\Jimpitan::find($id)->update([
         'nominal' => $request->nominal,
         'id_admin' => Auth::id(),

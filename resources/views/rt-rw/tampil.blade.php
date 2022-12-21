@@ -16,8 +16,25 @@
     @endif
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="m-0 p-0">Data RT/RW</h5>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="cari" name="cari" placeholder="Cari..">
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" name="rt" id="rt" class="form-control" placeholder="Cari RT">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" name="rw" id="rw" class="form-control" placeholder="Cari RW">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card">

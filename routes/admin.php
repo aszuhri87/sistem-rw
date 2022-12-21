@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/get-tambah', function () {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $rt;
 
     if (!Auth::user()->id_rt_rw) {
@@ -24,10 +20,6 @@ Route::get('/admin/get-tambah', function () {
 });
 
 Route::post('/admin/post-tambah', function (Request $request) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $admin = \App\Models\Admin::create([
         'nama' => $request->nama,
         'email' => $request->email,
@@ -44,10 +36,6 @@ Route::post('/admin/post-tambah', function (Request $request) {
 });
 
 Route::get('/admin/tampil', function () {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $admin = \App\Models\Admin::select([
         'admin.*',
         DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
@@ -86,10 +74,6 @@ Route::get('/admin/filter', function (Request $request) {
 });
 
 Route::get('/admin/get-ubah/{id}', function ($id) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $rt;
 
     if (!Auth::user()->id_rt_rw) {
@@ -104,10 +88,6 @@ Route::get('/admin/get-ubah/{id}', function ($id) {
 });
 
 Route::post('/admin/post-ubah/{id}', function (Request $request, $id) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $password = null;
 
     $admin = \App\Models\Admin::find($id);
@@ -133,9 +113,6 @@ Route::post('/admin/post-ubah/{id}', function (Request $request, $id) {
 });
 
 Route::get('/admin/get-hapus/{id}', function ($id) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
     \App\Models\Admin::find($id)->delete();
 
     return redirect('/admin/tampil');

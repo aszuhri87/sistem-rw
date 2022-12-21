@@ -17,18 +17,14 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-include base_path('routes/warga.php');
-
-include base_path('routes/admin.php');
-
 include base_path('routes/login.php');
-include base_path('routes/jimpitan.php');
-include base_path('routes/kas_warga.php');
-include base_path('routes/dashboard.php');
-include base_path('routes/qr.php');
-include base_path('routes/rt_rw.php');
 
+Route::middleware(['auth'])->group(function () {
+    include base_path('routes/warga.php');
+    include base_path('routes/admin.php');
+    include base_path('routes/jimpitan.php');
+    include base_path('routes/kas_warga.php');
+    include base_path('routes/dashboard.php');
+    include base_path('routes/qr.php');
+    include base_path('routes/rt_rw.php');
+});

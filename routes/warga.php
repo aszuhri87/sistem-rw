@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/warga/tambah', function () {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $rt;
 
     if (!Auth::user()->id_rt_rw) {
@@ -24,10 +20,6 @@ Route::get('/warga/tambah', function () {
 });
 
 Route::post('/warga/post-tambah', function (Request $request) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $warga = \App\Models\Warga::create([
         'no_kk' => $request->no_kk,
         'nik' => $request->nik,
@@ -56,10 +48,6 @@ Route::post('/warga/post-tambah', function (Request $request) {
 });
 
 Route::get('/warga/tampil', function (Request $request) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $rt = Auth::user()->id_rt_rw;
 
     $result = \DB::table('warga')->select([
@@ -112,10 +100,6 @@ Route::get('/warga/filter', function (Request $request) {
 });
 
 Route::get('/warga/ubah/{id}', function ($id) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $rt;
 
     if (!Auth::user()->id_rt_rw) {
@@ -129,9 +113,6 @@ Route::get('/warga/ubah/{id}', function ($id) {
 });
 
 Route::post('/warga/post-ubah/{id}', function (Request $request, $id) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
     $warga = \App\Models\Warga::find($id)->update([
         'no_kk' => $request->no_kk,
         'nik' => $request->nik,
@@ -160,18 +141,12 @@ Route::post('/warga/post-ubah/{id}', function (Request $request, $id) {
 });
 
 Route::get('/warga/hapus/{id}', function ($id) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
     \App\Models\Warga::find($id)->delete();
 
     return redirect('/warga/tampil');
 });
 
 Route::get('/warga/lihat/{id}', function ($id) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
     $warga = \App\Models\Warga::select([
         'warga.*',
         DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
@@ -186,18 +161,10 @@ Route::get('/warga/lihat/{id}', function ($id) {
 });
 
 Route::get('/warga/import', function () {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     return view('warga.import');
 });
 
 Route::post('/warga/post-import', function (Request $request) {
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
-
     $excel = Excel::import(new WargaImport(), $request->file);
 
     if ($excel) {

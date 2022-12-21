@@ -1,10 +1,11 @@
 <script type = "text/javascript" >
     $(document).ready(function () {
-        $('#cari').on('keyup', function (e) {
+        $(':input').on('keyup', function (e) {
             $('tbody tr').remove();
             $('#paginate').remove();
 
-            let value = $('#cari').val();
+            let rt = $('#rt').val();
+            let rw = $('#rw').val();
 
             $.ajax({
                     type: 'get',
@@ -13,7 +14,8 @@
                     url: '/rt-rw/filter',
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        'cari': value,
+                        'rt': rt,
+                        'rw': rw
                     },
                 }).done(function (res, xhr, meta) {
                     let data = res.data;

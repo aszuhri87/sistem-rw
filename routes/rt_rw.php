@@ -37,15 +37,20 @@ Route::get('/rt-rw/filter', function (Request $request) {
     $result = \App\Models\RtRw::select([
         '*',
     ])
-    ->where('rt', 'like', '%'.$request->cari.'%')
-    ->orWhere('rw', 'like', '%'.$request->cari.'%')
     ->whereNull('rt_rw.deleted_at')
-    ->orderBy('rt_rw.created_at', 'desc')
-    ->get();
+    ->orderBy('rt_rw.created_at', 'desc');
+
+    if ($request->rt) {
+        $result->where('rt', $request->rt);
+    }
+
+    if ($request->rw) {
+        $result->where('rw', $request->rw);
+    }
 
     return response()->json([
         'status' => 'success',
-        'data' => $result,
+        'data' => $result->get(),
         'message' => 'Information load successfully!',
     ], 200);
 });
