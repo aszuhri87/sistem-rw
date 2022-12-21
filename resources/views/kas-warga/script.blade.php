@@ -53,7 +53,7 @@
             });
         });
 
-        $('#filter').on('click', function (e) {
+        $(':input').on('click change', function (e) {
             $('tbody tr').remove();
             $('#paginate').remove();
 
