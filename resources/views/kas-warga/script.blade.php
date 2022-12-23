@@ -114,12 +114,12 @@
                         $('tbody').append(`
                     <tr>
                         <th scope="row">` + i + `</th>
-                        <td>` + item.nominal + `</td>
-                        <td>` + item.tanggal + `</td>
-                        <td>` + item.rt + `</td>
-                        <td>` + item.rw + `</td>
-                        <td>` + item.tipe + `</td>
-                        <td>` + item.kategori + `</td>
+                        <td class="text-center">` + item.nominal + `</td>
+                        <td class="text-center">` + item.tanggal + `</td>
+                        <td class="text-center">` + item.rt + `</td>
+                        <td class="text-center">` + item.rw + `</td>
+                        <td class="text-center">` + item.tipe + `</td>
+                        <td class="text-center">` + item.kategori + `</td>
                         <td class="text-center">
                             <a href="/kas-warga/lihat/` + item.id + `" class="btn btn-sm btn-primary m-1">Lihat</a>
                             <a href="/kas-warga/ubah/` + item.id + `" class="btn btn-sm btn-warning m-1">Ubah</a>
