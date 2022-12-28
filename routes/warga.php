@@ -164,6 +164,12 @@ Route::get('/warga/import', function () {
     return view('warga.import');
 });
 
+Route::get('/warga/download-format', function () {
+    $file = public_path().'/contoh-format.xlsx';
+
+    return Response::download($file, 'format.xlsx');
+});
+
 Route::post('/warga/post-import', function (Request $request) {
     $excel = Excel::import(new WargaImport(), $request->file);
 

@@ -40,9 +40,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group mb-3 div-kategori d-none">
-
-                        </div>
+                        <div class="form-group mb-3 div-kategori d-none"></div>
 
                         <div class="form-group mb-3">
                             <label>Catatan</label>

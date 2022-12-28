@@ -20,6 +20,7 @@
                     </form>
                 </div>
             </div>
+            <a href="/warga/download-format" class="btn btn-success mt-3">Download Contoh Format</a>
         </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -1,6 +1,22 @@
 <script type = "text/javascript" >
     $(document).ready(function () {
 
+        $('.btn-save').click(function () {
+            $.blockUI({
+                message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
+                css: {
+                    backgroundColor: 'transparent',
+                    color: '#fff',
+                    border: '0'
+                },
+                overlayCSS: {
+                    opacity: 0.5
+                },
+                timeout: 1000,
+                baseZ: 2000
+            });
+        });
+
         $('#filter_btn').on('click', function (e) {
             if ($('#filter_card').hasClass('d-none')) {
                 $('#filter_card').removeClass('d-none');
