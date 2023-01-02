@@ -30,12 +30,11 @@ use OpenApi\Annotations as OA;
      *
      * )
      *
-     *
      * @OA\Post(
      *     path="/api/login",
      *     tags={"Auth"},
-     *     summary="Returns a Sample API response",
-     *     description="A sample greeting to test out the API",
+     *     summary="Login function",
+     *     description="Login to app",
      *     operationId="greet",
      *     @OA\Parameter(
      *          name="email",
@@ -64,8 +63,8 @@ use OpenApi\Annotations as OA;
      * @OA\Get(
      *     path="/api/dashboard",
      *     tags={"Dashboard"},
-     *     summary="Returns a Sample API response",
-     *     description="Dashboard data Jimpitan ",
+     *     summary="Get Dashboard function",
+     *     description="Get all data dashboard ",
      *     security={{"passport": {}}},
      *
      *     @OA\Response(
@@ -77,8 +76,8 @@ use OpenApi\Annotations as OA;
      * @OA\Get(
      *     path="/api/logout",
      *     tags={"Auth"},
-     *     summary="Returns a Sample API response",
-     *     description="A sample greeting to test out the API",
+     *     summary="Logout from App",
+     *     description="Logout from app",
      *     @OA\Parameter(
      *          name="id",
      *          description="id",
@@ -97,8 +96,8 @@ use OpenApi\Annotations as OA;
      * @OA\Post(
      *     path="/api/jimpitan/tampil",
      *     tags={"Jimpitan"},
-     *     summary="Returns a Sample API response",
-     *     description="A ",
+     *     summary="Get Jimpitan data function",
+     *     description="Get all jimpitan data",
      *     operationId="s",
      *     security={{"passport": {}}},
      *     @OA\RequestBody(
@@ -135,8 +134,8 @@ use OpenApi\Annotations as OA;
      * @OA\Post(
      *     path="/api/jimpitan/tambah",
      *     tags={"Jimpitan"},
-     *     summary="Returns a Sample API response",
-     *     description="A ",
+     *     summary="Add Jimpitan function",
+     *     description="Adding Jimpitan data to sistem",
      *     security={{"passport": {}}},
      *     @OA\RequestBody(
      *         @OA\MediaType(
@@ -168,8 +167,8 @@ use OpenApi\Annotations as OA;
      * @OA\Post(
      *     path="/api/jimpitan/ubah/{id}",
      *     tags={"Jimpitan"},
-     *     summary="Returns a Sample API response",
-     *     description="ubah data",
+     *     summary="Update Jimpitan data function",
+     *     description="Updating jimpitan data by id",
      *     security={{"passport": {}}},
      *
      *     @OA\Parameter(
@@ -203,11 +202,12 @@ use OpenApi\Annotations as OA;
      *         description="successful operation"
      *     )
      * )
+     *
      * @OA\Get(
      *     path="/api/jimpitan/hapus/{id}",
      *     tags={"Jimpitan"},
-     *     summary="Returns a Sample API response",
-     *     description="Hapus data Jimpitan ",
+     *     summary="Delete Jimpitan data",
+     *     description="Deleting Jimpitan data by id",
      *     security={{"passport": {}}},
      *
      *     @OA\Parameter(

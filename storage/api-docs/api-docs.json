@@ -18,8 +18,8 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Returns a Sample API response",
-                "description": "A sample greeting to test out the API",
+                "summary": "Login function",
+                "description": "Login to app",
                 "operationId": "greet",
                 "parameters": [
                     {
@@ -53,8 +53,8 @@
                 "tags": [
                     "Dashboard"
                 ],
-                "summary": "Returns a Sample API response",
-                "description": "Dashboard data Jimpitan ",
+                "summary": "Get Dashboard function",
+                "description": "Get all data dashboard ",
                 "responses": {
                     "default": {
                         "description": "successful operation"
@@ -72,8 +72,8 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Returns a Sample API response",
-                "description": "A sample greeting to test out the API",
+                "summary": "Logout from App",
+                "description": "Logout from app",
                 "parameters": [
                     {
                         "name": "id",
@@ -97,8 +97,8 @@
                 "tags": [
                     "Jimpitan"
                 ],
-                "summary": "Returns a Sample API response",
-                "description": "A ",
+                "summary": "Get Jimpitan data function",
+                "description": "Get all jimpitan data",
                 "operationId": "s",
                 "requestBody": {
                     "content": {
@@ -146,8 +146,8 @@
                 "tags": [
                     "Jimpitan"
                 ],
-                "summary": "Returns a Sample API response",
-                "description": "A ",
+                "summary": "Add Jimpitan function",
+                "description": "Adding Jimpitan data to sistem",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -190,8 +190,8 @@
                 "tags": [
                     "Jimpitan"
                 ],
-                "summary": "Returns a Sample API response",
-                "description": "ubah data",
+                "summary": "Update Jimpitan data function",
+                "description": "Updating jimpitan data by id",
                 "parameters": [
                     {
                         "name": "id",
@@ -241,8 +241,8 @@
                 "tags": [
                     "Jimpitan"
                 ],
-                "summary": "Returns a Sample API response",
-                "description": "Hapus data Jimpitan ",
+                "summary": "Delete Jimpitan data",
+                "description": "Deleting Jimpitan data by id",
                 "parameters": [
                     {
                         "name": "id",
