@@ -56,11 +56,10 @@
 <script src="{{asset('js/jquery.blockUI.js')}}"></script>
 <script>
     $(document).ready(function () {
-
         var data = {!!json_encode($admin) !!};
 
-        $('#ubah').find('select[name="level"]').find('option[value="' + data.level + '"]').prop('selected', true);
-        $('#ubah').find('select[name="rt"]').find('option[value="' + data.id_rt_rw + '"]').prop('selected', true);
+        $('#ubah').find('select[name="level"]').find('option[value="' + data.level + '"]').prop('selected',true);
+        $('#ubah').find('select[name="rt"]').find('option[value="' + data.id_rt_rw + '"]').prop('selected',true);
     });
 
 </script>

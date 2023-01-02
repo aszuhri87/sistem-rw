@@ -1,5 +1,4 @@
 @include("header")
-
         <div class="d-flex justify-content-center align-items-center" style="width: 100vw; height: 100vh;">
             <div class="">
                 <center>

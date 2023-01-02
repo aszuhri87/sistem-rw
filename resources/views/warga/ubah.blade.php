@@ -122,23 +122,8 @@
 
                 $('#ubah').find('select[name="rt"]').find('option[value="'+ data.id_rt_rw +'"]').prop('selected', true);
                 $('#ubah').find('select[name="status_dalam_keluarga"]').find('option[value="'+ data.status_dalam_keluarga+'"]').prop('selected', true);
-
-                $('.btn-save').click(function () {
-                    $.blockUI({
-                        message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
-                        css: {
-                            backgroundColor: 'transparent',
-                            color: '#fff',
-                            border: '0'
-                        },
-                        overlayCSS: {
-                            opacity: 0.5
-                        },
-                        timeout: 1000,
-                        baseZ: 2000
-                    });
-                });
             });
-
         </script>
+
+@include('warga.script')
 @include("footer")

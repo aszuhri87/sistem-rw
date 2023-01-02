@@ -24,7 +24,8 @@
                     </div>
                     <div class="form-group">
                         <label>Nominal</label>
-                        <input type="text" class="form-control" name="nominal" id="nominal" required placeholder="Nominal">
+                        <input type="text" class="form-control" name="nominal" id="nominal" required
+                            placeholder="Nominal">
                     </div>
                     <div class="form-group mb-3">
                         <label>Kategori</label>
@@ -36,11 +37,13 @@
                         </select>
                     </div>
                     <div class="mb-4">
-                        @for($i=1; $i <= 10; $i++) <button type="button" class="btn btn-outline-primary btn-nominal m-1" value="{{$i*500}}">{{$i*500}}</button>
-                        @endfor
+                        @for($i=1; $i <= 10; $i++) <button type="button" class="btn btn-outline-primary btn-nominal m-1"
+                            value="{{$i*500}}">{{$i*500}}</button>
+                            @endfor
 
-                        @for($i=2; $i <= 4; $i++) <button type="button" class="btn btn-outline-primary btn-nominal m-1" value="{{$i*5000}}">{{$i*5000}}</button>
-                        @endfor
+                            @for($i=2; $i <= 4; $i++) <button type="button"
+                                class="btn btn-outline-primary btn-nominal m-1" value="{{$i*5000}}">{{$i*5000}}</button>
+                                @endfor
                     </div>
                     <button type="submit" class="btn btn-primary btn-save">Simpan</button>
                 </form>
@@ -52,13 +55,14 @@
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script>
         @if(Session::get('scan_result'))
-        $('#no_kk').val(atob('{{Session::get('scan_result')}}'))
+        $('#no_kk').val(atob('{{Session::get('scan_result ')}}'))
         @endif
 
-        $(document).on('click', '.btn-nominal', function(e) {
+        $(document).on('click', '.btn-nominal', function (e) {
             $('#nominal').val($(this).val())
         })
+
     </script>
 
-@include('jimpitan.script')
-@include ("footer")
+    @include('jimpitan.script')
+    @include ("footer")

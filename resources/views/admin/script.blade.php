@@ -73,7 +73,6 @@
                     console.error(res.responseJSON.message, 'Gagal')
                 })
                 .always(function () {});
-
         })
     });
 </script>

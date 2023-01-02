@@ -4,9 +4,9 @@
 <body>
     <div class="container mb-5">
         @if($errors->has('error'))
-            <div class="alert alert-danger mt-3" style="text-align: left;" role="alert">
-                {{ $errors->first('error') }}
-            </div>
+        <div class="alert alert-danger mt-3" style="text-align: left;" role="alert">
+            {{ $errors->first('error') }}
+        </div>
         @endif
         @if (session('message'))
         <div class="alert alert-success mt-3" style="text-align: left;" role="alert">
@@ -33,7 +33,8 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control mt-4" id="cari" name="cari" placeholder="Cari..">
+                                    <input type="text" class="form-control mt-4" id="cari" name="cari"
+                                        placeholder="Cari..">
                                 </div>
                                 <div class="form-group mb-3" style="margin-top: 40px;">
                                     <select name="kategori" class="form-control" id="kategori">
@@ -55,7 +56,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex mb-3">
-                            <a href="/jimpitan/tambah" class="btn btn-success p-2 mr-auto" style="margin-top: auto; margin-bottom: auto;">Tambah</a>
+                            <a href="/jimpitan/tambah" class="btn btn-success p-2 mr-auto"
+                                style="margin-top: auto; margin-bottom: auto;">Tambah</a>
                             <div>
                                 <a href="/jimpitan/export" class="btn btn-primary p-2 ml-1">Laporan Excel</a>
                                 <a class="btn btn-secondary p-2 m-1" id="filter_btn">Filter</a>
@@ -81,8 +83,10 @@
                                     <td>{{$item->nominal}}</td>
                                     <td>{{$item->kategori}}</td>
                                     <td class="text-center">
-                                        <a href="/jimpitan/ubah/{{$item->id}}" class="btn btn-sm btn-warning m-1">Ubah</a>
-                                        <a href="/jimpitan/hapus/{{$item->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                                        <a href="/jimpitan/ubah/{{$item->id}}"
+                                            class="btn btn-sm btn-warning m-1">Ubah</a>
+                                        <a href="/jimpitan/hapus/{{$item->id}}" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Yakin Hapus?');">Hapus</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -98,6 +102,6 @@
         </div>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-@include('jimpitan.script')
-@include ("footer")
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    @include('jimpitan.script')
+    @include ("footer")

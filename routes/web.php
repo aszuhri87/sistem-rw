@@ -22,9 +22,11 @@ include base_path('routes/login.php');
 Route::middleware(['auth'])->group(function () {
     include base_path('routes/warga.php');
     include base_path('routes/admin.php');
-    include base_path('routes/jimpitan.php');
     include base_path('routes/kas_warga.php');
+    include base_path('routes/jimpitan.php');
     include base_path('routes/dashboard.php');
     include base_path('routes/qr.php');
     include base_path('routes/rt_rw.php');
 });
+
+Route::view('/swagger', 'swagger');

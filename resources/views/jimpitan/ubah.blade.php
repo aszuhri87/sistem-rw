@@ -13,11 +13,13 @@
                     @csrf
                     <div class="form-group">
                         <label>ID Warga</label>
-                        <input type="text" class="form-control" name="id_warga" value="{{$jimpitan->id_warga}}" disabled>
+                        <input type="text" class="form-control" name="id_warga" value="{{$jimpitan->id_warga}}"
+                            disabled>
                     </div>
                     <div class="form-group">
                         <label>Nominal</label>
-                        <input type="text" class="form-control" name="nominal" value="{{$jimpitan->nominal}}" required placeholder="Nominal">
+                        <input type="text" class="form-control" name="nominal" value="{{$jimpitan->nominal}}" required
+                            placeholder="Nominal">
                     </div>
                     <div class="form-group mb-3">
                         <label>Kategori</label>
@@ -39,11 +41,11 @@
     <script src="{{asset('js/jquery.blockUI.js')}}"></script>
     <script>
         $(document).ready(function () {
-            var data = {!! json_encode($jimpitan) !!};
+            var data = { !!json_encode($jimpitan) !! };
 
-            $('#ubah').find('select[name="kategori"]').find('option[value="'+ data.kategori+'"]').prop('selected', true);
+            $('#ubah').find('select[name="kategori"]').find('option[value="' + data.kategori + '"]').prop('selected', true);
         });
 
     </script>
-@include('jimpitan.script')
-@include('footer')
+    @include('jimpitan.script')
+    @include('footer')

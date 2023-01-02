@@ -31,7 +31,7 @@
                 <thead>
                     <tr>
                         <th width="5%"">No</th>
-                        <th width="10%">NOMOR KK</th>
+                        <th width=" 10%">NOMOR KK</th>
                         <th width="20%">NAMA</th>
                         <th width="10%">NIK</th>
                         <th width="5%">RT</th>
@@ -42,7 +42,7 @@
                 <tbody>
                     @foreach ($warga as $index => $item)
                     <tr>
-                    <th scope="row">{{ $loop->index + 1}}</th>
+                        <th scope="row">{{ $loop->index + 1}}</th>
                         <td>{{$item->no_kk}}</td>
                         <td>{{$item->nama_lengkap}}</td>
                         <td>{{$item->nik}}</td>
@@ -51,21 +51,23 @@
                         <td class="text-center">
                             <a href="/warga/lihat/{{$item->id}}" class="btn btn-sm btn-primary m-1">Lihat</a>
                             <a href="/warga/ubah/{{$item->id}}" class="btn btn-sm btn-warning m-1">Ubah</a>
-                            <a href="/warga/qrcode/{{$item->id}}" target="_blank" class="btn btn-sm btn-primary m-1">Qr Code</a>
-                            <a href="/warga/hapus/{{$item->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
-                            </td>
-                        </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <br>
-                    <div id="paginate">
-                        {{ $warga->links() }}
-                    </div>
-                </div>
+                            <a href="/warga/qrcode/{{$item->id}}" target="_blank" class="btn btn-sm btn-primary m-1">Qr
+                                Code</a>
+                            <a href="/warga/hapus/{{$item->id}}" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <br>
+            <div id="paginate">
+                {{ $warga->links() }}
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
