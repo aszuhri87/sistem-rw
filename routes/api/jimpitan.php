@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/jimpitan/tambah', function (Request $request) {
     try {
-        $warga = \App\Models\Warga::where('no_kk', base64_decode($request->no_kk))->first();
+        $warga = \App\Models\Warga::where('no_kk', $request->no_kk)->first();
 
         if (!$warga) {
             return response()->json([
@@ -41,42 +41,7 @@ Route::post('/jimpitan/tambah', function (Request $request) {
     }
 });
 
-Route::get('/jimpitan/tampil', function () {
-    try {
-        $rt = Auth::user()->id_rt_rw;
-
-        $result = \DB::table('jimpitan')->select([
-        'jimpitan.*',
-        'warga.nama_lengkap',
-        'warga.no_kk',
-    ])
-    ->leftJoin('warga', 'warga.id', 'jimpitan.id_warga')
-    ->orderBy('jimpitan.created_at', 'desc');
-
-        $jimpitan = null;
-
-        $jimpitan = $result->paginate(10);
-
-        if ($rt == null) {
-            $jimpitan = $result->paginate(10);
-        } else {
-            $jimpitan = $result->where('warga.id_rt_rw', Auth::user()->id_rt_rw)->paginate(10);
-        }
-
-        return response()->json([
-        'status' => 'OK',
-        'data' => $jimpitan,
-        'message' => 'Load data berhasil',
-    ], 200);
-    } catch (Exception $e) {
-        return response()->json([
-        'status' => 'Internal Server Error',
-        'message' => 'Error!',
-    ], 500);
-    }
-});
-
-Route::get('/jimpitan/filter', function (Request $request) {
+Route::post('/jimpitan/tampil', function (Request $request) {
     try {
         $rt = Auth::user()->id_rt_rw;
 
@@ -105,14 +70,15 @@ Route::get('/jimpitan/filter', function (Request $request) {
             $jimpitan->whereBetween('jimpitan.tanggal', [$request->dari, $request->ke]);
         }
 
+
         return response()->json([
         'status' => 'success',
-        'data' => $jimpitan->get(),
+        'data' => $jimpitan->paginate(10),
         'message' => 'Informasi berhasil di akses!',
     ], 200);
     } catch (Exception $e) {
         return response()->json([
-        'status' => 'Internal Server Error!',
+        'status' => 'Internal Server Error',
         'message' => 'Error!',
     ], 500);
     }
@@ -136,11 +102,13 @@ Route::get('/jimpitan/hapus/{id}', function ($id) {
 
 Route::post('/jimpitan/ubah/{id}', function (Request $request, $id) {
     try {
+        // dd($request->nominal);
         $jimpitan = \App\Models\Jimpitan::find($id)->update([
-        'nominal' => $request->nominal,
-        'id_admin' => Auth::id(),
-        'kategori' => $request->kategori,
-    ]);
+            'nominal' => $request->nominal,
+            'id_admin' => Auth::id(),
+            'kategori' => $request->kategori,
+        ]);
+
 
         if ($jimpitan) {
             return response()->json([
@@ -161,29 +129,6 @@ Route::post('/jimpitan/ubah/{id}', function (Request $request, $id) {
     }
 });
 
-Route::get('/jimpitan/ubah/{id}', function ($id) {
-    try {
-        $jimpitan = \App\Models\Jimpitan::find($id);
-
-        if ($jimpitan) {
-            return response()->json([
-            'status' => 'success',
-            'data' => $jimpitan,
-            'message' => 'Berhasil load data.',
-        ], 200);
-        } else {
-            return response()->json([
-            'status' => 'Failed',
-            'message' => 'Gagal load data!',
-        ], 400);
-        }
-    } catch (Exception $e) {
-        return response()->json([
-        'status' => 'Internal Server Error!',
-        'message' => 'Error!',
-    ], 500);
-    }
-});
 
 Route::get('/jimpitan/scan-qr', function (Request $request) {
     try {

@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Laravel OpenApi Demo Documentation",
-        "description": "L5 Swagger OpenApi description",
+        "title": "Sistem RW API Documentation",
+        "description": "Sistem RW OpenApi description",
         "contact": {
-            "email": "admin@admin.com"
+            "email": "achmad.zuhri@varx.id"
         },
         "license": {
             "name": "Apache 2.0",
@@ -13,49 +13,10 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/jimpitan/tampil": {
-            "get": {
-                "tags": [
-                    "jimpitan"
-                ],
-                "summary": "Returns a Sample API response",
-                "description": "A ",
-                "operationId": "s",
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                },
-                "security": [
-                    {
-                        "passport": []
-                    }
-                ]
-            }
-        },
-        "/api/jimpitan/tambah": {
-            "post": {
-                "tags": [
-                    "jimpitan"
-                ],
-                "summary": "Returns a Sample API response",
-                "description": "A ",
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                },
-                "security": [
-                    {
-                        "passport": []
-                    }
-                ]
-            }
-        },
         "/api/login": {
             "post": {
                 "tags": [
-                    "Login"
+                    "Auth"
                 ],
                 "summary": "Returns a Sample API response",
                 "description": "A sample greeting to test out the API",
@@ -85,6 +46,224 @@
                         "description": "successful operation"
                     }
                 }
+            }
+        },
+        "/api/dashboard": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "summary": "Returns a Sample API response",
+                "description": "Dashboard data Jimpitan ",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Returns a Sample API response",
+                "description": "A sample greeting to test out the API",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/jimpitan/tampil": {
+            "post": {
+                "tags": [
+                    "Jimpitan"
+                ],
+                "summary": "Returns a Sample API response",
+                "description": "A ",
+                "operationId": "s",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "dari": {
+                                        "type": "string"
+                                    },
+                                    "ke": {
+                                        "type": "string"
+                                    },
+                                    "cari": {
+                                        "type": "string"
+                                    },
+                                    "kategori": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "dari": "2022-12-01",
+                                    "ke": "2022-12-30",
+                                    "cari": "",
+                                    "kategori": "harian"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/jimpitan/tambah": {
+            "post": {
+                "tags": [
+                    "Jimpitan"
+                ],
+                "summary": "Returns a Sample API response",
+                "description": "A ",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "no_kk": {
+                                        "type": "number"
+                                    },
+                                    "nominal": {
+                                        "type": "number"
+                                    },
+                                    "kategori": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "no_kk": 3471072108961377,
+                                    "nominal": 500,
+                                    "kategori": "harian"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/jimpitan/ubah/{id}": {
+            "post": {
+                "tags": [
+                    "Jimpitan"
+                ],
+                "summary": "Returns a Sample API response",
+                "description": "ubah data",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Parameter with mutliple examples",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nominal": {
+                                        "type": "number"
+                                    },
+                                    "kategori": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "nominal": 500,
+                                    "kategori": "harian"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/jimpitan/hapus/{id}": {
+            "get": {
+                "tags": [
+                    "Jimpitan"
+                ],
+                "summary": "Returns a Sample API response",
+                "description": "Hapus data Jimpitan ",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Parameter with mutliple examples",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
             }
         }
     },
