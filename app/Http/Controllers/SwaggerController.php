@@ -223,6 +223,7 @@ use OpenApi\Annotations as OA;
      *         description="successful operation"
      *     )
      * )
+     *
     */
 
 class SwaggerController extends Controller
