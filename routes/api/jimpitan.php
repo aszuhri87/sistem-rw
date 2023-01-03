@@ -57,10 +57,17 @@ Route::post("/jimpitan/tampil", function (Request $request) {
     try {
         $rt = Auth::user()->id_rt_rw;
 
-        $result = \App\Models\Jimpitan::select(["jimpitan.*", "warga.nama_lengkap"])
+        $result = \App\Models\Jimpitan::select([
+            "jimpitan.*",
+            "warga.nama_lengkap",
+        ])
             ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
             ->orderBy("jimpitan.created_at", "desc")
-            ->where("jimpitan.kategori", "like", "%" . $request->kategori . "%");
+            ->where(
+                "jimpitan.kategori",
+                "like",
+                "%" . $request->kategori . "%"
+            );
 
         $jimpitan = null;
 
@@ -71,12 +78,23 @@ Route::post("/jimpitan/tampil", function (Request $request) {
         }
 
         if ($request->cari) {
-            $jimpitan->where("warga.nama_lengkap", "like", "%" . $request->cari . "%");
-            $jimpitan->orWhere("jimpitan.nominal", "like", "%" . $request->cari . "%");
+            $jimpitan->where(
+                "warga.nama_lengkap",
+                "like",
+                "%" . $request->cari . "%"
+            );
+            $jimpitan->orWhere(
+                "jimpitan.nominal",
+                "like",
+                "%" . $request->cari . "%"
+            );
         }
 
         if ($request->ke && $request->dari) {
-            $jimpitan->whereBetween("jimpitan.tanggal", [$request->dari, $request->ke]);
+            $jimpitan->whereBetween("jimpitan.tanggal", [
+                $request->dari,
+                $request->ke,
+            ]);
         }
 
         return response()->json(

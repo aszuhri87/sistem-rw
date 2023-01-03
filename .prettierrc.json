@@ -4,7 +4,7 @@
             "files": ["*.blade.php", "*.php"],
             "options": {
                 "tabWidth": 4,
-                "parser": "blade"
+                "parser": "php"
             }
         }
     ]

@@ -1,8 +1,11 @@
 {
-    "printWidth": 120,
-    "tabWidth": 4,
-    "wrapAttributes": "auto",
-    "sortTailwindcssClasses": true,
-    "sortHtmlAttributes": "none",
-    "noPhpSyntaxCheck": false
+    "overrides": [
+        {
+            "files": ["*.blade.php", "*.php"],
+            "options": {
+                "tabWidth": 4,
+                "parser": "php"
+            }
+        }
+    ]
 }

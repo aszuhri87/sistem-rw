@@ -14,14 +14,20 @@ Route::get("/jimpitan/scan-qr", function () {
 });
 
 Route::post("/jimpitan/scan-qr", function (Request $request) {
-    return redirect("jimpitan/tambah")->with("scan_result", $request->scan_result);
+    return redirect("jimpitan/tambah")->with(
+        "scan_result",
+        $request->scan_result
+    );
 });
 
 Route::post("/jimpitan/tambah", function (Request $request) {
     $warga = \App\Models\Warga::where("no_kk", $request->no_kk)->first();
 
     if (!$warga) {
-        return redirect("jimpitan/tambah")->with("message", "NIK Tidak Ditemukan");
+        return redirect("jimpitan/tambah")->with(
+            "message",
+            "NIK Tidak Ditemukan"
+        );
     }
 
     $jimpitan = \App\Models\Jimpitan::create([
@@ -32,9 +38,15 @@ Route::post("/jimpitan/tambah", function (Request $request) {
     ]);
 
     if ($jimpitan) {
-        return redirect("jimpitan/tampil")->with("message", "Berhasil Ditambahkan!");
+        return redirect("jimpitan/tampil")->with(
+            "message",
+            "Berhasil Ditambahkan!"
+        );
     } else {
-        return redirect("jimpitan/tampil")->withErrors("error", "Penambahan jimpitan gagal!");
+        return redirect("jimpitan/tampil")->withErrors(
+            "error",
+            "Penambahan jimpitan gagal!"
+        );
     }
 });
 
@@ -51,7 +63,9 @@ Route::get("/jimpitan/tampil", function () {
     if ($rt == null) {
         $jimpitan = $result->paginate(10);
     } else {
-        $jimpitan = $result->where("warga.id_rt_rw", Auth::user()->id_rt_rw)->paginate(10);
+        $jimpitan = $result
+            ->where("warga.id_rt_rw", Auth::user()->id_rt_rw)
+            ->paginate(10);
     }
 
     return view("jimpitan/tampil", [
@@ -76,12 +90,23 @@ Route::get("/jimpitan/filter", function (Request $request) {
     }
 
     if ($request->cari) {
-        $jimpitan->where("warga.nama_lengkap", "like", "%" . $request->cari . "%");
-        $jimpitan->orWhere("jimpitan.nominal", "like", "%" . $request->cari . "%");
+        $jimpitan->where(
+            "warga.nama_lengkap",
+            "like",
+            "%" . $request->cari . "%"
+        );
+        $jimpitan->orWhere(
+            "jimpitan.nominal",
+            "like",
+            "%" . $request->cari . "%"
+        );
     }
 
     if ($request->ke && $request->dari) {
-        $jimpitan->whereBetween("jimpitan.tanggal", [$request->dari, $request->ke]);
+        $jimpitan->whereBetween("jimpitan.tanggal", [
+            $request->dari,
+            $request->ke,
+        ]);
     }
 
     return response()->json(
@@ -108,7 +133,10 @@ Route::post("/jimpitan/ubah/{id}", function (Request $request, $id) {
     ]);
 
     if ($jimpitan) {
-        return redirect("/jimpitan/tampil")->with("message", "Berhasil Mengubah!");
+        return redirect("/jimpitan/tampil")->with(
+            "message",
+            "Berhasil Mengubah!"
+        );
     } else {
         return redirect("/jimpitan/tampil")->withErrors("error", "Gagal!");
     }
