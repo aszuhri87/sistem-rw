@@ -1,10 +1,17 @@
 {
     "overrides": [
         {
-            "files": ["*.blade.php", "*.php"],
+            "files": ["*.php"],
             "options": {
                 "tabWidth": 4,
                 "parser": "php"
+            }
+        },
+        {
+            "files": ["*.blade.php"],
+            "options": {
+                "tabWidth": 3,
+                "parser": "html"
             }
         }
     ]

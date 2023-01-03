@@ -17,6 +17,6 @@ indent_size = 2
 [docker-compose.yml]
 indent_size = 4
 
-[{.php, .blade.php, .js}]
+[{.php, .blade.php, .js, .html}]
 indent_style = space
 indent_size = 2
