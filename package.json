@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "prettier": "./node_modules/.bin/prettier --write resources/**/*.php resources/**/**/*.php routes/*.php routes/**/*.php app/controller/*.php app/controller/**/*.php"
+        "prettier": "./node_modules/.bin/prettier --write resources/**/*.php resources/**/**/*.php routes/*.php routes/**/*.php app/http/controller/*.php app/http/controller/**/*.php"
     },
     "devDependencies": {
         "axios": "^0.21",
