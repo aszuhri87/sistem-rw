@@ -178,4 +178,6 @@ Route::get("/dashboard", function () {
  * )
  */
 
- class Dashboard extends Controller{}
+class Dashboard extends Controller
+{
+}

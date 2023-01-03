@@ -95,7 +95,9 @@
             <div class="col-md-6 col-sm-12 mb-3">
                 <div class="card">
                     <br />
-                    <h5 class="text-center">Dashboard Perbandingan Warga Laki-Laki/Perempuan</h5>
+                    <h5 class="text-center">
+                        Dashboard Perbandingan Warga Laki-Laki/Perempuan
+                    </h5>
                     <div class="card-body">
                         <div id="chart2-container"></div>
                     </div>
@@ -143,6 +145,6 @@
     <script src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
     @include('dashboard.chart4') @include('dashboard.chart1') @include('dashboard.chart2')
-    @include('dashboard.chart3') @include('dashboard.chart5') @include('dashboard.chart6') @include
-    ('footer')
+    @include('dashboard.chart3') @include('dashboard.chart5') @include('dashboard.chart6')
+    @include('footer')
 </body>

@@ -17,7 +17,7 @@
             "options": {
                 "tabWidth": 4,
                 "parser": "html",
-                "printWidth": 100,
+                "printWidth": 90,
                 "semi":false,
                 "bracketSpacing": true,
                 "bracketSameLine": true,

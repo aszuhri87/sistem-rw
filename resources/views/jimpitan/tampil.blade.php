@@ -120,7 +120,10 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $item->nama_lengkap }}</td>
-                                    <td>{{ date('d-m-Y H:i:s', strtotime($item->tanggal)) }}</td>
+                                    <td>
+                                        {{ date('d-m-Y H:i:s', strtotime($item->tanggal))
+                                        }}
+                                    </td>
                                     <td>{{ $item->nominal }}</td>
                                     <td>{{ $item->kategori }}</td>
                                     <td class="text-center">

@@ -20,10 +20,16 @@
         $("#filter_btn").on("click", function (e) {
             if ($("#filter_card").hasClass("d-none")) {
                 $("#filter_card").removeClass("d-none")
-                $("#filter_btn").removeClass("btn-secondary").addClass("btn-danger").html("Tutup")
+                $("#filter_btn")
+                    .removeClass("btn-secondary")
+                    .addClass("btn-danger")
+                    .html("Tutup")
             } else {
                 $("#filter_card").addClass("d-none")
-                $("#filter_btn").removeClass("btn-danger").addClass("btn-secondary").html("Filter")
+                $("#filter_btn")
+                    .removeClass("btn-danger")
+                    .addClass("btn-secondary")
+                    .html("Filter")
             }
         })
 

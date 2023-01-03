@@ -318,7 +318,9 @@
                                     aria-expanded="false">
                                     <i class="fas fa-bell fa-fw"></i>
                                     <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
+                                    <span class="badge badge-danger badge-counter"
+                                        >3+</span
+                                    >
                                 </a>
                                 <!-- Dropdown - Alerts -->
                                 <div
@@ -334,9 +336,12 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="small text-gray-500">December 12, 2019</div>
+                                            <div class="small text-gray-500">
+                                                December 12, 2019
+                                            </div>
                                             <span class="font-weight-bold"
-                                                >A new monthly report is ready to download!</span
+                                                >A new monthly report is ready to
+                                                download!</span
                                             >
                                         </div>
                                     </a>
@@ -349,7 +354,9 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="small text-gray-500">December 7, 2019</div>
+                                            <div class="small text-gray-500">
+                                                December 7, 2019
+                                            </div>
                                             $290.29 has been deposited into your account!
                                         </div>
                                     </a>
@@ -363,9 +370,11 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="small text-gray-500">December 2, 2019</div>
-                                            Spending Alert: We've noticed unusually high spending
-                                            for your account.
+                                            <div class="small text-gray-500">
+                                                December 2, 2019
+                                            </div>
+                                            Spending Alert: We've noticed unusually high
+                                            spending for your account.
                                         </div>
                                     </a>
                                     <a
@@ -388,7 +397,9 @@
                                     aria-expanded="false">
                                     <i class="fas fa-envelope fa-fw"></i>
                                     <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
+                                    <span class="badge badge-danger badge-counter"
+                                        >7</span
+                                    >
                                 </a>
                                 <!-- Dropdown - Messages -->
                                 <div
@@ -403,12 +414,13 @@
                                                 class="rounded-circle"
                                                 src="img/undraw_profile_1.svg"
                                                 alt="..." />
-                                            <div class="status-indicator bg-success"></div>
+                                            <div
+                                                class="status-indicator bg-success"></div>
                                         </div>
                                         <div class="font-weight-bold">
                                             <div class="text-truncate">
-                                                Hi there! I am wondering if you can help me with a
-                                                problem I've been having.
+                                                Hi there! I am wondering if you can help
+                                                me with a problem I've been having.
                                             </div>
                                             <div class="small text-gray-500">
                                                 Emily Fowler · 58m
@@ -427,10 +439,13 @@
                                         </div>
                                         <div>
                                             <div class="text-truncate">
-                                                I have the photos that you ordered last month, how
-                                                would you like them sent to you?
+                                                I have the photos that you ordered last
+                                                month, how would you like them sent to
+                                                you?
                                             </div>
-                                            <div class="small text-gray-500">Jae Chun · 1d</div>
+                                            <div class="small text-gray-500">
+                                                Jae Chun · 1d
+                                            </div>
                                         </div>
                                     </a>
                                     <a
@@ -441,12 +456,14 @@
                                                 class="rounded-circle"
                                                 src="img/undraw_profile_3.svg"
                                                 alt="..." />
-                                            <div class="status-indicator bg-warning"></div>
+                                            <div
+                                                class="status-indicator bg-warning"></div>
                                         </div>
                                         <div>
                                             <div class="text-truncate">
-                                                Last month's report looks great, I am very happy
-                                                with the progress so far, keep up the good work!
+                                                Last month's report looks great, I am very
+                                                happy with the progress so far, keep up
+                                                the good work!
                                             </div>
                                             <div class="small text-gray-500">
                                                 Morgan Alvarez · 2d
@@ -461,13 +478,15 @@
                                                 class="rounded-circle"
                                                 src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
                                                 alt="..." />
-                                            <div class="status-indicator bg-success"></div>
+                                            <div
+                                                class="status-indicator bg-success"></div>
                                         </div>
                                         <div>
                                             <div class="text-truncate">
-                                                Am I a good boy? The reason I ask is because someone
-                                                told me that people say this to all dogs, even if
-                                                they aren't good...
+                                                Am I a good boy? The reason I ask is
+                                                because someone told me that people say
+                                                this to all dogs, even if they aren't
+                                                good...
                                             </div>
                                             <div class="small text-gray-500">
                                                 Chicken the Dog · 2w
@@ -494,7 +513,8 @@
                                     data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                                    <span
+                                        class="mr-2 d-none d-lg-inline text-gray-600 small"
                                         >Douglas McGee</span
                                     >
                                     <img
@@ -508,19 +528,22 @@
                                     <a
                                         class="dropdown-item"
                                         href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i
+                                            class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
                                     <a
                                         class="dropdown-item"
                                         href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i
+                                            class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Settings
                                     </a>
                                     <a
                                         class="dropdown-item"
                                         href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i
+                                            class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
@@ -544,9 +567,9 @@
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">Charts</h1>
                         <p class="mb-4">
-                            Chart.js is a third party plugin that is used to generate the charts in
-                            this theme. The charts below have been customized - for further
-                            customization options, please visit the
+                            Chart.js is a third party plugin that is used to generate the
+                            charts in this theme. The charts below have been customized -
+                            for further customization options, please visit the
                             <a
                                 target="_blank"
                                 href="https://www.chartjs.org/docs/latest/"
@@ -578,7 +601,9 @@
                                 <!-- Bar Chart -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">
+                                            Bar Chart
+                                        </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="chart-bar">
@@ -667,7 +692,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Select "Logout" below if you are ready to end your current session.
+                        Select "Logout" below if you are ready to end your current
+                        session.
                     </div>
                     <div class="modal-footer">
                         <button

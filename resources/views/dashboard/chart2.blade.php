@@ -1,7 +1,7 @@
 <?php
 $chart2 = [];
-$warga_jenis_kelamin->each(function ($warga) use (&$chart2) { array_push($chart2, ['value' =>
-$warga->jumlah, 'name' => $warga->jenis_kelamin]); }); ?>
+$warga_jenis_kelamin->each(function ($warga) use (&$chart2) { array_push($chart2, ['value'
+=> $warga->jumlah, 'name' => $warga->jenis_kelamin]); }); ?>
 
 <script>
     var dom = document.getElementById('chart2-container');

@@ -34,9 +34,9 @@
             }
 
             html {
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-                    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-                    Segoe UI Symbol, Noto Color Emoji;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+                    Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+                    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
                 line-height: 1.5;
             }
 
@@ -221,7 +221,8 @@
             }
 
             .shadow {
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+                    0 1px 2px 0 rgba(0, 0, 0, 0.06);
             }
 
             .text-center {
@@ -453,7 +454,8 @@
                     </svg>
                 </div>
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                <div
+                    class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div class="p-6">
                             <div class="flex items-center">
@@ -478,11 +480,13 @@
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel has wonderful, thorough documentation covering every
-                                    aspect of the framework. Whether you are new to the framework or
-                                    have previous experience with Laravel, we recommend reading all
-                                    of the documentation from beginning to end.
+                                <div
+                                    class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                    Laravel has wonderful, thorough documentation covering
+                                    every aspect of the framework. Whether you are new to
+                                    the framework or have previous experience with
+                                    Laravel, we recommend reading all of the documentation
+                                    from beginning to end.
                                 </div>
                             </div>
                         </div>
@@ -512,10 +516,12 @@
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP,
-                                    and JavaScript development. Check them out, see for yourself,
-                                    and massively level up your development skills in the process.
+                                <div
+                                    class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                    Laracasts offers thousands of video tutorials on
+                                    Laravel, PHP, and JavaScript development. Check them
+                                    out, see for yourself, and massively level up your
+                                    development skills in the process.
                                 </div>
                             </div>
                         </div>
@@ -543,15 +549,18 @@
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel News is a community driven portal and newsletter
-                                    aggregating all of the latest and most important news in the
-                                    Laravel ecosystem, including new package releases and tutorials.
+                                <div
+                                    class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                    Laravel News is a community driven portal and
+                                    newsletter aggregating all of the latest and most
+                                    important news in the Laravel ecosystem, including new
+                                    package releases and tutorials.
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
+                        <div
+                            class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
                             <div class="flex items-center">
                                 <svg
                                     fill="none"
@@ -571,9 +580,10 @@
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel's robust library of first-party tools and libraries,
-                                    such as
+                                <div
+                                    class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                    Laravel's robust library of first-party tools and
+                                    libraries, such as
                                     <a
                                         href="https://forge.laravel.com"
                                         class="underline"
@@ -594,8 +604,8 @@
                                         class="underline"
                                         >Envoyer</a
                                     >
-                                    help you take your projects to the next level. Pair them with
-                                    powerful open source libraries like
+                                    help you take your projects to the next level. Pair
+                                    them with powerful open source libraries like
                                     <a
                                         href="https://laravel.com/docs/billing"
                                         class="underline"
@@ -673,7 +683,8 @@
                         </div>
                     </div>
 
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+                    <div
+                        class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{
                         PHP_VERSION }})
                     </div>

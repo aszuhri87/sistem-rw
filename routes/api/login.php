@@ -46,8 +46,6 @@ Route::post("/login", function (Request $request) {
     }
 });
 
-
-
 Route::group(["middleware" => "auth:api"], function () {
     Route::get("/logout", function (Request $request) {
         try {
@@ -64,7 +62,6 @@ Route::group(["middleware" => "auth:api"], function () {
         }
     });
 });
-
 
 /**
  * @OA\Post(
@@ -117,7 +114,8 @@ Route::group(["middleware" => "auth:api"], function () {
  *     )
  * )
  *
-*/
+ */
 
-
-class Login extends Controller{}
+class Login extends Controller
+{
+}

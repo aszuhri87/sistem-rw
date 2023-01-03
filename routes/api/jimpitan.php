@@ -259,6 +259,8 @@ Route::get("/jimpitan/scan-qr", function (Request $request) {
  *     )
  * )
  *
-*/
+ */
 
-class Jimpitan extends Controller{}
+class Jimpitan extends Controller
+{
+}
