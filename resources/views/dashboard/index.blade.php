@@ -47,12 +47,12 @@
                 <div class="card">
                     <div class="card-body">
                         @if (Auth::user()->level == 'admin')
-                        <div class="card mb-3">
-                            <div class="card-header">Total Warga</div>
-                            <div class="card-body">
-                                <h1>{{ $warga }}</h1>
+                            <div class="card mb-3">
+                                <div class="card-header">Total Warga</div>
+                                <div class="card-body">
+                                    <h1>{{ $warga }}</h1>
+                                </div>
                             </div>
-                        </div>
                         @endif
                         <div class="card mb-3">
                             <div class="card-header">Total Jimpitan</div>
@@ -61,59 +61,59 @@
                             </div>
                         </div>
                         @if (Auth::user()->level == 'admin')
-                        <div class="card mb-3">
-                            <div class="card-header">Total Kas Masuk</div>
-                            <div class="card-body">
-                                <h1>{{ number_format($kas_masuk, 0) }}</h1>
+                            <div class="card mb-3">
+                                <div class="card-header">Total Kas Masuk</div>
+                                <div class="card-body">
+                                    <h1>{{ number_format($kas_masuk, 0) }}</h1>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card mb-3">
-                            <div class="card-header">Total Kas Keluar</div>
-                            <div class="card-body">
-                                <h1>{{ number_format($kas_keluar, 0) }}</h1>
+                            <div class="card mb-3">
+                                <div class="card-header">Total Kas Keluar</div>
+                                <div class="card-body">
+                                    <h1>{{ number_format($kas_keluar, 0) }}</h1>
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                 </div>
             </div>
             @if (Auth::user()->level == 'admin')
-            <div class="col-md-6 col-sm-12">
-                <div class="card">
-                    <br />
-                    <h5 class="text-center">Dashboard Perbandingan Jumlah Warga</h5>
-                    <div class="card-body">
-                        <div id="chart1-container"></div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <br />
+                        <h5 class="text-center">Dashboard Perbandingan Jumlah Warga</h5>
+                        <div class="card-body">
+                            <div id="chart1-container"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endif
         </div>
 
         @if (Auth::user()->level == 'admin')
-        <div class="row mb-3">
-            <div class="col-md-6 col-sm-12 mb-3">
-                <div class="card">
-                    <br />
-                    <h5 class="text-center">
-                        Dashboard Perbandingan Warga Laki-Laki/Perempuan
-                    </h5>
-                    <div class="card-body">
-                        <div id="chart2-container"></div>
+            <div class="row mb-3">
+                <div class="col-md-6 col-sm-12 mb-3">
+                    <div class="card">
+                        <br />
+                        <h5 class="text-center">
+                            Dashboard Perbandingan Warga Laki-Laki/Perempuan
+                        </h5>
+                        <div class="card-body">
+                            <div id="chart2-container"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-6 col-sm-12 mb-3">
-                <div class="card">
-                    <br />
-                    <h5 class="text-center">Dashboard Diagram Kas Warga PerBulan</h5>
-                    <div class="card-body">
-                        <div id="chart5-container"></div>
+                <div class="col-md-6 col-sm-12 mb-3">
+                    <div class="card">
+                        <br />
+                        <h5 class="text-center">Dashboard Diagram Kas Warga PerBulan</h5>
+                        <div class="card-body">
+                            <div id="chart5-container"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endif
 
         <div class="row mb-3">
@@ -129,22 +129,26 @@
         </div>
 
         @if (Auth::user()->level == 'admin')
-        <div class="row mb-3">
-            <div class="col-12">
-                <div class="card">
-                    <br />
-                    <h5 class="text-center">Dashboard Diagram Kas Warga PerBulan</h5>
-                    <div class="card-body">
-                        <div id="chart3-container"></div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card">
+                        <br />
+                        <h5 class="text-center">Dashboard Diagram Kas Warga PerBulan</h5>
+                        <div class="card-body">
+                            <div id="chart3-container"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endif
     </div>
     <script src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
-    @include('dashboard.chart4') @include('dashboard.chart1') @include('dashboard.chart2')
-    @include('dashboard.chart3') @include('dashboard.chart5') @include('dashboard.chart6')
+    @include('dashboard.chart4')
+    @include('dashboard.chart1')
+    @include('dashboard.chart2')
+    @include('dashboard.chart3')
+    @include('dashboard.chart5')
+    @include('dashboard.chart6')
     @include('footer')
 </body>

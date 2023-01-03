@@ -2,71 +2,64 @@
 
 <style>
     #camera-container {
-       margin: 0px;
-       padding: 0px;
-       background-color: #000;
-       width: 100vw !important;
-       height: 90vh !important;
+        margin: 0px;
+        padding: 0px;
+        background-color: #000;
+        width: 100vw !important;
+        height: 90vh !important;
     }
 
     #device-camera {
-       position: fixed;
-       top: 10px;
-       left: 10px;
+        position: fixed;
+        top: 10px;
+        left: 10px;
     }
 
     #switch-btn {
-       background-color: #ffffff;
-       position: fixed;
-       padding: 7px 10px 10px 10px;
-       bottom: 40px;
-       left: calc(50% - 15px);
-       width: 40px;
-       height: 40px;
-       border-radius: 100%;
-       z-index: 999;
+        background-color: #ffffff;
+        position: fixed;
+        padding: 7px 10px 10px 10px;
+        bottom: 40px;
+        left: calc(50% - 15px);
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        z-index: 999;
     }
 
     #cancel-btn {
-       position: fixed;
-       padding: 7px 10px 10px 10px;
-       bottom: 30px;
-       zuhr left: 20px;
-       z-index: 999;
+        position: fixed;
+        padding: 7px 10px 10px 10px;
+        bottom: 30px;
+        zuhr left: 20px;
+        z-index: 999;
     }
 </style>
 
 <div id="camera-container">
-    <div
-        id="reader"
-        style="width: 100%"></div>
+    <div id="reader"
+         style="width: 100%"></div>
 
     <div id="switch-btn">
-        <img
-            src="{{ asset('img/switch-camera.png') }}"
-            width="100%"
-            alt="" />
+        <img src="{{ asset('img/switch-camera.png') }}"
+             width="100%"
+             alt="" />
     </div>
 
     <div id="cancel-btn">
-        <a
-            href="/jimpitan/tambah"
-            class="btn btn-outline-danger"
-            >Kembali</a
-        >
+        <a href="/jimpitan/tambah"
+           class="btn btn-outline-danger">Kembali</a>
     </div>
 </div>
 
-<form
-    action="{{ url('jimpitan/scan-qr') }}"
-    id="form-qr"
-    method="POST"
-    autocomplete="off">
+<form action="{{ url('jimpitan/scan-qr') }}"
+      id="form-qr"
+      method="POST"
+      autocomplete="off">
     @csrf
-    <input
-        type="hidden"
-        id="scan-result"
-        name="scan_result" />
+    <input type="hidden"
+           id="scan-result"
+           name="scan_result" />
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -96,8 +89,7 @@
 
                 html5QrCodeEl
                     .start(
-                        cameraId,
-                        {
+                        cameraId, {
                             fps: 10, // Optional, frame per seconds for qr code scanning
                             qrbox: {
                                 width: 250,
@@ -134,8 +126,8 @@
             // handle err
         })
 
-    $(document).ready(function () {
-        $(document).on("click", "#switch-btn", function (e) {
+    $(document).ready(function() {
+        $(document).on("click", "#switch-btn", function(e) {
             if (html5QrCodeEl) {
                 html5QrCodeEl = null
             }
@@ -152,8 +144,7 @@
 
             html5QrCodeEl
                 .start(
-                    cameraId,
-                    {
+                    cameraId, {
                         fps: 10, // Optional, frame per seconds for qr code scanning
                         qrbox: {
                             width: 250,

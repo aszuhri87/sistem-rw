@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#tipe").on("change", function (e) {
+    $(document).ready(function() {
+        $("#tipe").on("change", function(e) {
             if ($(this).val() == "masuk") {
                 $(".div-kategori").removeClass("d-none").html(`
                     <label>Pilih Kategori</label>
@@ -37,10 +37,9 @@
             }
         })
 
-        $(".btn-save").click(function () {
+        $(".btn-save").click(function() {
             $.blockUI({
-                message:
-                    '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
+                message: '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
                 css: {
                     backgroundColor: "transparent",
                     color: "#fff",
@@ -54,7 +53,7 @@
             })
         })
 
-        $(":input").on("change", function (e) {
+        $(":input").on("change", function(e) {
             $("tbody tr").remove()
             $("#paginate").remove()
 
@@ -95,19 +94,19 @@
             }
 
             $.ajax({
-                type: "get",
-                async: false,
-                cache: false,
-                url: "/kas-warga/filter",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    cari: value,
-                    ke: ke,
-                    dari: dari,
-                    kategori: kategori,
-                },
-            })
-                .done(function (res, xhr, meta) {
+                    type: "get",
+                    async: false,
+                    cache: false,
+                    url: "/kas-warga/filter",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        cari: value,
+                        ke: ke,
+                        dari: dari,
+                        kategori: kategori,
+                    },
+                })
+                .done(function(res, xhr, meta) {
                     let data = res.data
 
                     data.forEach((item, i) => {
@@ -117,45 +116,45 @@
                             `
                     <tr>
                         <th scope="row">` +
-                                i +
-                                `</th>
+                            i +
+                            `</th>
                         <td class="text-center">` +
-                                item.nominal +
-                                `</td>
+                            item.nominal +
+                            `</td>
                         <td class="text-center">` +
-                                item.tanggal +
-                                `</td>
+                            item.tanggal +
+                            `</td>
                         <td class="text-center">` +
-                                item.rt +
-                                `</td>
+                            item.rt +
+                            `</td>
                         <td class="text-center">` +
-                                item.rw +
-                                `</td>
+                            item.rw +
+                            `</td>
                         <td class="text-center">` +
-                                item.tipe +
-                                `</td>
+                            item.tipe +
+                            `</td>
                         <td class="text-center">` +
-                                item.kategori +
-                                `</td>
+                            item.kategori +
+                            `</td>
                         <td class="text-center">
                             <a href="/kas-warga/lihat/` +
-                                item.id +
-                                `" class="btn btn-sm btn-primary m-1">Lihat</a>
+                            item.id +
+                            `" class="btn btn-sm btn-primary m-1">Lihat</a>
                             <a href="/kas-warga/ubah/` +
-                                item.id +
-                                `" class="btn btn-sm btn-warning m-1">Ubah</a>
+                            item.id +
+                            `" class="btn btn-sm btn-warning m-1">Ubah</a>
                             <a href="/kas-warga/hapus/` +
-                                item.id +
-                                `" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                            item.id +
+                            `" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
                         </td>
                         </tr>`
                         )
                     })
                 })
-                .fail(function (res, error) {
+                .fail(function(res, error) {
                     console.error(res.responseJSON.message, "Gagal")
                 })
-                .always(function () {})
+                .always(function() {})
         })
     })
 </script>

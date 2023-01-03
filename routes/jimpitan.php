@@ -31,10 +31,7 @@ Route::post("/jimpitan/tambah", function (Request $request) {
     if ($jimpitan) {
         return redirect("jimpitan/tampil")->with("message", "Berhasil Ditambahkan!");
     } else {
-        return redirect("jimpitan/tampil")->withErrors(
-            "error",
-            "Penambahan jimpitan gagal!"
-        );
+        return redirect("jimpitan/tampil")->withErrors("error", "Penambahan jimpitan gagal!");
     }
 });
 
@@ -44,7 +41,7 @@ Route::get("/jimpitan/tampil", function () {
     $result = \DB::table("jimpitan")
         ->select(["jimpitan.*", "warga.nama_lengkap", "warga.no_kk"])
         ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
-        ->whereNull('jimpitan.deleted_at')
+        ->whereNull("jimpitan.deleted_at")
         ->orderBy("jimpitan.created_at", "desc");
 
     $jimpitan = null;
@@ -63,7 +60,7 @@ Route::get("/jimpitan/filter", function (Request $request) {
     $result = \App\Models\Jimpitan::select(["jimpitan.*", "warga.nama_lengkap"])
         ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
         ->orderBy("jimpitan.created_at", "desc")
-        ->whereNull('jimpitan.deleted_at')
+        ->whereNull("jimpitan.deleted_at")
         ->where("jimpitan.kategori", "like", "%" . $request->kategori . "%");
 
     $jimpitan = null;

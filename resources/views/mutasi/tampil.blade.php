@@ -7,17 +7,15 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <table
-                    width="100%"
-                    class="table table-bordered mb-0">
+                <table width="100%"
+                       class="table-bordered table mb-0">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th width="30%">Nama</th>
                             <th width="30%">Email</th>
                             <th width="20%">Password</th>
-                            <th
-                                width="20%"
+                            <th width="20%"
                                 class="text-center">
                                 Aksi
                             </th>
@@ -25,25 +23,19 @@
                     </thead>
                     <tbody>
                         @foreach ($admin as $index => $item)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td>{{ $item->password }}</td>
-                            <td class="text-center">
-                                <a
-                                    href="/admin/get-ubah/{{ $item->id }}"
-                                    class="btn btn-sm btn-warning"
-                                    >Ubah</a
-                                >
-                                <a
-                                    href="/admin/get-hapus/{{ $item->id }}"
-                                    class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Yakin Hapus?');"
-                                    >Hapus</a
-                                >
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->password }}</td>
+                                <td class="text-center">
+                                    <a href="/admin/get-ubah/{{ $item->id }}"
+                                       class="btn btn-sm btn-warning">Ubah</a>
+                                    <a href="/admin/get-hapus/{{ $item->id }}"
+                                       class="btn btn-sm btn-danger"
+                                       onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
