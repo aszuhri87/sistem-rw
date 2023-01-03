@@ -21,16 +21,15 @@ Route::get("/dashboard", function () {
         if ($rt == null) {
             $warga_rt_res = $warga_rt->get();
         } else {
-            $warga_rt_res = $warga_rt
-                ->where("warga.id_rt_rw", Auth::user()->id_rt_rw)
-                ->get();
+            $warga_rt_res = $warga_rt->where("warga.id_rt_rw", Auth::user()->id_rt_rw)->get();
         }
+
         $warga_jenis_kelamin = DB::table("warga")
             ->select([
-                DB::raw("count(*) as
-jumlah"),
-                DB::raw("CASE WHEN warga.jenis_kelamin = 'L' THEN 'Laki-laki' ELSE
-'Perempuan' END as jenis_kelamin"),
+                DB::raw("count(*) as jumlah"),
+                DB::raw(
+                    "CASE WHEN warga.jenis_kelamin = 'L' THEN 'Laki-laki' ELSE 'Perempuan' END as jenis_kelamin"
+                ),
             ])
             ->leftJoin("rt_rw", "rt_rw.id", "warga.id_rt_rw")
             ->whereNull("warga.deleted_at")
@@ -42,12 +41,13 @@ jumlah"),
                 ->where("warga.id_rt_rw", Auth::user()->id_rt_rw)
                 ->get();
         }
-        $kas_masuk = \App\Models\KasWarga::select([
-            \DB::raw("SUM(kas_warga.nominal) as count"),
-        ])
+
+        $kas_masuk = \App\Models\KasWarga::select([\DB::raw("SUM(kas_warga.nominal) as count")])
             ->leftJoin("rt_rw", "rt_rw.id", "kas_warga.id_rt_rw")
+            ->whereYear("kas_warga.tanggal", date("Y"))
             ->whereNull("kas_warga.deleted_at")
             ->where("kas_warga.tipe", "masuk");
+
         if ($rt == null) {
             $kas_masuk_res = $kas_masuk->first()->count;
         } else {
@@ -55,12 +55,13 @@ jumlah"),
                 ->where("kas_warga.id_rt_rw", Auth::user()->id_rt_rw)
                 ->first()->count;
         }
-        $kas_keluar = \App\Models\KasWarga::select([
-            \DB::raw("SUM(kas_warga.nominal) as count"),
-        ])
+
+        $kas_keluar = \App\Models\KasWarga::select([\DB::raw("SUM(kas_warga.nominal) as count")])
             ->leftJoin("rt_rw", "rt_rw.id", "kas_warga.id_rt_rw")
             ->whereNull("kas_warga.deleted_at")
+            ->whereYear("kas_warga.tanggal", date("Y"))
             ->where("kas_warga.tipe", "keluar");
+
         if ($rt == null) {
             $kas_keluar_res = $kas_keluar->first()->count;
         } else {
@@ -68,45 +69,41 @@ jumlah"),
                 ->where("kas_warga.id_rt_rw", Auth::user()->id_rt_rw)
                 ->first()->count;
         }
+
         $kas_warga = \App\Models\KasWarga::select(
-            DB::raw("sum(kas_warga.nominal) as
-jumlah "),
+            DB::raw("sum(kas_warga.nominal) as jumlah "),
             DB::raw("DATE_FORMAT(kas_warga.tanggal,'%M %Y') as bulan")
         )
             ->whereNull("kas_warga.deleted_at")
+            ->whereYear("kas_warga.tanggal", date("Y"))
             ->groupBy("bulan");
+
         if ($rt == null) {
             $kas_warga_res = $kas_warga->get();
         } else {
-            $kas_warga_res = $kas_warga
-                ->where("kas_warga.id_rt_rw", Auth::user()->id_rt_rw)
-                ->get();
+            $kas_warga_res = $kas_warga->where("kas_warga.id_rt_rw", Auth::user()->id_rt_rw)->get();
         }
-        $jimpit = \App\Models\Jimpitan::select([
-            \DB::raw("SUM(jimpitan.nominal) as count"),
-        ])
+
+        $jimpit = \App\Models\Jimpitan::select([\DB::raw("SUM(jimpitan.nominal) as count")])
             ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
             ->whereNull("jimpitan.deleted_at");
         if ($rt == null) {
             $jimpit_res = $jimpit->first();
         } else {
-            $jimpit_res = $jimpit
-                ->where("warga.id_rt_rw", Auth::user()->id_rt_rw)
-                ->first();
+            $jimpit_res = $jimpit->where("warga.id_rt_rw", Auth::user()->id_rt_rw)->first();
         }
-        $warga = \App\Models\Warga::select([
-            \DB::raw("count(warga.id) as count"),
-        ])->whereNull("warga.deleted_at");
+
+        $warga = \App\Models\Warga::select([\DB::raw("count(warga.id) as count")])->whereNull(
+            "warga.deleted_at"
+        );
         if ($rt == null) {
             $warga_res = $warga->first()->count;
         } else {
-            $warga_res = $warga
-                ->where("warga.id_rt_rw", Auth::user()->id_rt_rw)
-                ->first()->count;
+            $warga_res = $warga->where("warga.id_rt_rw", Auth::user()->id_rt_rw)->first()->count;
         }
+
         $jimpit_per_bulan = \App\Models\Jimpitan::select(
-            DB::raw("sum(jimpitan.nominal)
-as count"),
+            DB::raw("sum(jimpitan.nominal) as count"),
             DB::raw("MONTHNAME(jimpitan.tanggal) as bulan")
         )
             ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
@@ -117,13 +114,11 @@ as count"),
         if ($rt == null) {
             $jimpit_per_bulan->get();
         } else {
-            $jimpit_per_bulan
-                ->where("warga.id_rt_rw", Auth::user()->id_rt_rw)
-                ->get();
+            $jimpit_per_bulan->where("warga.id_rt_rw", Auth::user()->id_rt_rw)->get();
         }
+
         $jimpit_per_bulan_sum = \App\Models\Jimpitan::select(
-            DB::raw("count(id) as
-count"),
+            DB::raw("count(id) as count"),
             DB::raw("MONTHNAME(tanggal) as bulan")
         )
             ->where("id", "!=", null)
@@ -131,16 +126,19 @@ count"),
             ->whereNull("jimpitan.deleted_at")
             ->groupBy(DB::raw("MONTHNAME(tanggal)"), "bulan")
             ->get();
+
         $jimpit_data = [];
         foreach ($jimpit_per_bulan as $key => $row) {
             $jimpit_data["bulan"][] = $row["bulan"];
             $jimpit_data["count"][] = (int) $row["count"];
         }
+
         $jimpit_data_sum = [];
         foreach ($jimpit_per_bulan_sum as $key => $row) {
             $jimpit_data_sum["bulan"][] = $row["bulan"];
             $jimpit_data_sum["count"][] = (int) $row["count"];
         }
+
         return response()->json(
             [
                 "status" => "OK",
@@ -158,9 +156,6 @@ count"),
             200
         );
     } catch (Exception $e) {
-        return response()->json(
-            ["status" => "Internal Server Error!", "message" => "error!"],
-            500
-        );
+        return response()->json(["status" => "Internal Server Error!", "message" => "error!"], 500);
     }
 });

@@ -36,10 +36,7 @@ Route::post("/kas-warga/post-tambah", function (Request $request) {
     ]);
 
     if ($kas) {
-        return redirect("/kas-warga/tampil")->with(
-            "message",
-            "Berhasil Menambah!"
-        );
+        return redirect("/kas-warga/tampil")->with("message", "Berhasil Menambah!");
     } else {
         return redirect("/kas-warga/tampil")->withErrors("error", "Gagal!");
     }
@@ -132,10 +129,7 @@ Route::post("/kas-warga/post-ubah/{id}", function (Request $request, $id) {
     ]);
 
     if ($kas_warga) {
-        return redirect("/kas-warga/tampil")->with(
-            "message",
-            "Berhasil Mengubah!"
-        );
+        return redirect("/kas-warga/tampil")->with("message", "Berhasil Mengubah!");
     } else {
         return redirect("/kas-warga/tampil")->withErrors("error", "Gagal!");
     }

@@ -1,8 +1,8 @@
 <script type="text/javascript">
-   $(document).ready(function () {
-      $("#tipe").on("change", function (e) {
-         if ($(this).val() == "masuk") {
-            $(".div-kategori").removeClass("d-none").html(`
+    $(document).ready(function () {
+        $("#tipe").on("change", function (e) {
+            if ($(this).val() == "masuk") {
+                $(".div-kategori").removeClass("d-none").html(`
                     <label>Pilih Kategori</label>
                     <select name="kategori" id="kategori" class="form-control" required>
                         <option value=""> -- Pilih Kategori --</option>
@@ -14,9 +14,9 @@
                         <option value="Peralenan"> Peralenan </option>
                         <option value="Lain-lain"> Lain-lain </option>
                     </select>
-                `);
-         } else if ($(this).val() == "keluar") {
-            $(".div-kategori").removeClass("d-none").html(`
+                `)
+            } else if ($(this).val() == "keluar") {
+                $(".div-kategori").removeClass("d-none").html(`
                     <label>Pilih Kategori</label>
                     <select name="kategori" id="kategori" class="form-control" required>
                         <option value=""> -- Pilih Kategori --</option>
@@ -31,41 +31,41 @@
                         <option value="Iuran sampah"> Iuran sampah </option>
                         <option value="Lain-lain"> Lain-lain </option>
                     </select>
-                `);
-         } else {
-            $(".kategori").addClass("d-none");
-         }
-      });
+                `)
+            } else {
+                $(".kategori").addClass("d-none")
+            }
+        })
 
-      $(".btn-save").click(function () {
-         $.blockUI({
-            message:
-               '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
-            css: {
-               backgroundColor: "transparent",
-               color: "#fff",
-               border: "0",
-            },
-            overlayCSS: {
-               opacity: 0.5,
-            },
-            timeout: 1000,
-            baseZ: 2000,
-         });
-      });
+        $(".btn-save").click(function () {
+            $.blockUI({
+                message:
+                    '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Mohon Tunggu...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
+                css: {
+                    backgroundColor: "transparent",
+                    color: "#fff",
+                    border: "0",
+                },
+                overlayCSS: {
+                    opacity: 0.5,
+                },
+                timeout: 1000,
+                baseZ: 2000,
+            })
+        })
 
-      $(":input").on("change", function (e) {
-         $("tbody tr").remove();
-         $("#paginate").remove();
+        $(":input").on("change", function (e) {
+            $("tbody tr").remove()
+            $("#paginate").remove()
 
-         let value = $("#filter_type").val();
-         let ke = $("#ke").val();
-         let dari = $("#dari").val();
-         let kategori = $("#kategori").val();
+            let value = $("#filter_type").val()
+            let ke = $("#ke").val()
+            let dari = $("#dari").val()
+            let kategori = $("#kategori").val()
 
-         if ($(this).val() == "masuk") {
-            $(".div-kategori").removeClass("d-none");
-            $("#kategori").html(`
+            if ($(this).val() == "masuk") {
+                $(".div-kategori").removeClass("d-none")
+                $("#kategori").html(`
                         <option value=""> -- Pilih Kategori --</option>
                         <option value="Iuran sampah"> Iuran sampah </option>
                         <option value="Sponsorship/donatur"> Sponsorship/donatur </option>
@@ -74,10 +74,10 @@
                         <option value="Sewa tempat"> Sewa tempat </option>
                         <option value="Peralenan"> Peralenan </option>
                         <option value="Lain-lain"> Lain-lain </option>
-                `);
-         } else if ($(this).val() == "keluar") {
-            $(".div-kategori").removeClass("d-none");
-            $("#kategori").html(`
+                `)
+            } else if ($(this).val() == "keluar") {
+                $(".div-kategori").removeClass("d-none")
+                $("#kategori").html(`
                         <option value=""> -- Pilih Kategori --</option>
                         <option value="Santunan"> Santunan </option>
                         <option value="Kerjabakti"> Kerjabakti  </option>
@@ -89,73 +89,73 @@
                         <option value="Peralenan"> Peralenan </option>
                         <option value="Iuran sampah"> Iuran sampah </option>
                         <option value="Lain-lain"> Lain-lain </option>
-                `);
-         } else if ($(this).val() == null || $(this).val() == "") {
-            $(".div-kategori").addClass("d-none");
-         }
+                `)
+            } else if ($(this).val() == null || $(this).val() == "") {
+                $(".div-kategori").addClass("d-none")
+            }
 
-         $.ajax({
-            type: "get",
-            async: false,
-            cache: false,
-            url: "/kas-warga/filter",
-            data: {
-               _token: "{{ csrf_token() }}",
-               cari: value,
-               ke: ke,
-               dari: dari,
-               kategori: kategori,
-            },
-         })
-            .done(function (res, xhr, meta) {
-               let data = res.data;
+            $.ajax({
+                type: "get",
+                async: false,
+                cache: false,
+                url: "/kas-warga/filter",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    cari: value,
+                    ke: ke,
+                    dari: dari,
+                    kategori: kategori,
+                },
+            })
+                .done(function (res, xhr, meta) {
+                    let data = res.data
 
-               data.forEach((item, i) => {
-                  i += 1;
+                    data.forEach((item, i) => {
+                        i += 1
 
-                  $("tbody").append(
-                     `
+                        $("tbody").append(
+                            `
                     <tr>
                         <th scope="row">` +
-                        i +
-                        `</th>
+                                i +
+                                `</th>
                         <td class="text-center">` +
-                        item.nominal +
-                        `</td>
+                                item.nominal +
+                                `</td>
                         <td class="text-center">` +
-                        item.tanggal +
-                        `</td>
+                                item.tanggal +
+                                `</td>
                         <td class="text-center">` +
-                        item.rt +
-                        `</td>
+                                item.rt +
+                                `</td>
                         <td class="text-center">` +
-                        item.rw +
-                        `</td>
+                                item.rw +
+                                `</td>
                         <td class="text-center">` +
-                        item.tipe +
-                        `</td>
+                                item.tipe +
+                                `</td>
                         <td class="text-center">` +
-                        item.kategori +
-                        `</td>
+                                item.kategori +
+                                `</td>
                         <td class="text-center">
                             <a href="/kas-warga/lihat/` +
-                        item.id +
-                        `" class="btn btn-sm btn-primary m-1">Lihat</a>
+                                item.id +
+                                `" class="btn btn-sm btn-primary m-1">Lihat</a>
                             <a href="/kas-warga/ubah/` +
-                        item.id +
-                        `" class="btn btn-sm btn-warning m-1">Ubah</a>
+                                item.id +
+                                `" class="btn btn-sm btn-warning m-1">Ubah</a>
                             <a href="/kas-warga/hapus/` +
-                        item.id +
-                        `" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                                item.id +
+                                `" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>
                         </td>
                         </tr>`
-                  );
-               });
-            })
-            .fail(function (res, error) {
-               console.error(res.responseJSON.message, "Gagal");
-            })
-            .always(function () {});
-      });
-   });
+                        )
+                    })
+                })
+                .fail(function (res, error) {
+                    console.error(res.responseJSON.message, "Gagal")
+                })
+                .always(function () {})
+        })
+    })
 </script>

@@ -14,18 +14,13 @@ Route::get("/jimpitan/scan-qr", function () {
 });
 
 Route::post("/jimpitan/scan-qr", function (Request $request) {
-    return redirect("jimpitan/tambah")->with(
-        "scan_result",
-        $request->scan_result
-    );
+    return redirect("jimpitan/tambah")->with("scan_result", $request->scan_result);
 });
+
 Route::post("/jimpitan/tambah", function (Request $request) {
     $warga = \App\Models\Warga::where("no_kk", $request->no_kk)->first();
     if (!$warga) {
-        return redirect("jimpitan/tambah")->with(
-            "message",
-            "NIK Tidak Ditemukan"
-        );
+        return redirect("jimpitan/tambah")->with("message", "NIK Tidak Ditemukan");
     }
     $jimpitan = \App\Models\Jimpitan::create([
         "id_warga" => $warga->id,
@@ -34,10 +29,7 @@ Route::post("/jimpitan/tambah", function (Request $request) {
         "kategori" => $request->kategori,
     ]);
     if ($jimpitan) {
-        return redirect("jimpitan/tampil")->with(
-            "message",
-            "Berhasil Ditambahkan!"
-        );
+        return redirect("jimpitan/tampil")->with("message", "Berhasil Ditambahkan!");
     } else {
         return redirect("jimpitan/tampil")->withErrors(
             "error",
@@ -46,6 +38,7 @@ gagal!"
         );
     }
 });
+
 Route::get("/jimpitan/tampil", function () {
     $rt = Auth::user()->id_rt_rw;
     $result = \DB::table("jimpitan")
@@ -56,12 +49,11 @@ Route::get("/jimpitan/tampil", function () {
     if ($rt == null) {
         $jimpitan = $result->paginate(10);
     } else {
-        $jimpitan = $result
-            ->where("warga.id_rt_rw", Auth::user()->id_rt_rw)
-            ->paginate(10);
+        $jimpitan = $result->where("warga.id_rt_rw", Auth::user()->id_rt_rw)->paginate(10);
     }
     return view("jimpitan/tampil", ["jimpitan" => $jimpitan]);
 });
+
 Route::get("/jimpitan/filter", function (Request $request) {
     $rt = Auth::user()->id_rt_rw;
     $result = \App\Models\Jimpitan::select(["jimpitan.*", "warga.nama_lengkap"])
@@ -75,22 +67,11 @@ Route::get("/jimpitan/filter", function (Request $request) {
         $jimpitan = $result->where("warga.rt", $rt);
     }
     if ($request->cari) {
-        $jimpitan->where(
-            "warga.nama_lengkap",
-            "like",
-            "%" . $request->cari . "%"
-        );
-        $jimpitan->orWhere(
-            "jimpitan.nominal",
-            "like",
-            "%" . $request->cari . "%"
-        );
+        $jimpitan->where("warga.nama_lengkap", "like", "%" . $request->cari . "%");
+        $jimpitan->orWhere("jimpitan.nominal", "like", "%" . $request->cari . "%");
     }
     if ($request->ke && $request->dari) {
-        $jimpitan->whereBetween("jimpitan.tanggal", [
-            $request->dari,
-            $request->ke,
-        ]);
+        $jimpitan->whereBetween("jimpitan.tanggal", [$request->dari, $request->ke]);
     }
     return response()->json(
         [
@@ -101,10 +82,12 @@ Route::get("/jimpitan/filter", function (Request $request) {
         200
     );
 });
+
 Route::get("/jimpitan/hapus/{id}", function ($id) {
     \App\Models\Jimpitan::find($id)->delete();
     return redirect("jimpitan/tampil");
 });
+
 Route::post("/jimpitan/ubah/{id}", function (Request $request, $id) {
     $jimpitan = \App\Models\Jimpitan::find($id)->update([
         "nominal" => $request->nominal,
@@ -112,18 +95,17 @@ Route::post("/jimpitan/ubah/{id}", function (Request $request, $id) {
         "kategori" => $request->kategori,
     ]);
     if ($jimpitan) {
-        return redirect("/jimpitan/tampil")->with(
-            "message",
-            "Berhasil Mengubah!"
-        );
+        return redirect("/jimpitan/tampil")->with("message", "Berhasil Mengubah!");
     } else {
         return redirect("/jimpitan/tampil")->withErrors("error", "Gagal!");
     }
 });
+
 Route::get("/jimpitan/ubah/{id}", function ($id) {
     $jimpitan = \App\Models\Jimpitan::find($id);
     return view("jimpitan/ubah", compact("jimpitan"));
 });
+
 Route::get("/jimpitan/export", function () {
     return Excel::download(
         new JimpitanExport(),

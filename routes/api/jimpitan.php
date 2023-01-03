@@ -11,8 +11,7 @@ Route::post("/jimpitan/tambah", function (Request $request) {
             return response()->json(
                 [
                     "status" => "Not Found",
-                    "message" => "N0
-KK tidak ditemukan!",
+                    "message" => "N0 KK tidak ditemukan!",
                 ],
                 404
             );
@@ -24,10 +23,7 @@ KK tidak ditemukan!",
             "kategori" => $request->kategori,
         ]);
         if ($jimpitan) {
-            return response()->json(
-                ["status" => "OK", "message" => "Berhasil menambah data"],
-                200
-            );
+            return response()->json(["status" => "OK", "message" => "Berhasil menambah data"], 200);
         } else {
             return response()->json(
                 [
@@ -38,26 +34,17 @@ KK tidak ditemukan!",
             );
         }
     } catch (Exception $e) {
-        return response()->json(
-            ["status" => "Internal Server Error", "message" => "Error!"],
-            500
-        );
+        return response()->json(["status" => "Internal Server Error", "message" => "Error!"], 500);
     }
 });
+
 Route::post("/jimpitan/tampil", function (Request $request) {
     try {
         $rt = Auth::user()->id_rt_rw;
-        $result = \App\Models\Jimpitan::select([
-            "jimpitan.*",
-            "warga.nama_lengkap",
-        ])
+        $result = \App\Models\Jimpitan::select(["jimpitan.*", "warga.nama_lengkap"])
             ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
             ->orderBy("jimpitan.created_at", "desc")
-            ->where(
-                "jimpitan.kategori",
-                "like",
-                "%" . $request->kategori . "%"
-            );
+            ->where("jimpitan.kategori", "like", "%" . $request->kategori . "%");
         $jimpitan = null;
         if ($rt == null) {
             $jimpitan = $result;
@@ -65,22 +52,11 @@ Route::post("/jimpitan/tampil", function (Request $request) {
             $jimpitan = $result->where("warga.rt", $rt);
         }
         if ($request->cari) {
-            $jimpitan->where(
-                "warga.nama_lengkap",
-                "like",
-                "%" . $request->cari . "%"
-            );
-            $jimpitan->orWhere(
-                "jimpitan.nominal",
-                "like",
-                "%" . $request->cari . "%"
-            );
+            $jimpitan->where("warga.nama_lengkap", "like", "%" . $request->cari . "%");
+            $jimpitan->orWhere("jimpitan.nominal", "like", "%" . $request->cari . "%");
         }
         if ($request->ke && $request->dari) {
-            $jimpitan->whereBetween("jimpitan.tanggal", [
-                $request->dari,
-                $request->ke,
-            ]);
+            $jimpitan->whereBetween("jimpitan.tanggal", [$request->dari, $request->ke]);
         }
         return response()->json(
             [
@@ -93,14 +69,14 @@ Route::post("/jimpitan/tampil", function (Request $request) {
     } catch (Exception $e) {
         return response()->json(
             [
-                "status" => "Internal Server
-Error",
+                "status" => "Internal Server Error",
                 "message" => "Error!",
             ],
             500
         );
     }
 });
+
 Route::get("/jimpitan/hapus/{id}", function ($id) {
     try {
         $result = \App\Models\Jimpitan::find($id)->delete();
@@ -109,12 +85,10 @@ Route::get("/jimpitan/hapus/{id}", function ($id) {
             200
         );
     } catch (Exception $e) {
-        return response()->json(
-            ["status" => "Internal Server Error", "message" => "Error!"],
-            500
-        );
+        return response()->json(["status" => "Internal Server Error", "message" => "Error!"], 500);
     }
 });
+
 Route::post("/jimpitan/ubah/{id}", function (Request $request, $id) {
     try {
         // dd($request->nominal); $jimpitan =
@@ -127,8 +101,7 @@ Route::post("/jimpitan/ubah/{id}", function (Request $request, $id) {
             return response()->json(
                 [
                     "status" => "success",
-                    "message" => "Berhasil
-Mengubah data.",
+                    "message" => "Berhasil Mengubah data.",
                 ],
                 200
             );
@@ -139,12 +112,10 @@ Mengubah data.",
             );
         }
     } catch (Exception $e) {
-        return response()->json(
-            ["status" => "Internal Server Error", "message" => "Error!"],
-            500
-        );
+        return response()->json(["status" => "Internal Server Error", "message" => "Error!"], 500);
     }
 });
+
 Route::get("/jimpitan/scan-qr", function (Request $request) {
     try {
         $decode = base64_decode($request->scan_result);

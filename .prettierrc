@@ -4,14 +4,25 @@
             "files": ["*.php"],
             "options": {
                 "tabWidth": 4,
-                "parser": "php"
+                "parser": "php",
+                "printWidth": 100,
+                "semi":false,
+                "bracketSpacing": true,
+                "bracketSameLine": true,
+                "singleAttributePerLine": false
             }
         },
         {
             "files": ["*.blade.php"],
             "options": {
-                "tabWidth": 3,
-                "parser": "html"
+                "tabWidth": 4,
+                "parser": "html",
+                "printWidth": 100,
+                "semi":false,
+                "bracketSpacing": true,
+                "bracketSameLine": true,
+                "singleAttributePerLine": true,
+                "jsxBracketSameLine": true
             }
         }
     ]
