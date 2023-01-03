@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -63,59 +61,4 @@ Route::group(["middleware" => "auth:api"], function () {
     });
 });
 
-/**
- * @OA\Post(
- *     path="/api/login",
- *     tags={"Auth"},
- *     summary="Login function",
- *     description="Login to app",
- *     operationId="greet",
- *     @OA\Parameter(
- *          name="email",
- *          description="Email",
- *          required=true,
- *          in="query",
- *          @OA\Schema(
- *              type="string"
- *          )
- *     ),
- *     @OA\Parameter(
- *          name="password",
- *          description="Password",
- *          required=true,
- *          in="query",
- *          @OA\Schema(
- *              type="string"
- *          )
- *     ),
- *     @OA\Response(
- *         response="default",
- *         description="successful operation"
- *     )
- * )
- *
- * @OA\Get(
- *     path="/api/logout",
- *     tags={"Auth"},
- *     summary="Logout from App",
- *     description="Logout from app",
- *     @OA\Parameter(
- *          name="id",
- *          description="id",
- *          required=true,
- *          in="query",
- *          @OA\Schema(
- *              type="string"
- *          )
- *     ),
- *     @OA\Response(
- *         response="default",
- *         description="successful operation"
- *     )
- * )
- *
- */
 
-class Login extends Controller
-{
-}

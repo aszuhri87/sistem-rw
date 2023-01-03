@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use OpenApi\Annotations as OA;
 
 Route::get("/dashboard", function () {
     try {
@@ -162,22 +159,3 @@ Route::get("/dashboard", function () {
         return response()->json(["status" => "Internal Server Error!", "message" => "error!"], 500);
     }
 });
-
-/**
- * @OA\Get(
- *     path="/api/dashboard",
- *     tags={"Dashboard"},
- *     summary="Get Dashboard function",
- *     description="Get all data dashboard ",
- *     security={{"passport": {}}},
- *
- *     @OA\Response(
- *         response="default",
- *         description="successful operation"
- *     )
- * )
- */
-
-class Dashboard extends Controller
-{
-}
