@@ -33,19 +33,22 @@ Route::post("/jimpitan/tambah", function (Request $request) {
     } else {
         return redirect("jimpitan/tampil")->withErrors(
             "error",
-            "Penambahan jimpitan
-gagal!"
+            "Penambahan jimpitan gagal!"
         );
     }
 });
 
 Route::get("/jimpitan/tampil", function () {
     $rt = Auth::user()->id_rt_rw;
+
     $result = \DB::table("jimpitan")
         ->select(["jimpitan.*", "warga.nama_lengkap", "warga.no_kk"])
         ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
+        ->whereNull('jimpitan.deleted_at')
         ->orderBy("jimpitan.created_at", "desc");
+
     $jimpitan = null;
+
     if ($rt == null) {
         $jimpitan = $result->paginate(10);
     } else {
@@ -56,23 +59,30 @@ Route::get("/jimpitan/tampil", function () {
 
 Route::get("/jimpitan/filter", function (Request $request) {
     $rt = Auth::user()->id_rt_rw;
+
     $result = \App\Models\Jimpitan::select(["jimpitan.*", "warga.nama_lengkap"])
         ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
         ->orderBy("jimpitan.created_at", "desc")
+        ->whereNull('jimpitan.deleted_at')
         ->where("jimpitan.kategori", "like", "%" . $request->kategori . "%");
+
     $jimpitan = null;
+
     if ($rt == null) {
         $jimpitan = $result;
     } else {
         $jimpitan = $result->where("warga.rt", $rt);
     }
+
     if ($request->cari) {
         $jimpitan->where("warga.nama_lengkap", "like", "%" . $request->cari . "%");
         $jimpitan->orWhere("jimpitan.nominal", "like", "%" . $request->cari . "%");
     }
+
     if ($request->ke && $request->dari) {
         $jimpitan->whereBetween("jimpitan.tanggal", [$request->dari, $request->ke]);
     }
+
     return response()->json(
         [
             "status" => "success",
@@ -85,6 +95,7 @@ Route::get("/jimpitan/filter", function (Request $request) {
 
 Route::get("/jimpitan/hapus/{id}", function ($id) {
     \App\Models\Jimpitan::find($id)->delete();
+
     return redirect("jimpitan/tampil");
 });
 
@@ -94,6 +105,7 @@ Route::post("/jimpitan/ubah/{id}", function (Request $request, $id) {
         "id_admin" => Auth::id(),
         "kategori" => $request->kategori,
     ]);
+
     if ($jimpitan) {
         return redirect("/jimpitan/tampil")->with("message", "Berhasil Mengubah!");
     } else {

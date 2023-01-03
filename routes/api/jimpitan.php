@@ -45,7 +45,9 @@ Route::post("/jimpitan/tampil", function (Request $request) {
         $result = \App\Models\Jimpitan::select(["jimpitan.*", "warga.nama_lengkap"])
             ->leftJoin("warga", "warga.id", "jimpitan.id_warga")
             ->orderBy("jimpitan.created_at", "desc")
+            ->whereNull('jimpitan.deleted_at')
             ->where("jimpitan.kategori", "like", "%" . $request->kategori . "%");
+
         $jimpitan = null;
         if ($rt == null) {
             $jimpitan = $result;
