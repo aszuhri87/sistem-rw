@@ -43,26 +43,27 @@
 
                             @for($i=2; $i <= 4; $i++) <button type="button"
                                 class="btn btn-outline-primary btn-nominal m-1" value="{{$i*5000}}">{{$i*5000}}</button>
-                                @endfor
+                            @endfor
                     </div>
                     <button type="submit" class="btn btn-primary btn-save">Simpan</button>
                 </form>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{asset('js/jquery.blockUI.js')}}"></script>
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-    <script>
-        @if(Session::get('scan_result'))
-        $('#no_kk').val(atob('{{Session::get('scan_result ')}}'))
-        @endif
 
-        $(document).on('click', '.btn-nominal', function (e) {
-            $('#nominal').val($(this).val())
-        })
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{asset('js/jquery.blockUI.js')}}"></script>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script>
+    @if(Session::get('scan_result'))
+    $('#no_kk').val(atob('{{Session::get('scan_result ')}}'))
+    @endif
 
-    </script>
+    $(document).on('click', '.btn-nominal', function (e) {
+        $('#nominal').val($(this).val())
+    })
 
-    @include('jimpitan.script')
-    @include ("footer")
+</script>
+
+@include('jimpitan.script')
+@include ("footer")

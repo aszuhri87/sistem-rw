@@ -13,18 +13,22 @@ class CreateAdminTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create("admin", function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_rt_rw')->nullable();
-            $table->string('nama');
-            $table->string('email');
-            $table->string('password');
-            $table->string('level');
+            $table->unsignedBigInteger("id_rt_rw")->nullable();
+            $table->string("nama");
+            $table->string("email");
+            $table->string("password");
+            $table->string("level");
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id_rt_rw')->references('id')->on('rt_rw')->onDelete('cascade');
+            $table
+                ->foreign("id_rt_rw")
+                ->references("id")
+                ->on("rt_rw")
+                ->onDelete("cascade");
         });
     }
 
@@ -35,6 +39,6 @@ class CreateAdminTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists("admin");
     }
 }

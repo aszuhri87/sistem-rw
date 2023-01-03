@@ -1,13 +1,13 @@
 <?php
 $chart3 = [];
-$bulan =[];
-$kas_warga ->each(function ($kas_warga) use(&$chart3,&$bulan){
-    array_push($chart3,$kas_warga->jumlah);
-    array_push($bulan,$kas_warga->bulan);
+$bulan = [];
+$kas_warga->each(function ($kas_warga) use (&$chart3, &$bulan) {
+    array_push($chart3, $kas_warga->jumlah);
+    array_push($bulan, $kas_warga->bulan);
 });
 
-$chart3=array_reverse($chart3);
-$bulan=array_reverse($bulan);
+$chart3 = array_reverse($chart3);
+$bulan = array_reverse($bulan);
 ?>
 <script>
   var dom = document.getElementById('chart3-container');

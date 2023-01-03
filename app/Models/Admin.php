@@ -14,16 +14,9 @@ class Admin extends Authenticatable
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
-    protected $table = 'admin';
+    protected $table = "admin";
 
-    protected $fillable = [
-        'id',
-        'nama',
-        'email',
-        'password',
-        'id_rt_rw',
-        'level',
-    ];
+    protected $fillable = ["id", "nama", "email", "password", "id_rt_rw", "level"];
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ["deleted_at"];
 }

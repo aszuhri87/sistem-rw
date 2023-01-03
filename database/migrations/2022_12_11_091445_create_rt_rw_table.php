@@ -13,10 +13,10 @@ class CreateRtRwTable extends Migration
      */
     public function up()
     {
-        Schema::create('rt_rw', function (Blueprint $table) {
+        Schema::create("rt_rw", function (Blueprint $table) {
             $table->id();
-            $table->integer('rt');
-            $table->integer('rw');
+            $table->integer("rt");
+            $table->integer("rw");
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ class CreateRtRwTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rt_rw');
+        Schema::dropIfExists("rt_rw");
     }
 }

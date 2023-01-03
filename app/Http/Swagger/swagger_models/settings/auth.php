@@ -1,7 +1,6 @@
 
 
 <?php
-
 /**
  * @OA\SecurityScheme(
  *     type="apiKey",
@@ -10,3 +9,4 @@
  *     name="Authorization"
  * )
  */
+?>

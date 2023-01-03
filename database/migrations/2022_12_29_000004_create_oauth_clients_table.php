@@ -30,7 +30,7 @@ class CreateOauthClientsTable extends Migration
      */
     public function getConnection()
     {
-        return config('passport.storage.database.connection');
+        return config("passport.storage.database.connection");
     }
 
     /**
@@ -40,16 +40,19 @@ class CreateOauthClientsTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('oauth_clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->uuid('user_id')->nullable()->index();
-            $table->string('name');
-            $table->string('secret', 100)->nullable();
-            $table->string('provider')->nullable();
-            $table->text('redirect');
-            $table->boolean('personal_access_client');
-            $table->boolean('password_client');
-            $table->boolean('revoked');
+        $this->schema->create("oauth_clients", function (Blueprint $table) {
+            $table->bigIncrements("id");
+            $table
+                ->uuid("user_id")
+                ->nullable()
+                ->index();
+            $table->string("name");
+            $table->string("secret", 100)->nullable();
+            $table->string("provider")->nullable();
+            $table->text("redirect");
+            $table->boolean("personal_access_client");
+            $table->boolean("password_client");
+            $table->boolean("revoked");
             $table->timestamps();
         });
     }
@@ -61,6 +64,6 @@ class CreateOauthClientsTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('oauth_clients');
+        $this->schema->dropIfExists("oauth_clients");
     }
 }

@@ -8,13 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RtRw extends Model
 {
     use SoftDeletes;
-    protected $table = 'rt_rw';
+    protected $table = "rt_rw";
 
-    protected $fillable = [
-        'id',
-        'rt',
-        'rw',
-    ];
+    protected $fillable = ["id", "rt", "rw"];
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ["deleted_at"];
 }

@@ -1,14 +1,12 @@
 <?php
 $chart1 = [];
 $daftar_warga = \App\Models\Warga::get();
-$warga_rt ->each(function ($warga) use(&$chart1){
-    array_push($chart1,[
-      'value' => $warga->jumlah,
-      'name' => 'RT '.$warga->rt,
+$warga_rt->each(function ($warga) use (&$chart1) {
+    array_push($chart1, [
+        "value" => $warga->jumlah,
+        "name" => "RT " . $warga->rt,
     ]);
 });
-
-
 ?>
 <script>
 var dom = document.getElementById('chart1-container');

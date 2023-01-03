@@ -13,18 +13,22 @@ class CreateKasWargaTable extends Migration
      */
     public function up()
     {
-        Schema::create('kas_warga', function (Blueprint $table) {
+        Schema::create("kas_warga", function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_rt_rw');
-            $table->integer('nominal');
-            $table->date('tanggal');
-            $table->string('tipe');
-            $table->string('kategori');
-            $table->string('catatan')->nullable();
+            $table->unsignedBigInteger("id_rt_rw");
+            $table->integer("nominal");
+            $table->date("tanggal");
+            $table->string("tipe");
+            $table->string("kategori");
+            $table->string("catatan")->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id_rt_rw')->references('id')->on('rt_rw')->onDelete('cascade');
+            $table
+                ->foreign("id_rt_rw")
+                ->references("id")
+                ->on("rt_rw")
+                ->onDelete("cascade");
         });
     }
 
@@ -35,6 +39,6 @@ class CreateKasWargaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kas_warga');
+        Schema::dropIfExists("kas_warga");
     }
 }

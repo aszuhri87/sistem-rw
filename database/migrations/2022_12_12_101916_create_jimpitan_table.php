@@ -13,18 +13,26 @@ class CreateJimpitanTable extends Migration
      */
     public function up()
     {
-        Schema::create('jimpitan', function (Blueprint $table) {
+        Schema::create("jimpitan", function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_warga');
-            $table->bigInteger('nominal');
-            $table->unsignedBigInteger('id_admin');
-            $table->timestamp('tanggal');
-            $table->string('kategori');
+            $table->unsignedBigInteger("id_warga");
+            $table->bigInteger("nominal");
+            $table->unsignedBigInteger("id_admin");
+            $table->timestamp("tanggal");
+            $table->string("kategori");
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id_warga')->references('id')->on('warga')->onDelete('cascade');
-            $table->foreign('id_admin')->references('id')->on('admin')->onDelete('cascade');
+            $table
+                ->foreign("id_warga")
+                ->references("id")
+                ->on("warga")
+                ->onDelete("cascade");
+            $table
+                ->foreign("id_admin")
+                ->references("id")
+                ->on("admin")
+                ->onDelete("cascade");
         });
     }
 
@@ -35,6 +43,6 @@ class CreateJimpitanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jimpitan');
+        Schema::dropIfExists("jimpitan");
     }
 }

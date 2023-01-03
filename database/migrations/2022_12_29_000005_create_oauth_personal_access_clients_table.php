@@ -30,9 +30,9 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('oauth_personal_access_clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('client_id');
+        $this->schema->create("oauth_personal_access_clients", function (Blueprint $table) {
+            $table->bigIncrements("id");
+            $table->unsignedBigInteger("client_id");
             $table->timestamps();
         });
     }
@@ -44,7 +44,7 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('oauth_personal_access_clients');
+        $this->schema->dropIfExists("oauth_personal_access_clients");
     }
 
     /**
@@ -54,6 +54,6 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function getConnection()
     {
-        return config('passport.storage.database.connection');
+        return config("passport.storage.database.connection");
     }
 }

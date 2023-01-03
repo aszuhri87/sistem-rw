@@ -30,11 +30,11 @@ class CreateOauthRefreshTokensTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('oauth_refresh_tokens', function (Blueprint $table) {
-            $table->string('id', 100)->primary();
-            $table->string('access_token_id', 100)->index();
-            $table->boolean('revoked');
-            $table->dateTime('expires_at')->nullable();
+        $this->schema->create("oauth_refresh_tokens", function (Blueprint $table) {
+            $table->string("id", 100)->primary();
+            $table->string("access_token_id", 100)->index();
+            $table->boolean("revoked");
+            $table->dateTime("expires_at")->nullable();
         });
     }
 
@@ -45,7 +45,7 @@ class CreateOauthRefreshTokensTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('oauth_refresh_tokens');
+        $this->schema->dropIfExists("oauth_refresh_tokens");
     }
 
     /**
@@ -55,6 +55,6 @@ class CreateOauthRefreshTokensTable extends Migration
      */
     public function getConnection()
     {
-        return config('passport.storage.database.connection');
+        return config("passport.storage.database.connection");
     }
 }
