@@ -16,7 +16,9 @@ Route::post("/login", function (Request $request) {
             $data["name"] = $user->name;
             $data["id_rt_rw"] = $user->id_rt_rw;
             $data["level"] = $user->level;
-            $data["token"] = $user->createToken("accessToken")->accessToken;
+            $data["token"] = $user->createToken(
+                "accessToken"
+            )->accessToken;
 
             return response()->json(
                 [
@@ -54,10 +56,19 @@ Route::group(["middleware" => "auth:api"], function () {
                 $user->revoke();
             }
 
-            return response()->json(["status" => "OK", "message" => "Berhasil Logout!"], 200);
+            return response()->json(
+                [
+                    "status" => "OK",
+                    "message" => "Berhasil Logout!",
+                ],
+                200
+            );
         } catch (Exception $e) {
             return response()->json(
-                ["status" => "Internal Server Error", "message" => "Error!"],
+                [
+                    "status" => "Internal Server Error",
+                    "message" => "Error!",
+                ],
                 500
             );
         }

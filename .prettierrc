@@ -5,12 +5,13 @@
             "options": {
                 "tabWidth": 4,
                 "parser": "php",
-                "printWidth": 100,
+                "printWidth": 60,
                 "semi":false,
                 "bracketSpacing": true,
                 "bracketSameLine": false,
                 "singleAttributePerLine": false,
-                "endOfLine": "crlf"
+                "endOfLine": "crlf",
+                "wrapAttributes": "auto"
             }
         },{
             "files": ["*.blade.php"],

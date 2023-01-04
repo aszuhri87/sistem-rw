@@ -25,7 +25,8 @@ Route::post("/login", function (Request $request) {
     } else {
         return \Redirect::back()
             ->withErrors([
-                "message" => "Login gagal!, periksa email dan password.",
+                "message" =>
+                    "Login gagal!, periksa email dan password.",
             ])
             ->withInput();
     }

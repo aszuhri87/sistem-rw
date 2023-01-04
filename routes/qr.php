@@ -16,7 +16,9 @@ Route::get("/warga/qrcode/{id}", function ($id) {
         ->writerOptions([])
         ->data(base64_encode($warga->no_kk))
         ->encoding(new Encoding("UTF-8"))
-        ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+        ->errorCorrectionLevel(
+            new ErrorCorrectionLevelHigh()
+        )
         ->size(300)
         ->margin(10)
         ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
@@ -29,5 +31,8 @@ Route::get("/warga/qrcode/{id}", function ($id) {
 
     $dataUri = $result->getDataUri();
 
-    return view("warga.qr", compact("result", "warga", "dataUri"));
+    return view(
+        "warga.qr",
+        compact("result", "warga", "dataUri")
+    );
 });

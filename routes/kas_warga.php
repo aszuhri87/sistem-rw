@@ -11,13 +11,18 @@ Route::get("/kas-warga/tambah", function () {
     if (!Auth::user()->id_rt_rw) {
         $rt = RtRw::all();
     } else {
-        $rt = RtRw::where("id", Auth::user()->id_rt_rw)->get();
+        $rt = RtRw::where(
+            "id",
+            Auth::user()->id_rt_rw
+        )->get();
     }
 
     return view("kas-warga.tambah", compact("rt"));
 });
 
-Route::post("/kas-warga/post-tambah", function (Request $request) {
+Route::post("/kas-warga/post-tambah", function (
+    Request $request
+) {
     $rt;
 
     if ($request->rt) {
@@ -36,27 +41,45 @@ Route::post("/kas-warga/post-tambah", function (Request $request) {
     ]);
 
     if ($kas) {
-        return redirect("/kas-warga/tampil")->with("message", "Berhasil Menambah!");
+        return redirect("/kas-warga/tampil")->with(
+            "message",
+            "Berhasil Menambah!"
+        );
     } else {
-        return redirect("/kas-warga/tampil")->withErrors("error", "Gagal!");
+        return redirect("/kas-warga/tampil")->withErrors(
+            "error",
+            "Gagal!"
+        );
     }
 });
 
-Route::get("/kas-warga/tampil", function (Request $request) {
+Route::get("/kas-warga/tampil", function (
+    Request $request
+) {
     $kas_warga = null;
     $rt = Auth::user()->id_rt_rw;
 
     $result = \App\Models\KasWarga::select([
         "kas_warga.*",
-        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
-        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+        DB::raw(
+            'IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'
+        ),
+        DB::raw(
+            'IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'
+        ),
     ])
-        ->leftJoin("rt_rw", "rt_rw.id", "kas_warga.id_rt_rw")
+        ->leftJoin(
+            "rt_rw",
+            "rt_rw.id",
+            "kas_warga.id_rt_rw"
+        )
         ->whereNull("kas_warga.deleted_at")
         ->orderBy("tanggal", "desc");
 
     if ($rt) {
-        $kas_warga = $result->where("id_rt_rw", $rt)->paginate(10);
+        $kas_warga = $result
+            ->where("id_rt_rw", $rt)
+            ->paginate(10);
     } else {
         $kas_warga = $result->paginate(10);
     }
@@ -66,15 +89,25 @@ Route::get("/kas-warga/tampil", function (Request $request) {
     ]);
 });
 
-Route::get("/kas-warga/filter", function (Request $request) {
+Route::get("/kas-warga/filter", function (
+    Request $request
+) {
     $rt = Auth::user()->id_rt_rw;
 
     $result = \App\Models\KasWarga::select([
         "kas_warga.*",
-        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
-        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+        DB::raw(
+            'IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'
+        ),
+        DB::raw(
+            'IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'
+        ),
     ])
-        ->leftJoin("rt_rw", "rt_rw.id", "kas_warga.id_rt_rw")
+        ->leftJoin(
+            "rt_rw",
+            "rt_rw.id",
+            "kas_warga.id_rt_rw"
+        )
         ->whereNull("kas_warga.deleted_at")
         ->where("tipe", "like", "%" . $request->cari . "%");
 
@@ -87,11 +120,18 @@ Route::get("/kas-warga/filter", function (Request $request) {
     }
 
     if ($request->cari) {
-        $kas_warga->where("kategori", "like", "%" . $request->kategori . "%");
+        $kas_warga->where(
+            "kategori",
+            "like",
+            "%" . $request->kategori . "%"
+        );
     }
 
     if ($request->ke && $request->dari) {
-        $kas_warga->whereBetween("tanggal", [$request->dari, $request->ke]);
+        $kas_warga->whereBetween("tanggal", [
+            $request->dari,
+            $request->ke,
+        ]);
     }
 
     return response()->json(
@@ -110,7 +150,10 @@ Route::get("/kas-warga/hapus/{id}", function ($id) {
     return redirect("kas-warga/tampil");
 });
 
-Route::post("/kas-warga/post-ubah/{id}", function (Request $request, $id) {
+Route::post("/kas-warga/post-ubah/{id}", function (
+    Request $request,
+    $id
+) {
     $rt;
 
     if ($request->rt) {
@@ -129,19 +172,33 @@ Route::post("/kas-warga/post-ubah/{id}", function (Request $request, $id) {
     ]);
 
     if ($kas_warga) {
-        return redirect("/kas-warga/tampil")->with("message", "Berhasil Mengubah!");
+        return redirect("/kas-warga/tampil")->with(
+            "message",
+            "Berhasil Mengubah!"
+        );
     } else {
-        return redirect("/kas-warga/tampil")->withErrors("error", "Gagal!");
+        return redirect("/kas-warga/tampil")->withErrors(
+            "error",
+            "Gagal!"
+        );
     }
 });
 
 Route::get("/kas-warga/ubah/{id}", function ($id) {
     $kas_warga = \App\Models\KasWarga::select([
         "kas_warga.*",
-        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
-        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+        DB::raw(
+            'IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'
+        ),
+        DB::raw(
+            'IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'
+        ),
     ])
-        ->leftJoin("rt_rw", "rt_rw.id", "kas_warga.id_rt_rw")
+        ->leftJoin(
+            "rt_rw",
+            "rt_rw.id",
+            "kas_warga.id_rt_rw"
+        )
         ->where("kas_warga.id", $id)
         ->first();
 
@@ -150,7 +207,10 @@ Route::get("/kas-warga/ubah/{id}", function ($id) {
     if (!Auth::user()->id_rt_rw) {
         $rt = RtRw::all();
     } else {
-        $rt = RtRw::where("id", Auth::user()->id_rt_rw)->get();
+        $rt = RtRw::where(
+            "id",
+            Auth::user()->id_rt_rw
+        )->get();
     }
 
     return view("kas-warga.ubah", [
@@ -162,10 +222,18 @@ Route::get("/kas-warga/ubah/{id}", function ($id) {
 Route::get("/kas-warga/lihat/{id}", function ($id) {
     $kas_warga = \App\Models\KasWarga::select([
         "kas_warga.*",
-        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
-        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+        DB::raw(
+            'IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'
+        ),
+        DB::raw(
+            'IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'
+        ),
     ])
-        ->leftJoin("rt_rw", "rt_rw.id", "kas_warga.id_rt_rw")
+        ->leftJoin(
+            "rt_rw",
+            "rt_rw.id",
+            "kas_warga.id_rt_rw"
+        )
         ->whereNull("kas_warga.deleted_at")
         ->where("kas_warga.id", $id)
         ->first();

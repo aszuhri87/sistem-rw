@@ -7,16 +7,24 @@ Route::get("/rt-rw/tambah", function () {
     return view("rt-rw.tambah");
 });
 
-Route::post("/rt-rw/post-tambah", function (Request $request) {
+Route::post("/rt-rw/post-tambah", function (
+    Request $request
+) {
     $rt = \App\Models\RtRw::create([
         "rt" => $request->rt,
         "rw" => $request->rw,
     ]);
 
     if ($rt) {
-        return redirect("/rt-rw/tampil")->with("message", "Berhasil Menambah!");
+        return redirect("/rt-rw/tampil")->with(
+            "message",
+            "Berhasil Menambah!"
+        );
     } else {
-        return redirect("/rt-rw/tampil")->withErrors("error", "Gagal!");
+        return redirect("/rt-rw/tampil")->withErrors(
+            "error",
+            "Gagal!"
+        );
     }
 });
 
@@ -60,16 +68,25 @@ Route::get("/rt-rw/hapus/{id}", function ($id) {
     return redirect("rt-rw/tampil");
 });
 
-Route::post("/rt-rw/post-ubah/{id}", function (Request $request, $id) {
+Route::post("/rt-rw/post-ubah/{id}", function (
+    Request $request,
+    $id
+) {
     $rt_rw = \App\Models\RtRw::find($id)->update([
         "rt" => $request->rt,
         "rw" => $request->rw,
     ]);
 
     if ($rt_rw) {
-        return redirect("/rt-rw/tampil")->with("message", "Berhasil Mengubah!");
+        return redirect("/rt-rw/tampil")->with(
+            "message",
+            "Berhasil Mengubah!"
+        );
     } else {
-        return redirect("/rt-rw/tampil")->withErrors("error", "Gagal!");
+        return redirect("/rt-rw/tampil")->withErrors(
+            "error",
+            "Gagal!"
+        );
     }
 });
 

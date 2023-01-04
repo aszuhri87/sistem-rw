@@ -13,13 +13,18 @@ Route::get("/admin/get-tambah", function () {
     if (!Auth::user()->id_rt_rw) {
         $rt = RtRw::all();
     } else {
-        $rt = RtRw::where("id", Auth::user()->id_rt_rw)->get();
+        $rt = RtRw::where(
+            "id",
+            Auth::user()->id_rt_rw
+        )->get();
     }
 
     return view("admin.tambah", ["rt" => $rt]);
 });
 
-Route::post("/admin/post-tambah", function (Request $request) {
+Route::post("/admin/post-tambah", function (
+    Request $request
+) {
     $admin = \App\Models\Admin::create([
         "nama" => $request->nama,
         "email" => $request->email,
@@ -29,17 +34,27 @@ Route::post("/admin/post-tambah", function (Request $request) {
     ]);
 
     if ($admin) {
-        return redirect("/admin/tampil")->with("message", "Berhasil menambah!");
+        return redirect("/admin/tampil")->with(
+            "message",
+            "Berhasil menambah!"
+        );
     } else {
-        return redirect("/admin/tampil")->withErrors("error", "Gagal!");
+        return redirect("/admin/tampil")->withErrors(
+            "error",
+            "Gagal!"
+        );
     }
 });
 
 Route::get("/admin/tampil", function () {
     $admin = \App\Models\Admin::select([
         "admin.*",
-        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
-        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+        DB::raw(
+            'IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'
+        ),
+        DB::raw(
+            'IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'
+        ),
     ])
         ->leftJoin("rt_rw", "rt_rw.id", "admin.id_rt_rw")
         ->whereNull("admin.deleted_at")
@@ -54,15 +69,39 @@ Route::get("/admin/tampil", function () {
 Route::get("/admin/filter", function (Request $request) {
     $admin = \App\Models\Admin::select([
         "*",
-        DB::raw('IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'),
-        DB::raw('IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'),
+        DB::raw(
+            'IF(rt_rw.rt is null, "-", rt_rw.rt) as rt'
+        ),
+        DB::raw(
+            'IF(rt_rw.rw is null, "-", rt_rw.rw) as rw'
+        ),
     ])
         ->leftJoin("rt_rw", "rt_rw.id", "admin.id_rt_rw")
-        ->where("admin.nama", "like", "%" . $request->cari . "%")
-        ->orWhere("admin.email", "like", "%" . $request->cari . "%")
-        ->orWhere("admin.level", "like", "%" . $request->cari . "%")
-        ->orWhere("rt_rw.rt", "like", "%" . $request->cari . "%")
-        ->orWhere("rt_rw.rw", "like", "%" . $request->cari . "%")
+        ->where(
+            "admin.nama",
+            "like",
+            "%" . $request->cari . "%"
+        )
+        ->orWhere(
+            "admin.email",
+            "like",
+            "%" . $request->cari . "%"
+        )
+        ->orWhere(
+            "admin.level",
+            "like",
+            "%" . $request->cari . "%"
+        )
+        ->orWhere(
+            "rt_rw.rt",
+            "like",
+            "%" . $request->cari . "%"
+        )
+        ->orWhere(
+            "rt_rw.rw",
+            "like",
+            "%" . $request->cari . "%"
+        )
         ->orderBy("admin.created_at", "desc")
         ->whereNull("admin.deleted_at");
 
@@ -82,7 +121,10 @@ Route::get("/admin/get-ubah/{id}", function ($id) {
     if (!Auth::user()->id_rt_rw) {
         $rt = RtRw::all();
     } else {
-        $rt = RtRw::where("id", Auth::user()->id_rt_rw)->get();
+        $rt = RtRw::where(
+            "id",
+            Auth::user()->id_rt_rw
+        )->get();
     }
 
     $admin = \App\Models\Admin::find($id);
@@ -90,7 +132,10 @@ Route::get("/admin/get-ubah/{id}", function ($id) {
     return view("admin.ubah", compact("admin", "rt"));
 });
 
-Route::post("/admin/post-ubah/{id}", function (Request $request, $id) {
+Route::post("/admin/post-ubah/{id}", function (
+    Request $request,
+    $id
+) {
     $password = null;
 
     $admin = \App\Models\Admin::find($id);
@@ -109,9 +154,15 @@ Route::post("/admin/post-ubah/{id}", function (Request $request, $id) {
     ]);
 
     if ($admin) {
-        return redirect("/admin/tampil")->with("message", "Berhasil mengubah!");
+        return redirect("/admin/tampil")->with(
+            "message",
+            "Berhasil mengubah!"
+        );
     } else {
-        return redirect("/admin/tampil")->withErrors("error", "Gagal!");
+        return redirect("/admin/tampil")->withErrors(
+            "error",
+            "Gagal!"
+        );
     }
 });
 
