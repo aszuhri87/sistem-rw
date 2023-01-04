@@ -57,7 +57,9 @@
                                 <a href="/jimpitan/tambah" class="btn btn-success p-2 mr-auto"
                                     style="margin-top: auto; margin-bottom: auto">Tambah</a>
                                 <div>
+                                    @if (Auth::user()->level == 'admin')
                                     <a href="/jimpitan/export" class="btn btn-primary p-2 ml-1">Laporan Excel</a>
+                                    @endif
                                     <a class="btn btn-secondary p-2 m-1" id="filter_btn">Filter</a>
                                 </div>
                             </div>
