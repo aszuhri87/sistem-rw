@@ -19,6 +19,7 @@
                 "tabWidth": 4,
                 "parser": "blade",
                 "printWidth": 120,
+                "bracketSameLine": false,
                 "wrapAttributes": "auto",
                 "sortTailwindcssClasses": true,
                 "sortHtmlAttributes": "none",
