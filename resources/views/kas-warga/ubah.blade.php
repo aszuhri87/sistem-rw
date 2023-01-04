@@ -3,40 +3,27 @@
 <div class="container mb-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="m-0 p-0">Ubah Data Warga</h5>
-        <a href="/kas-warga/tampil"
-           class="btn btn-outline-danger">Kembali</a>
+        <a href="/kas-warga/tampil" class="btn btn-outline-danger">Kembali</a>
     </div>
     <div class="card">
         <div class="card-body">
-            <form action="/kas-warga/post-ubah/{{ $kas_warga->id }}"
-                  method="POST"
-                  id="ubah">
+            <form action="/kas-warga/post-ubah/{{ $kas_warga->id }}" method="POST" id="ubah">
                 @csrf
                 <div class="form-group mb-3">
                     <label>Nominal</label>
-                    <input type="text"
-                           value="{{ $kas_warga->nominal }}"
-                           class="form-control"
-                           name="nominal"
-                           required
-                           placeholder="Nominal" />
+                    <input type="text" value="{{ $kas_warga->nominal }}" class="form-control" name="nominal" required
+                        placeholder="Nominal" />
                 </div>
 
                 <div class="form-group mb-3">
                     <label>Tanggal</label>
-                    <input type="date"
-                           value="{{ $kas_warga->tanggal }}"
-                           class="form-control"
-                           name="tanggal"
-                           required
-                           placeholder="Tanggal" />
+                    <input type="date" value="{{ $kas_warga->tanggal }}" class="form-control" name="tanggal" required
+                        placeholder="Tanggal" />
                 </div>
                 @if (Auth::user()->level == 'admin' && Auth::user()->id_rt_rw == null)
                     <div class="form-group mb-3 mb-3">
                         <label>RT/RW</label>
-                        <select name="rt"
-                                id="rt"
-                                class="form-control">
+                        <select name="rt" id="rt" class="form-control">
                             <option value="">--</option>
                             @foreach ($rt as $item)
                                 <option value="{{ $item->id }}">
@@ -48,9 +35,7 @@
                 @endif
                 <div class="form-group mb-3">
                     <label>Tipe</label>
-                    <select name="tipe"
-                            id="tipe"
-                            class="form-control">
+                    <select name="tipe" id="tipe" class="form-control">
                         <option value="">-- Pilih Tipe --</option>
                         <option value="masuk">Masuk</option>
                         <option value="keluar">Keluar</option>
@@ -61,15 +46,10 @@
 
                 <div class="form-group mb-3">
                     <label>Catatan</label>
-                    <textarea class="form-control"
-                              name="catatan"
-                              id="catatan"
-                              cols="30"
-                              rows="10"></textarea>
+                    <textarea class="form-control" name="catatan" id="catatan" cols="30" rows="10"></textarea>
                 </div>
 
-                <button type="submit"
-                        class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                     Simpan
                 </button>
             </form>

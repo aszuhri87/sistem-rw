@@ -37,29 +37,20 @@
 </style>
 
 <div id="camera-container">
-    <div id="reader"
-         style="width: 100%"></div>
+    <div id="reader" style="width: 100%"></div>
 
     <div id="switch-btn">
-        <img src="{{ asset('img/switch-camera.png') }}"
-             width="100%"
-             alt="" />
+        <img src="{{ asset('img/switch-camera.png') }}" width="100%" alt="" />
     </div>
 
     <div id="cancel-btn">
-        <a href="/jimpitan/tambah"
-           class="btn btn-outline-danger">Kembali</a>
+        <a href="/jimpitan/tambah" class="btn btn-outline-danger">Kembali</a>
     </div>
 </div>
 
-<form action="{{ url('jimpitan/scan-qr') }}"
-      id="form-qr"
-      method="POST"
-      autocomplete="off">
+<form action="{{ url('jimpitan/scan-qr') }}" id="form-qr" method="POST" autocomplete="off">
     @csrf
-    <input type="hidden"
-           id="scan-result"
-           name="scan_result" />
+    <input type="hidden" id="scan-result" name="scan_result" />
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

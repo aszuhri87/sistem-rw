@@ -7,16 +7,14 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <table width="100%"
-                       class="table-bordered table mb-0">
+                <table width="100%" class="table-bordered table mb-0">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th width="30%">Nama</th>
                             <th width="30%">Email</th>
                             <th width="20%">Password</th>
-                            <th width="20%"
-                                class="text-center">
+                            <th width="20%" class="text-center">
                                 Aksi
                             </th>
                         </tr>
@@ -30,10 +28,9 @@
                                 <td>{{ $item->password }}</td>
                                 <td class="text-center">
                                     <a href="/admin/get-ubah/{{ $item->id }}"
-                                       class="btn btn-sm btn-warning">Ubah</a>
-                                    <a href="/admin/get-hapus/{{ $item->id }}"
-                                       class="btn btn-sm btn-danger"
-                                       onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                                        class="btn btn-sm btn-warning">Ubah</a>
+                                    <a href="/admin/get-hapus/{{ $item->id }}" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Yakin Hapus?');">Hapus</a>
                                 </td>
                             </tr>
                         @endforeach

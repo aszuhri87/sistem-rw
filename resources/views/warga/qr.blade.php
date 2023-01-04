@@ -6,20 +6,14 @@
             <div class="card-body">
                 <center>
                     <div id="qr-print">
-                        <div id="qrcode"
-                             class="justify-content-center">
-                            <img class="img-thumbnail"
-                                 src="{{ $dataUri }}"
-                                 width="300"
-                                 height="300"
-                                 style="margin-top: 20px" />
+                        <div id="qrcode" class="justify-content-center">
+                            <img class="img-thumbnail" src="{{ $dataUri }}" width="300" height="300"
+                                style="margin-top: 20px" />
                         </div>
                         <br />
                         <hr />
                     </div>
-                    <button type="button"
-                            class="btn btn-primary"
-                            id="btn-print">
+                    <button type="button" class="btn btn-primary" id="btn-print">
                         Print kode QR
                     </button>
                 </center>

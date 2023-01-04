@@ -4,66 +4,44 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="m-0 p-0">Detail Kas Warga</h5>
-        <a href="/kas-warga/tampil"
-           class="btn btn-danger">Kembali</a>
+        <a href="/kas-warga/tampil" class="btn btn-danger">Kembali</a>
     </div>
     <div class="card">
         <div class="card-body">
             <form action="">
                 <div class="form-group">
                     <label>Nominal</label>
-                    <input type="text"
-                           class="form-control"
-                           value="{{ $kas_warga->nominal }}"
-                           disabled />
+                    <input type="text" class="form-control" value="{{ $kas_warga->nominal }}" disabled />
                 </div>
                 <br />
                 <div class="form-group">
                     <label>Tanggal</label>
-                    <input type="date"
-                           class="form-control"
-                           value="{{ $kas_warga->tanggal }}"
-                           disabled />
+                    <input type="date" class="form-control" value="{{ $kas_warga->tanggal }}" disabled />
                 </div>
                 <br />
                 <div class="form-group">
                     <label>RT</label>
-                    <input type="text"
-                           class="form-control"
-                           value="{{ $kas_warga->rt }}"
-                           disabled />
+                    <input type="text" class="form-control" value="{{ $kas_warga->rt }}" disabled />
                 </div>
                 <br />
                 <div class="form-group">
                     <label>RW</label>
-                    <input type="text"
-                           class="form-control"
-                           value="{{ $kas_warga->rw }}"
-                           disabled />
+                    <input type="text" class="form-control" value="{{ $kas_warga->rw }}" disabled />
                 </div>
                 <br />
                 <div class="form-group">
                     <label>Tipe</label>
-                    <input type="date"
-                           class="form-control"
-                           value="{{ $kas_warga->tipe }}"
-                           disabled />
+                    <input type="date" class="form-control" value="{{ $kas_warga->tipe }}" disabled />
                 </div>
                 <br />
                 <div class="form-group">
                     <label>kategori</label>
-                    <input type="text"
-                           class="form-control"
-                           value="{{ $kas_warga->kategori }}"
-                           disabled />
+                    <input type="text" class="form-control" value="{{ $kas_warga->kategori }}" disabled />
                 </div>
                 <br />
                 <div class="form-group">
                     <label>Catatan</label>
-                    <textarea id="catatan"
-                              cols="30"
-                              rows="10"
-                              class="form-control"></textarea>
+                    <textarea id="catatan" cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <br />
             </form>

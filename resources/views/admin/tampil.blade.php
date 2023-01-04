@@ -2,34 +2,26 @@
 
 <div class="container mb-5">
     @if (session('message'))
-        <div class="alert alert-success mt-5"
-             role="alert">
+        <div class="alert alert-success mt-5" role="alert">
             {{ session('message') }}
         </div>
         @endif @if (session('error'))
-            <div class="alert alert-danger mt-5"
-                 role="alert">
+            <div class="alert alert-danger mt-5" role="alert">
                 {{ session('error') }}
             </div>
         @endif
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="m-0 p-0">Data Akun Admin</h5>
             <div class="mb-3">
-                <input type="text"
-                       class="form-control"
-                       id="cari"
-                       name="cari"
-                       placeholder="Cari.." />
+                <input type="text" class="form-control" id="cari" name="cari" placeholder="Cari.." />
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <div class="mb-3">
-                    <a href="/admin/get-tambah"
-                       class="btn btn-success">Tambah</a>
+                    <a href="/admin/get-tambah" class="btn btn-success">Tambah</a>
                 </div>
-                <table width="100%"
-                       class="table-bordered table-responsive table mb-0">
+                <table width="100%" class="table-bordered table-responsive table mb-0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -38,8 +30,7 @@
                             <th width="10%">RT</th>
                             <th width="10%">RW</th>
                             <th width="10%">LEVEL</th>
-                            <th width="20%"
-                                class="text-center">
+                            <th width="20%" class="text-center">
                                 Aksi
                             </th>
                         </tr>
@@ -55,10 +46,9 @@
                                 <td>{{ $item->level }}</td>
                                 <td class="text-center">
                                     <a href="/admin/get-ubah/{{ $item->id }}"
-                                       class="btn btn-sm btn-warning m-1">Ubah</a>
-                                    <a href="/admin/get-hapus/{{ $item->id }}"
-                                       class="btn btn-sm btn-danger"
-                                       onclick="return confirm('Yakin Hapus?');">Hapus</a>
+                                        class="btn btn-sm btn-warning m-1">Ubah</a>
+                                    <a href="/admin/get-hapus/{{ $item->id }}" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Yakin Hapus?');">Hapus</a>
                                 </td>
                             </tr>
                         @endforeach

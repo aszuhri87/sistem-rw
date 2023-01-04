@@ -10,12 +10,14 @@ Route::post("/login", function (Request $request) {
             "email" => $request->email,
             "password" => $request->password,
         ];
+
         if (Auth::attempt($login)) {
             $user = Auth::user();
             $data["name"] = $user->name;
             $data["id_rt_rw"] = $user->id_rt_rw;
             $data["level"] = $user->level;
             $data["token"] = $user->createToken("accessToken")->accessToken;
+
             return response()->json(
                 [
                     "status" => "success",
@@ -51,6 +53,7 @@ Route::group(["middleware" => "auth:api"], function () {
                 $user = Auth::user()->token();
                 $user->revoke();
             }
+
             return response()->json(["status" => "OK", "message" => "Berhasil Logout!"], 200);
         } catch (Exception $e) {
             return response()->json(
@@ -60,5 +63,3 @@ Route::group(["middleware" => "auth:api"], function () {
         }
     });
 });
-
-

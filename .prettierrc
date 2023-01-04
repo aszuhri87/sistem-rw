@@ -8,8 +8,9 @@
                 "printWidth": 100,
                 "semi":false,
                 "bracketSpacing": true,
-                "bracketSameLine": true,
-                "singleAttributePerLine": false
+                "bracketSameLine": false,
+                "singleAttributePerLine": false,
+                "endOfLine": "crlf"
             }
         },{
             "files": ["*.blade.php"],
