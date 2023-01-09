@@ -7,20 +7,35 @@
         useDirtyRect: false
     });
     var app = {};
-    var jimpit_per_bulan_sum = {!! json_encode($jimpit_per_bulan_sum) !!};
+    var data = {!! json_encode($jimpit_per_bulan_sum) !!};
+
+    var bulan = [];
+    var jumlah = [];
+
+
+    data.forEach(element => {
+        bulan.push(element.bulan);
+        jumlah.push(element.count);
+
+    });
+    console.log(bulan);
 
     var option;
 
     option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'line' }
+        },
         xAxis: {
             type: 'category',
-            data: jimpit_per_bulan_sum['bulan']
+            data: bulan,
         },
         yAxis: {
             type: 'value'
         },
         series: [{
-            data: jimpit_per_bulan_sum['count'],
+            data: jumlah,
             type: 'bar'
         }]
     };
