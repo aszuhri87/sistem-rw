@@ -76,15 +76,7 @@ use OpenApi\Annotations as OA;
  *     tags={"Auth"},
  *     summary="Logout from App",
  *     description="Logout from app",
- *     @OA\Parameter(
- *          name="id",
- *          description="id",
- *          required=true,
- *          in="query",
- *          @OA\Schema(
- *              type="string"
- *          )
- *     ),
+
  *     @OA\Response(
  *         response="default",
  *         description="successful operation"
