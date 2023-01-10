@@ -1,5 +1,6 @@
 <?php
 
+use App\Libraries\MonthName;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -177,7 +178,7 @@ Route::get('/dashboard', function () {
     }
 
     $jimpit_per_bulan_sum = \App\Models\Jimpitan::select(
-        DB::raw('count(id) as count'),
+        DB::raw('count(id) as jumlah'),
         DB::raw('MONTHNAME(tanggal) as bulan')
     )
         ->where('id', '!=', null)
@@ -192,73 +193,9 @@ Route::get('/dashboard', function () {
         $jimpit_data['count'][] = (int) $row['count'];
     }
 
-    // $jimpit_data_sum = [];
-    // foreach ($jimpit_per_bulan_sum as $key => $row) {
-    //     $jimpit_data_sum['bulan'][] = $row['bulan'];
-    //     $jimpit_data_sum['count'][] = (int) $row['count'];
-    // }
+    $jimpit_data_sum = MonthName::chart_data($jimpit_per_bulan_sum);
 
-    $allMonthJimpit = collect(
-        \Carbon\CarbonPeriod::create(
-            now()->startOfYear(),
-            now()->endOfYear()
-        ))
-        ->map(function ($jimpit_per_bulan_sum) {
-            $month = $jimpit_per_bulan_sum->format('F');
-
-            return [
-                'count' => 0,
-                'bulan' => $month,
-            ];
-        })
-        ->keyBy('bulan')
-        ->values();
-
-    $listJimpit = $allMonthJimpit->toArray();
-
-    $jimpit_data_sum = DB::transaction(function () use ($listJimpit,$jimpit_per_bulan_sum) {
-        for ($x = 0; $x < count($jimpit_per_bulan_sum); ++$x) {
-            for ($i = 0; $i < count($listJimpit); ++$i) {
-                if ($listJimpit[$i]['bulan'] == $jimpit_per_bulan_sum[$x]['bulan']) {
-                    $listJimpit[$i]['count'] = (int) $jimpit_per_bulan_sum[$x]['count'];
-                }
-            }
-
-            return $listJimpit;
-        }
-    });
-
-    $allMonth = collect(
-        \Carbon\CarbonPeriod::create(
-            now()->startOfYear(),
-            now()->endOfYear()
-        ))
-        ->map(function ($kas_warga_res) {
-            $month = $kas_warga_res->format('F');
-
-            return [
-                'jumlah' => 0,
-                'bulan' => $month,
-            ];
-        })
-        ->keyBy('bulan')
-        ->values();
-
-    $list = $allMonth->toArray();
-
-    $kas_bulan = DB::transaction(function () use ($list,$kas_warga_res) {
-        for ($x = 0; $x < count($kas_warga_res); ++$x) {
-            for ($i = 0; $i < count($list); ++$i) {
-                if ($kas_warga_res) {
-                    if ($list[$i]['bulan'] == $kas_warga_res[$x]['bulan']) {
-                        $list[$i]['jumlah'] = (int) $kas_warga_res[$x]['jumlah'];
-                    }
-                }
-            }
-
-            return $list;
-        }
-    });
+    $kas_bulan = MonthName::chart_data($kas_warga_res);
 
     return view('dashboard.index', [
         'warga_rt' => $warga_rt_res,

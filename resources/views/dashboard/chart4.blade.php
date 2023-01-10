@@ -12,13 +12,11 @@
     var bulan = [];
     var jumlah = [];
 
-
     data.forEach(element => {
         bulan.push(element.bulan);
-        jumlah.push(element.count);
+        jumlah.push(element.jumlah);
 
     });
-    console.log(bulan);
 
     var option;
 
