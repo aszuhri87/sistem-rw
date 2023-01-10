@@ -9,7 +9,7 @@ class MonthName
     public static function chart_data($data)
     {
         try {
-            $map = collect(
+            $collect = collect(
                 \Carbon\CarbonPeriod::create(
                     now()->startOfYear(),
                     now()->endOfYear()
@@ -25,8 +25,6 @@ class MonthName
                 ->keyBy('bulan')
                 ->values()
                 ->toArray();
-
-            $collect = $map;
 
             $result = DB::transaction(function () use ($collect,$data) {
                 for ($x = 0; $x < count($data); ++$x) {
