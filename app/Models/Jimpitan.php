@@ -10,7 +10,8 @@ class Jimpitan extends Model
     use SoftDeletes;
     protected $table = "jimpitan";
 
-    protected $fillable = ["id", "id_warga", "nominal", "id_admin", "kategori"];
+    protected $fillable = ["id", "id_warga", "nominal", 'tanggal', "id_admin", "kategori"];
 
     protected $dates = ["deleted_at"];
+
 }

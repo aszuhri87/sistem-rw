@@ -15,7 +15,7 @@ class MonthName
                     now()->endOfYear()
                 ))
                 ->map(function ($data) {
-                    $month = $data->translatedFormat('F');
+                    $month = $data->format('F');
 
                     return [
                         'jumlah' => 0,
@@ -34,6 +34,8 @@ class MonthName
                         $collect[$x]['jumlah'] = 0;
                     }
                 }
+                $collect[$x]['bulan'] = Carbon\Carbon::parse($collect[$x]['bulan'])->translatedFormat('F');
+
             }
 
             return $collect;
