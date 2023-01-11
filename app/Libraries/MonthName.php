@@ -2,8 +2,6 @@
 
 namespace App\Libraries;
 
-use Illuminate\Support\Facades\DB;
-
 class MonthName
 {
     public static function chart_data($data)
@@ -26,19 +24,17 @@ class MonthName
                 ->values()
                 ->toArray();
 
-            $result = DB::transaction(function () use ($collect,$data) {
-                for ($x = 0; $x < count($data); ++$x) {
-                    for ($i = 0; $i < count($collect); ++$i) {
-                        if ($collect[$i]['bulan'] == $data[$x]['bulan']) {
-                            $collect[$i]['jumlah'] = (int) $data[$x]['jumlah'];
-                        }
+            for ($x = 0; $x < count($collect); ++$x) {
+                for ($i = 0; $i < count($data); ++$i) {
+                    if ($data[$i]['bulan'] == $collect[$x]['bulan'] && $data[$i]['jumlah']) {
+                        $collect[$x]['jumlah'] = $data[$i]['jumlah'];
+                    } elseif ($data[$i]['bulan'] == $collect[$x]['bulan']) {
+                        $collect[$x]['jumlah'] = 0;
                     }
-
-                    return $collect;
                 }
-            });
+            }
 
-            return $result;
+            return $collect;
         } catch (Exception $e) {
             throw new Exception($e);
 
