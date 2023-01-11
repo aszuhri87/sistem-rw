@@ -15,7 +15,7 @@ class AdminSeed extends Seeder
     {
         \App\Models\Admin::create([
             "nama" => "Admin",
-            "email" => "admin@bibitunggul.com",
+            "email" => "admin@bibitunggul.id",
             "id_rt_rw" => null,
             "password" => \Hash::make("bu1@varx.id"),
             "level" => "admin",
@@ -23,7 +23,7 @@ class AdminSeed extends Seeder
 
         \App\Models\Admin::create([
             "nama" => "Penjimpit",
-            "email" => "penjimpit@bibitunggul.com",
+            "email" => "penjimpit@bibitunggul.id",
             "id_rt_rw" => null,
             "password" => \Hash::make("bu2@varx.id"),
             "level" => "penjimpit",
