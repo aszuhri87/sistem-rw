@@ -15,7 +15,7 @@ class MonthName
                     now()->endOfYear()
                 ))
                 ->map(function ($data) {
-                    $month = $data->format('F');
+                    $month = $data->translatedFormat('F');
 
                     return [
                         'jumlah' => 0,
