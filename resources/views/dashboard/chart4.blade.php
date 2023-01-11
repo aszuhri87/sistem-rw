@@ -27,6 +27,13 @@
         },
         xAxis: {
             type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLabel: {
+                fontSize: 10,
+                fontWeight: 'bold'
+            },
             data: bulan,
         },
         yAxis: {
