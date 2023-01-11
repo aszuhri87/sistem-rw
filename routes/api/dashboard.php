@@ -237,7 +237,7 @@ Route::get('/dashboard', function () {
         return response()->json(
             [
                 'status' => 'Internal Server Error!',
-                'message' => 'error!',
+                'message' => $e->getMessage(),
             ],
             500
         );

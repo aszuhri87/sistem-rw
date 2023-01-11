@@ -2,13 +2,15 @@
 
 namespace App\Libraries;
 
+use Carbon;
+
 class MonthName
 {
     public static function chart_data($data)
     {
         try {
             $collect = collect(
-                \Carbon\CarbonPeriod::create(
+                Carbon\CarbonPeriod::create(
                     now()->startOfYear(),
                     now()->endOfYear()
                 ))
