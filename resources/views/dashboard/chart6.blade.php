@@ -52,7 +52,10 @@
         },
         series: [{
             data: jumlah,
-            type: 'line'
+            type: 'line',
+            lineStyle: {
+                color: "#e09820"
+            }
         }]
     };
 

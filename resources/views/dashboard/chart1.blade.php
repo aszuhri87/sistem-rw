@@ -27,6 +27,7 @@ $warga_rt->each(function ($warga) use (&$chart1) {
             name: 'Warga',
             type: 'pie',
             radius: ['40%', '70%'],
+            color: ["#3cb44c", "#e09820"],
             avoidLabelOverlap: false,
             itemStyle: {
                 borderRadius: 10,

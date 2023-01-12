@@ -41,7 +41,10 @@
         },
         series: [{
             data: jumlah,
-            type: 'bar'
+            type: 'bar',
+            itemStyle: {
+                color: "#3cb44c"
+            }
         }]
     };
     if (option && typeof option === 'object') {
