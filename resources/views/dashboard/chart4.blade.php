@@ -43,7 +43,8 @@
             data: jumlah,
             type: 'bar',
             itemStyle: {
-                color: "#3cb44c"
+                color: "#3cb44c",
+                borderRadius: [10, 10, 0, 0]
             }
         }]
     };
