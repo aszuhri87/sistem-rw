@@ -51,6 +51,7 @@
             type: 'value'
         },
         series: [{
+            color: "#3cb44c",
             data: jumlah,
             type: 'line',
             lineStyle: {
