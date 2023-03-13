@@ -26,16 +26,17 @@ class MonthName
                 ->values()
                 ->toArray();
 
-            for ($x = 0; $x < count($collect); ++$x) {
-                for ($i = 0; $i < count($data); ++$i) {
-                    if ($data[$i]['bulan'] == $collect[$x]['bulan'] && $data[$i]['jumlah']) {
-                        $collect[$x]['jumlah'] = $data[$i]['jumlah'];
-                    } elseif ($data[$i]['bulan'] == $collect[$x]['bulan']) {
-                        $collect[$x]['jumlah'] = 0;
+            if ($data) {
+                for ($x = 0; $x < count($collect); ++$x) {
+                    for ($i = 0; $i < count($data); ++$i) {
+                        if ($data[$i]['bulan'] == $collect[$x]['bulan'] && $data[$i]['jumlah']) {
+                            $collect[$x]['jumlah'] = $data[$i]['jumlah'];
+                        } elseif ($data[$i]['bulan'] == $collect[$x]['bulan']) {
+                            $collect[$x]['jumlah'] = 0;
+                        }
                     }
+                    $collect[$x]['bulan'] = Carbon\Carbon::parse($collect[$x]['bulan'])->translatedFormat('F');
                 }
-                $collect[$x]['bulan'] = Carbon\Carbon::parse($collect[$x]['bulan'])->translatedFormat('F');
-
             }
 
             return $collect;

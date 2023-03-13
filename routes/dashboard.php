@@ -160,6 +160,7 @@ Route::get('/dashboard', function () {
     )
         ->leftJoin('warga', 'warga.id', 'jimpitan.id_warga')
         ->where('jimpitan.id', '!=', null)
+        ->where('jimpitan.id_admin')
         ->whereNull('jimpitan.deleted_at')
         ->whereYear('jimpitan.tanggal', date('Y'))
         ->groupBy(
@@ -179,14 +180,20 @@ Route::get('/dashboard', function () {
     }
 
     $jimpit_per_bulan_sum = \App\Models\Jimpitan::select(
-        DB::raw('count(id) as jumlah'),
-        DB::raw('MONTHNAME(tanggal) as bulan')
+        DB::raw('count(jimpitan.id) as jumlah'),
+        DB::raw('MONTHNAME(jimpitan.tanggal) as bulan'),
     )
-        ->where('id', '!=', null)
-        ->whereYear('tanggal', date('Y'))
+        ->leftJoin('warga', 'warga.id', 'jimpitan.id_warga')
+        ->where('jimpitan.id', '!=', null)
+        ->whereYear('jimpitan.tanggal', date('Y'))
         ->whereNull('jimpitan.deleted_at')
-        ->groupBy(DB::raw('MONTHNAME(tanggal)'), 'bulan')
-        ->get();
+        ->groupBy(DB::raw('MONTHNAME(jimpitan.tanggal)'), 'bulan')
+        ->where(
+            'warga.id_rt_rw',
+            Auth::user()->id_rt_rw
+        )->get();
+
+    // dd($jimpit_per_bulan_sum);
 
     $jimpit_data = [];
     foreach ($jimpit_per_bulan as $key => $row) {
