@@ -37,6 +37,7 @@ Route::post("/jimpitan/tambah", function (
     }
     $jimpitan = \App\Models\Jimpitan::create([
         "id_warga" => $warga->id,
+        "tanggal" => date("Y-m-d H:i:s"),
         "nominal" => $request->nominal,
         "id_admin" => Auth::user()->id,
         "kategori" => $request->kategori,
