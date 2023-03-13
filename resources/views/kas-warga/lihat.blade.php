@@ -41,7 +41,7 @@
                 <br />
                 <div class="form-group">
                     <label>Catatan</label>
-                    <textarea id="catatan" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea id="catatan" cols="30" rows="10" class="form-control" disabled>{{ $kas_warga->catatan }}</textarea>
                 </div>
                 <br />
             </form>

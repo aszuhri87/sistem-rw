@@ -46,7 +46,7 @@
 
                 <div class="form-group mb-3">
                     <label>Catatan</label>
-                    <textarea class="form-control" name="catatan" id="catatan" cols="30" rows="10"></textarea>
+                    <textarea class="form-control" name="catatan" id="catatan" cols="30" rows="10">{{ $kas_warga->catatan }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">
@@ -62,10 +62,8 @@
 <script src="{{ asset('js/jquery.blockUI.js') }}"></script>
 <script>
     $(document).ready(function() {
-        var data = {
-            !!json_encode($kas_warga) !!
-        };
-
+        var data = {!!json_encode($kas_warga) !!};
+        console.log(data);
         $('#ubah').find('select[name="tipe"]').find('option[value="' + data.tipe +
             '"]').prop('selected', true);
         $('#ubah').find('select[name="rt"]').find('option[value="' + data
@@ -74,35 +72,35 @@
 
         if ($('#tipe').val() == 'masuk') {
             $('.div-kategori').removeClass('d-none').html(`
-                   <label>Pilih Kategori</label>
-                   <select name="kategori" id="kategori" class="form-control">
-                       <option value=""> -- Pilih Kategori --</option>
-                       <option value="Iuran sampah"> Iuran sampah </option>
-                       <option value="Sponsorship/donatur"> Sponsorship/donatur </option>
-                       <option value="Sewa perlengkapan"> Sewa perlengkapan </option>
-                       <option value="Parkir"> Parkir </option>
-                       <option value="Sewa tempat"> Sewa tempat </option>
-                       <option value="Peralenan"> Peralenan </option>
-                       <option value="Lain-lain"> Lain-lain </option>
-                   </select>
-               `);
+                <label>Pilih Kategori</label>
+                <select name="kategori" id="kategori" class="form-control">
+                    <option value=""> -- Pilih Kategori --</option>
+                    <option value="Iuran sampah"> Iuran sampah </option>
+                    <option value="Sponsorship/donatur"> Sponsorship/donatur </option>
+                    <option value="Sewa perlengkapan"> Sewa perlengkapan </option>
+                    <option value="Parkir"> Parkir </option>
+                    <option value="Sewa tempat"> Sewa tempat </option>
+                    <option value="Peralenan"> Peralenan </option>
+                    <option value="Lain-lain"> Lain-lain </option>
+                </select>
+            `);
         } else if ($('#tipe').val() == 'keluar') {
             $('.div-kategori').removeClass('d-none').html(`
-                   <label>Pilih Kategori</label>
-                   <select name="kategori" id="kategori" class="form-control">
-                       <option value=""> -- Pilih Kategori --</option>
-                       <option value="Santunan"> Santunan </option>
-                       <option value="Kerjabakti"> Kerjabakti  </option>
-                       <option value="Kegiatan"> Kegiatan </option>
-                       <option value="Belanja"> Belanja  </option>
-                       <option value="Perawatan"> Perawatan</option>
-                       <option value="Konsumsi"> Konsumsi </option>
-                       <option value="Perlengkapan"> Perlengkapan  </option>
-                       <option value="Peralenan"> Peralenan </option>
-                       <option value="Iuran sampah"> Iuran sampah </option>
-                       <option value="Lain-lain"> Lain-lain </option>
-                   </select>
-               `);
+                <label>Pilih Kategori</label>
+                <select name="kategori" id="kategori" class="form-control">
+                    <option value=""> -- Pilih Kategori --</option>
+                    <option value="Santunan"> Santunan </option>
+                    <option value="Kerjabakti"> Kerjabakti  </option>
+                    <option value="Kegiatan"> Kegiatan </option>
+                    <option value="Belanja"> Belanja  </option>
+                    <option value="Perawatan"> Perawatan</option>
+                    <option value="Konsumsi"> Konsumsi </option>
+                    <option value="Perlengkapan"> Perlengkapan  </option>
+                    <option value="Peralenan"> Peralenan </option>
+                    <option value="Iuran sampah"> Iuran sampah </option>
+                    <option value="Lain-lain"> Lain-lain </option>
+                </select>
+            `);
         }
 
         $('#ubah').find('select[name="kategori"]').find('option[value="' + data

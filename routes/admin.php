@@ -30,7 +30,7 @@ Route::post("/admin/post-tambah", function (
         "email" => $request->email,
         "password" => Hash::make($request->password),
         "level" => $request->level,
-        "id_rt_rw" => $request->rt_rw,
+        "id_rt_rw" => $request->rt,
     ]);
 
     if ($admin) {
