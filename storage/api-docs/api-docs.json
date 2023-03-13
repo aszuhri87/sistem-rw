@@ -254,6 +254,36 @@
                     }
                 ]
             }
+        },
+        "/api/jimpitan/scan-qr": {
+            "get": {
+                "tags": [
+                    "Jimpitan"
+                ],
+                "summary": "Decode KK Jimpitan data",
+                "description": "Deleting Jimpitan data by id",
+                "parameters": [
+                    {
+                        "name": "scan_result",
+                        "in": "query",
+                        "description": "code",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
         }
     },
     "components": {

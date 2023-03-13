@@ -193,8 +193,6 @@ Route::get('/dashboard', function () {
             Auth::user()->id_rt_rw
         )->get();
 
-    // dd($jimpit_per_bulan_sum);
-
     $jimpit_data = [];
     foreach ($jimpit_per_bulan as $key => $row) {
         $jimpit_data['bulan'][] = $row['bulan'];

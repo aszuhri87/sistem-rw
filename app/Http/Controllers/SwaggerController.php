@@ -205,6 +205,27 @@ use OpenApi\Annotations as OA;
  *         description="successful operation"
  *     )
  * )
+ *
+ * @OA\Get(
+ *     path="/api/jimpitan/scan-qr",
+ *     tags={"Jimpitan"},
+ *     summary="Decode KK Jimpitan data",
+ *     description="Deleting Jimpitan data by id",
+ *     security={{"passport": {}}},
+ *     @OA\Parameter(
+ *          name="scan_result",
+ *          description="code",
+ *          required=true,
+ *          in="query",
+ *          @OA\Schema(
+ *              type="string"
+ *          )
+ *     ),
+ *     @OA\Response(
+ *         response="default",
+ *         description="successful operation"
+ *     )
+ * )
  */
 class SwaggerController extends Controller
 {

@@ -67,6 +67,8 @@
     <script>
         @if (Session::get('scan_result'))
             $('#no_kk').val(atob('{{ Session::get('scan_result') }}'))
+
+            console.log('{{ Session::get('scan_result') }}')
         @endif
 
         $(document).on('click', '.btn-nominal', function(e) {
