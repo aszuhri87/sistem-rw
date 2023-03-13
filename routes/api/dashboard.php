@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
                 'rt_rw.id',
                 'warga.id_rt_rw'
             )
+            ->whereNull('warga.deleted_at')
             ->groupBy('rt_rw.rt');
 
         if ($rt == null) {

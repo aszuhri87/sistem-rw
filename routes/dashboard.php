@@ -19,6 +19,7 @@ Route::get('/dashboard', function () {
     $warga_rt = DB::table('warga')
         ->select(DB::raw('count(*) as jumlah, rt_rw.rt'))
         ->leftJoin('rt_rw', 'rt_rw.id', 'warga.id_rt_rw')
+        ->whereNull('warga.deleted_at')
         ->groupBy('rt_rw.rt');
 
     if ($rt == null) {
