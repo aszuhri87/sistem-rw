@@ -116,8 +116,8 @@ Route::post('/jimpitan/tampil', function (
     } catch (Exception $e) {
         return response()->json(
             [
-                'status' => 'Internal Server Error',
-                'message' => $e->getMessage(),
+                'status' => 500,
+                'error' => $e->getMessage(),
             ],
             500
         );

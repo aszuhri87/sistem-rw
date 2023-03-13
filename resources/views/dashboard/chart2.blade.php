@@ -26,6 +26,7 @@ $warga_jenis_kelamin->each(function ($warga) use (&$chart2) {
             name: 'Jenis Kelamin',
             type: 'pie',
             radius: ['40%', '70%'],
+            color: ["#3cb44c", "#e09820"],
             avoidLabelOverlap: false,
             itemStyle: {
                 borderRadius: 10,

@@ -22,6 +22,7 @@
             type: 'pie',
             radius: ['40%', '70%'],
             avoidLabelOverlap: false,
+            color: ["#3cb44c", "#e09820"],
             itemStyle: {
                 borderRadius: 10,
                 borderColor: '#fff',
@@ -36,7 +37,7 @@
                     show: true,
                     fontSize: '40',
                     fontWeight: 'bold'
-                }
+                },
             },
             labelLine: {
                 show: false

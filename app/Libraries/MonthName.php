@@ -34,6 +34,8 @@ class MonthName
                         $collect[$x]['jumlah'] = 0;
                     }
                 }
+                $collect[$x]['bulan'] = Carbon\Carbon::parse($collect[$x]['bulan'])->translatedFormat('F');
+
             }
 
             return $collect;

@@ -27,6 +27,13 @@
         },
         xAxis: {
             type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLabel: {
+                fontSize: 10,
+                fontWeight: 'bold'
+            },
             data: bulan,
         },
         yAxis: {
@@ -34,7 +41,11 @@
         },
         series: [{
             data: jumlah,
-            type: 'bar'
+            type: 'bar',
+            itemStyle: {
+                color: "#3cb44c",
+                borderRadius: [10, 10, 0, 0]
+            }
         }]
     };
     if (option && typeof option === 'object') {

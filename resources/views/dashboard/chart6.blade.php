@@ -1,14 +1,3 @@
-<?php
-// $chart3 = [];
-// $bulan = [];
-// console.log($kas_warga)
-// $kas_warga->each(function ($kas_warga) use (&$chart3, &$bulan) {
-//     array_push($chart3, $kas_warga->jumlah);
-//     array_push($bulan, $kas_warga->bulan);
-// });
-// $chart3 = array_reverse($chart3);
-// $bulan = array_reverse($bulan); ?>
-
 <script>
     var data = {!! json_encode($kas_warga) !!};
 
@@ -38,14 +27,25 @@
         legend: {},
         xAxis: {
             type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLabel: {
+                fontSize: 10,
+                fontWeight: 'bold'
+            },
             data: bulan,
         },
         yAxis: {
             type: 'value'
         },
         series: [{
+            color: "#3cb44c",
             data: jumlah,
-            type: 'line'
+            type: 'line',
+            lineStyle: {
+                color: "#e09820"
+            }
         }]
     };
 

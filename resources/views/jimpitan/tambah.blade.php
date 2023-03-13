@@ -66,7 +66,7 @@
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script>
         @if (Session::get('scan_result'))
-            $('#no_kk').val(atob('{{ Session::get('scan_result ') }}'))
+            $('#no_kk').val(atob('{{ Session::get('scan_result') }}'))
         @endif
 
         $(document).on('click', '.btn-nominal', function(e) {
