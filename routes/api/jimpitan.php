@@ -12,6 +12,7 @@ Route::post('/jimpitan/tambah', function (
             'no_kk',
             $request->no_kk
         )->first();
+
         if (!$warga) {
             return response()->json(
                 [
@@ -27,6 +28,7 @@ Route::post('/jimpitan/tambah', function (
             'nominal' => $request->nominal,
             'id_admin' => Auth::user()->id,
             'kategori' => $request->kategori,
+            'tanggal' => date('Y-m-d H:i:s'),
         ]);
 
         if ($jimpitan) {
