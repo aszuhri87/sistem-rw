@@ -50,9 +50,9 @@
                             <a href="/warga/ubah/` +
                             item.id +
                             `" class="btn btn-sm btn-warning m-1">Ubah</a>
-                            <a href="/warga/qr/` +
+                            <a href="/warga/qrcode/` +
                             item.id +
-                            `" class="btn btn-sm btn-warning m-1">Qr Code</a>
+                            `" class="btn btn-sm btn-primary m-1">Qr Code</a>
                             <a href="/warga/hapus/` +
                             item.id +
                             `" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus?');">Hapus</a>

@@ -84,7 +84,7 @@ Route::post('/jimpitan/tampil', function (
         if ($rt == null) {
             $jimpitan = $result;
         } else {
-            $jimpitan = $result->where('warga.rt', $rt);
+            $jimpitan = $result->where('warga.id_rt_rw', $rt);
         }
 
         if ($request->cari) {
