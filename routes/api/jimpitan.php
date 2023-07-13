@@ -12,6 +12,7 @@ Route::post('/jimpitan/tambah', function (
             'no_kk',
             $request->no_kk
         )->first();
+
         if (!$warga) {
             return response()->json(
                 [
@@ -27,6 +28,7 @@ Route::post('/jimpitan/tambah', function (
             'nominal' => $request->nominal,
             'id_admin' => Auth::user()->id,
             'kategori' => $request->kategori,
+            'tanggal' => date('Y-m-d H:i:s'),
         ]);
 
         if ($jimpitan) {
@@ -82,7 +84,7 @@ Route::post('/jimpitan/tampil', function (
         if ($rt == null) {
             $jimpitan = $result;
         } else {
-            $jimpitan = $result->where('warga.rt', $rt);
+            $jimpitan = $result->where('warga.id_rt_rw', $rt);
         }
 
         if ($request->cari) {
