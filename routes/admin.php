@@ -57,6 +57,11 @@ Route::get("/admin/tampil", function () {
         ),
     ])
         ->leftJoin("rt_rw", "rt_rw.id", "admin.id_rt_rw")
+        ->where(function ($query){
+            if(Auth::user()->id_rt_rw){
+                $query->where('admin.id_rt_rw', Auth::user()->id_rt_rw);
+            }
+        })
         ->whereNull("admin.deleted_at")
         ->orderBy("admin.created_at", "desc")
         ->paginate(10);

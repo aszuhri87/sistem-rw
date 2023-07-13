@@ -17,6 +17,9 @@
                 </li>
                 @if (Auth::user()->level == 'admin')
                     <li class="nav-item mr-4">
+                        <a class="nav-link text-dark" href="/kas-warga/tampil">Kas Warga</a>
+                    </li>
+                    <li class="nav-item mr-4">
                         <a class="nav-link text-dark" href="/admin/tampil">Admin</a>
                     </li>
                     <li class="nav-item mr-4">
@@ -24,9 +27,6 @@
                     </li>
                     <li class="nav-item mr-4">
                         <a class="nav-link text-dark" href="/warga/tampil">Warga</a>
-                    </li>
-                    <li class="nav-item mr-4">
-                        <a class="nav-link text-dark" href="/kas-warga/tampil">Kas Warga</a>
                     </li>
                 @endif
                 <li>
